@@ -47,6 +47,22 @@ async function getReviewsByUserId(userId) {
   }
 }
 
+async function getReviewById(reviewId) {
+  try {
+    const { rows: review } = await client.query(
+      `
+            SELECT *
+            FROM reviews
+            WHERE id = $1;
+          `,
+      [reviewId]
+    );
+    return review;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function createReview(productId, userId, reviewText, starRating) {
   try {
     const {
@@ -114,4 +130,5 @@ module.exports = {
   createReview,
   updateReview,
   deleteReview,
+  getReviewById,
 };
