@@ -4,8 +4,8 @@ async function getOrderProductById(id) {
   try {
     const { rows: orderProduct } = await client.query(
       `
-            SELECT * FROM order_products
-            WHERE id=$1;
+        SELECT * FROM order_products
+        WHERE id=$1;
           `,
       [id]
     );
@@ -64,5 +64,6 @@ async function createOrderProductMultiple(cart, orderId) {
 }
 module.exports = {
   getOrderProductById,
+  getOrderProductsByOrderId,
   createOrderProductMultiple,
 };
