@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const { verifyUser, getUserByEmail, createUser } = require("../db");
 
-const userRouter = Router();
+const usersRouter = Router();
 
 //register a new user
-userRouter.post("/register", async (req, res, next) => {
+usersRouter.post("/register", async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
@@ -13,7 +13,7 @@ userRouter.post("/register", async (req, res, next) => {
     }
 
     const retrivedUser = await getUserByEmail(email);
-    if (retrivedUser) {
+    if (!retrivedUser) {
       throw new Error(`User with email ${email} already exists`);
     }
 
@@ -25,8 +25,8 @@ userRouter.post("/register", async (req, res, next) => {
   }
 });
 
-//login user send back token and user info
-userRouter.post("/login", async (req, res, next) => {
+//login user, send back token and user info
+usersRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   if (!email) {
     return next(new Error("No email credential"));
