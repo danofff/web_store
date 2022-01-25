@@ -30,7 +30,7 @@ async function createUser({ email, password }) {
     throw err;
   }
 }
-async function verifyUser({ email, password }) {
+async function verifyUser(email, password) {
   try {
     const user = await getUserByEmail(email);
     const hashedPassword = user.password;
