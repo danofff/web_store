@@ -1,5 +1,18 @@
 const { client } = require("./index");
+
 async function getAllCategories() {
+  try {
+    const { rows } = await client.query(`
+      SELECT * FROM categories
+      WHERE "isActive" = TRUE;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllCategoriesAdmin() {
   try {
     const { rows } = await client.query(`
       SELECT * FROM categories;
@@ -9,6 +22,7 @@ async function getAllCategories() {
     throw error;
   }
 }
+
 async function createCategory(title) {
   try {
     const {
@@ -27,6 +41,7 @@ async function createCategory(title) {
     throw err;
   }
 }
+
 async function editCategory(id, title) {
   try {
     const {
@@ -46,6 +61,7 @@ async function editCategory(id, title) {
     throw err;
   }
 }
+
 async function deleteCategory(id) {
   try {
     const {
@@ -68,6 +84,7 @@ async function deleteCategory(id) {
 
 module.exports = {
   getAllCategories,
+  getAllCategoriesAdmin,
   createCategory,
   editCategory,
   deleteCategory,

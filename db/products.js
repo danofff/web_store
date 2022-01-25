@@ -1,4 +1,5 @@
 const { client } = require("./index");
+
 async function getAllProducts() {
   try {
     const { rows: products } = await client.query(`
@@ -26,8 +27,8 @@ async function getProductById(id) {
       rows: [product],
     } = await client.query(
       `
-              SELECT * FROM products
-              WHERE id=$1;
+          SELECT * FROM products
+          WHERE id=$1;
           `,
       [id]
     );
@@ -41,9 +42,9 @@ async function getProductsByCategoryId(id) {
   try {
     const { rows: products } = await client.query(
       `
-                SELECT * FROM products
-                WHERE "categoryId"=$1
-                AND "isActive"=true;
+            SELECT * FROM products
+            WHERE "categoryId"=$1
+            AND "isActive"=true;
             `,
       [id]
     );
@@ -64,8 +65,8 @@ async function createProduct(
   try {
     const { rows: products } = await client.query(
       `
-                  INSERT INTO products("categoryId",title,description,price,quantity,"imageURL")
-                  VALUES($1,$2,$3,$4,$5);
+          INSERT INTO products("categoryId",title,description,price,quantity,"imageURL")
+          VALUES($1,$2,$3,$4,$5);
               `,
       [categoryId, title, description, price, quantity, imageURL]
     );
@@ -75,9 +76,11 @@ async function createProduct(
     throw err;
   }
 }
-async function updateProduct(updateData) {
+
+async function updateProduct(productData) {
+  //should contain id of product and some update Data
   try {
-    let updateStr = Object.keys(updateData)
+    let updateStr = Object.keys(productData)
       .filter((key) => key !== "id")
       .map((key, index) => `"${key}"=$${index + 2}`)
       .join(", ");
@@ -91,7 +94,7 @@ async function updateProduct(updateData) {
           WHERE id = $1
           RETURNING *;
          `,
-      Object.values(updateData)
+      Object.values(productData)
     );
 
     return product;
@@ -106,11 +109,11 @@ async function deleteProduct(id) {
       rows: [product],
     } = await client.query(
       `
-                UPDATE products
-                SET "isActive"=false
-                WHERE id = $1
-                RETURNING *;
-               `,
+        UPDATE products
+        SET "isActive"=false
+        WHERE id = $1
+        RETURNING *;
+        `,
       [id]
     );
     return product;

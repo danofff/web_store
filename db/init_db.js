@@ -25,13 +25,13 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       email varchar(255) UNIQUE NOT NULL,
       password varchar(255) NOT NULL,
-      "isAdmin" boolean Default false
+      "isAdmin" boolean DEFAULT false
     );
 
     CREATE TABLE categories(
       id SERIAL PRIMARY KEY,
       title varchar(255) UNIQUE NOT NULL,
-      "isActive" boolean Default true
+      "isActive" boolean DEFAULT true
     );
 
     CREATE TABLE products(
@@ -48,7 +48,7 @@ async function buildTables() {
     CREATE TABLE orders(
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
-      "isComplete" boolean Default false
+      "isComplete" boolean DEFAULT false
     );
 
     CREATE TABLE order_products(
@@ -56,8 +56,8 @@ async function buildTables() {
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id),
       quantity INTEGER NOT NULL,
-      sum decimal,
-      price decimal
+      price decimal,
+      sum decimal
     );
 
     CREATE TABLE reviews(
