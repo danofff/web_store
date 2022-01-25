@@ -13,7 +13,8 @@ server.use(express.json());
 const path = require('path');
 server.use(express.static(path.join(__dirname, 'build')));
 
-// here's our API
+// here's our API                                                               Changed not sure if neccessary
+
 server.use('/api', require('./routes'));
 
 // by default serve up the react app if we don't recognize the route
