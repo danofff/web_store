@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 var Isemail = require("isemail");
 const Salt_Count = process.env.Salt_Count || 10;
 
-async function createUser({ email, password }) {
+async function createUser(email, password) {
   try {
     const isValidEmail = Isemail.validate(email);
     if (!isValidEmail) {
