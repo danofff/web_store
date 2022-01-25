@@ -4,7 +4,7 @@ const { verifyUser, getUserByEmail, createUser } = require("../db");
 const userRouter = Router();
 
 //register a new user
-userRouter.post("/register", (req, res, next) => {
+userRouter.post("/register", async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
@@ -26,7 +26,7 @@ userRouter.post("/register", (req, res, next) => {
 });
 
 //login user send back token and user info
-userRouter.post("/login", (req, res, next) => {
+userRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   if (!email) {
     return next(new Error("No email credential"));
