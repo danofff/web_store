@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 var Isemail = require("isemail");
 const Salt_Count = process.env.Salt_Count || 10;
 
-async function createUser({ email, password }) {
+async function createUser(email, password) {
   try {
     const isValidEmail = Isemail.validate(email);
     if (!isValidEmail) {
@@ -30,7 +30,7 @@ async function createUser({ email, password }) {
     throw err;
   }
 }
-async function verifyUser({ email, password }) {
+async function verifyUser(email, password) {
   try {
     const user = await getUserByEmail(email);
     const hashedPassword = user.password;
