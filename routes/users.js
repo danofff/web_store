@@ -56,4 +56,4 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-module.export = userRouter;
+module.export = usersRouter;
