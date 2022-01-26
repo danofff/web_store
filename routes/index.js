@@ -1,8 +1,6 @@
 const apiRouter = require("express").Router();
 
-
 //middleware
-
 //check user authentication via jwt token
 const checkAuthUser = require("../middleware/checkAuthUser");
 apiRouter.use(checkAuthUser);
