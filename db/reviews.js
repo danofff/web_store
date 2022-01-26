@@ -1,4 +1,5 @@
-const { client } = require("./");
+const client = require("./client");
+const { updateProduct } = require("./products");
 
 async function getAllReviews() {
   try {
@@ -75,7 +76,8 @@ async function createReview(productId, userId, reviewText, starRating) {
           `,
       [productId, userId, reviewText, starRating]
     );
-    return review;
+    const product = await _recalculateProductRate(review.productId);
+    return { review, product };
   } catch (error) {
     throw error;
   }
@@ -83,22 +85,26 @@ async function createReview(productId, userId, reviewText, starRating) {
 async function updateReview(reviewData) {
   //should contain id of review and some update Data
   try {
+    const reviewId = reviewData.id;
+    delete reviewData.id;
     let updateStr = Object.keys(reviewData)
-      .filter((key) => key !== "id")
       .map((key, index) => `"${key}"=$${index + 2}`)
       .join(", ");
+
     const {
       rows: [review],
     } = await client.query(
       `
-            UPDATE  reviews
+            UPDATE reviews
             SET ${updateStr}
             WHERE id = $1
             RETURNING *;
           `,
-      Object.values(reviewData)
+      [reviewId, ...Object.values(reviewData)]
     );
-    return review;
+
+    const product = await _recalculateProductRate(review.productId);
+    return { review, product };
   } catch (error) {
     throw error;
   }
@@ -110,19 +116,39 @@ async function deleteReview(reviewId) {
       rows: [review],
     } = await client.query(
       `
-            DELETE FROM routines
+            DELETE FROM reviews
             WHERE id = $1
             RETURNING *
       `,
       [reviewId]
     );
-    return review;
+    const product = await _recalculateProductRate(review.productId);
+    return { review, product };
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
 
+async function _recalculateProductRate(productId) {
+  const {
+    rows: [ratingData],
+  } = await client.query(
+    `
+            SELECT sum("starRating") as sum, count(id) as count
+            FROM reviews
+            WHERE "productId" = $1
+            GROUP BY "productId"
+      `,
+    [productId]
+  );
+  const avgRating = ratingData.sum / ratingData.count;
+  const updatedProduct = await updateProduct({
+    id: productId,
+    rating: avgRating,
+  });
+  return updatedProduct;
+}
 module.exports = {
   getAllReviews,
   getReviewsByProductId,

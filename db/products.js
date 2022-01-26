@@ -1,10 +1,10 @@
-const { client } = require("./index");
+const client = require("./client");
 
 async function getAllProducts() {
   try {
     const { rows: products } = await client.query(`
-        SELECT * FROM products
-        WHERE "isActive"=true;
+          SELECT * FROM products
+          WHERE "isActive"=true;
       `);
     return products;
   } catch (error) {
@@ -14,7 +14,7 @@ async function getAllProducts() {
 async function getAllProductsAdmin() {
   try {
     const { rows: products } = await client.query(`
-          SELECT * FROM products;
+         SELECT * FROM products;
         `);
     return products;
   } catch (error) {
@@ -63,25 +63,29 @@ async function createProduct(
   imageURL
 ) {
   try {
-    const { rows: products } = await client.query(
+    const {
+      rows: [product],
+    } = await client.query(
       `
-          INSERT INTO products("categoryId",title,description,price,quantity,"imageURL")
-          VALUES($1,$2,$3,$4,$5);
+          INSERT INTO products("categoryId", title, description, price, quantity, "imageURL")
+          VALUES($1, $2, $3, $4, $5, $6)
+          RETURNING *;
               `,
       [categoryId, title, description, price, quantity, imageURL]
     );
-    return products;
-  } catch (err) {
-    console.log(err);
-    throw err;
+    return product;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 
 async function updateProduct(productData) {
   //should contain id of product and some update Data
   try {
+    const productId = productData.id;
+    delete productData.id;
     let updateStr = Object.keys(productData)
-      .filter((key) => key !== "id")
       .map((key, index) => `"${key}"=$${index + 2}`)
       .join(", ");
 
@@ -94,7 +98,7 @@ async function updateProduct(productData) {
           WHERE id = $1
           RETURNING *;
          `,
-      Object.values(productData)
+      [productId, ...Object.values(productData)]
     );
 
     return product;

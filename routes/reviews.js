@@ -40,7 +40,7 @@ reviewRouter.get("/:userId", async (req, res, next) => {
     next(error);
   }
 });
-//require login?
+
 reviewRouter.post("/", checkUser, async (req, res, next) => {
   try {
     //createReview needs productId,userId,reviewText,and starRating
@@ -48,8 +48,8 @@ reviewRouter.post("/", checkUser, async (req, res, next) => {
     let productId = req.body.productId;
     let reviewText = req.body.reviewText;
     let starRating = req.body.starRating;
-    //verify user has purchased product before review??????????????????????
 
+    //optional - verify user has purchased product before review?
     if (!productId) throw new Error("productId must be submitted!");
     if (!reviewText) throw new Error("userId must be submitted!");
     if (!starRating) throw new Error("Star rating must be submitted!");
