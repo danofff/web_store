@@ -1,3 +1,4 @@
+const { getProductById } = require(".");
 const client = require("./client");
 const { createOrderProductMultiple } = require("./order_products");
 
@@ -29,7 +30,25 @@ async function getOrdersByUserId(userId) {
 }
 
 async function createOrder(cart, userId) {
-  //retrive product price from DB and recreate our cart based on DB price data
+  //retrieve product price from DB and recreate our cart based on DB price data
+  const productsPromise = cart.map(async (prod) => {
+    const product = await getProductById(prod.productId);
+    if (product.quantity < prod.quantity) {
+      throw new Error(
+        "Dude, dont be greedy! We dont have that many products in stock"
+      );
+    }
+    const mappedProduct = {
+      productId: product.productId,
+      price: product.price,
+      quantity: prod.quantity,
+    };
+    return mappedProduct;
+  });
+  const checkedCart = await Promise.all(productsPromise);
+  const sum = checkedCart.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
 
   //calculate sum of order and add sum of order to order table
   try {
@@ -37,12 +56,13 @@ async function createOrder(cart, userId) {
       rows: [order],
     } = await client.query(
       `
-        INSERT INTO orders("userId")
-        VALUES ($1)
+        INSERT INTO orders("userId", "orderSum")
+        VALUES ($1, $2)
         RETURNING *
       `,
-      [userId]
+      [userId, sum]
     );
+
     const orderProducts = await createOrderProductMultiple(cart, order.id);
 
     //update product in products table, for every product in cart substract this quantity from producs table quantity
