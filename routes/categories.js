@@ -9,8 +9,8 @@ const {
 
 categoriesRouter.get("/", checkIsUserAdmin, async (req, res, next) => {
   try {
-    const gettingCategories = getAllCategories();
-    res.status(200).json(gettingCategories);
+    const gettingCategories = await getAllCategories();
+    res.status(200).json({ categories: gettingCategories });
   } catch (error) {
     return next(error);
   }
@@ -20,7 +20,7 @@ categoriesRouter.post("/", checkIsUserAdmin, async (req, res, next) => {
   const { title } = req.params;
   try {
     const creatingCategory = await createCategory(title);
-    res.status(200).json(creatingCategory);
+    res.status(200).json({ category: creatingCategory });
   } catch (error) {
     return next(error);
   }

@@ -1,5 +1,8 @@
 const { Router } = require("express");
 const { verifyUser, getUserByEmail, createUser } = require("../db");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET || "shopper dirty secret";
 
 const usersRouter = Router();
 
@@ -13,11 +16,11 @@ usersRouter.post("/register", async (req, res, next) => {
     }
 
     const retrivedUser = await getUserByEmail(email);
-    if (!retrivedUser) {
+    if (retrivedUser) {
       throw new Error(`User with email ${email} already exists`);
     }
 
-    const createdUser = await createUser(email, password, isAdmin);
+    const createdUser = await createUser(email, password);
 
     res.status(201).json({ user: createdUser });
   } catch (error) {
@@ -56,4 +59,4 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-module.export = usersRouter;
+module.exports = usersRouter;

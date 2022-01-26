@@ -7,6 +7,7 @@ const {
   getProductById,
   updateProduct,
   deleteProduct,
+  getProductsByCategoryId,
 } = require("../db");
 
 productsRouter.get("/", async (req, res, next) => {
@@ -14,7 +15,8 @@ productsRouter.get("/", async (req, res, next) => {
     let activeProducts = await getAllProducts();
     res.status(200).json(activeProducts);
   } catch (error) {
-    const error = new Error("Sorry, but we cannot get the products");
+    console.log(error);
+    error.message = "Sorry, but we cannot get the products";
     return next(error);
   }
 });
@@ -25,21 +27,23 @@ productsRouter.get("/:productId", async (req, res, next) => {
     const singleProduct = await getProductById(productId);
     res.status(200).json(singleProduct);
   } catch (error) {
-    const error = new Error("Sorry, we cannot find a product with that Id.");
+    console.log(error);
+    error.message = "Sorry, but we cannot get the products";
     return next(error);
   }
 });
 
-productsRouter.get('/categories/:categoryId', async(req, res, next) => {
-  const {categoryId} = req.params
+productsRouter.get("/categories/:categoryId", async (req, res, next) => {
+  const { categoryId } = req.params;
   try {
-    const products = await getProductsByCategoryId(categoryId)
-    res.status(200).json(products)
+    const products = await getProductsByCategoryId(categoryId);
+    res.status(200).json(products);
   } catch (error) {
-    const error = new Error("Sorry, we cannot find a product with that category.");
+    console.log(error);
+    error.message = "Sorry, but we cannot get the products";
     return next(error);
   }
-})
+});
 
 productsRouter.post("/", checkIsUserAdmin, async (req, res, next) => {
   const { title, description, price, quantity, imageURL } = req.body;
@@ -99,7 +103,5 @@ productsRouter.delete(
     }
   }
 );
-
-
 
 module.exports = productsRouter;

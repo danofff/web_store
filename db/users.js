@@ -1,7 +1,7 @@
 const client = require("./client");
 const bcrypt = require("bcrypt");
 var Isemail = require("isemail");
-const SALT_COUNT = process.env.SALT_COUNT || 10;
+const SALT_COUNT = parseInt(process.env.SALT_COUNT) || 10;
 
 async function createUser(email, password, isAdmin = false) {
   try {
