@@ -1,4 +1,4 @@
-const { client } = require("./index");
+const client = require("./client");
 
 async function getOrderProductById(id) {
   try {
@@ -51,7 +51,7 @@ async function createOrderProductMultiple(cart, orderId) {
     let orderProductsProm = await cart.map((product) => {
       return createOrderProduct(
         orderId,
-        product.id,
+        product.productId,
         product.quantity,
         product.price
       );

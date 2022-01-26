@@ -1,9 +1,9 @@
-const { client } = require("./index");
+const client = require("./client");
 const bcrypt = require("bcrypt");
 var Isemail = require("isemail");
-const Salt_Count = process.env.Salt_Count || 10;
+const SALT_COUNT = process.env.SALT_COUNT || 10;
 
-async function createUser(email, password) {
+async function createUser(email, password, isAdmin = false) {
   try {
     const isValidEmail = Isemail.validate(email);
     if (!isValidEmail) {
@@ -12,16 +12,16 @@ async function createUser(email, password) {
     if (password.length < 8) {
       throw new Error("Password length must be at least 8 characters!");
     }
-    const hashedPassword = await bcrypt.hash(password, Salt_Count);
+    const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     const {
       rows: [user],
     } = await client.query(
       `
-            INSERT INTO users(email, password)
-            VALUES($1, $2)
+            INSERT INTO users(email, password, "isAdmin")
+            VALUES($1, $2, $3)
             RETURNING *;
         `,
-      [email, hashedPassword]
+      [email, hashedPassword, isAdmin]
     );
     delete user.password;
     return user;

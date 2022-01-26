@@ -1,4 +1,4 @@
-const { client } = require("./index");
+const client = require("./client");
 const { createOrderProductMultiple } = require("./order_products");
 
 async function getAllOrders() {
@@ -12,13 +12,16 @@ async function getAllOrders() {
   }
 }
 
-async function getOrdersByUserId(userId){
+async function getOrdersByUserId(userId) {
   try {
-    const { rows: orders } = await client.query(`
+    const { rows: orders } = await client.query(
+      `
         SELECT * 
         FROM orders 
         WHERE "userId" = $1;
-      `), [userId];
+      `,
+      [userId]
+    );
     return orders;
   } catch (error) {
     throw error;
@@ -26,17 +29,23 @@ async function getOrdersByUserId(userId){
 }
 
 async function createOrder(cart, userId) {
+  //retrive product price from DB and recreate our cart based on DB price data
+
+  //calculate sum of order and add sum of order to order table
   try {
     const {
       rows: [order],
     } = await client.query(
       `
         INSERT INTO orders("userId")
-        VALUES "userId"=$1
+        VALUES ($1)
+        RETURNING *
       `,
       [userId]
     );
     const orderProducts = await createOrderProductMultiple(cart, order.id);
+
+    //update product in products table, for every product in cart substract this quantity from producs table quantity
     return orderProducts;
   } catch (error) {
     throw error;
@@ -46,5 +55,5 @@ async function createOrder(cart, userId) {
 module.exports = {
   getAllOrders,
   createOrder,
-  getOrdersByUserId
+  getOrdersByUserId,
 };
