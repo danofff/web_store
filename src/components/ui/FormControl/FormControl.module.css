@@ -1,0 +1,12 @@
+.label {
+  font-size: 3rem;
+  color: purple;
+}
+
+.input {
+  border: 2px solid seagreen;
+}
+
+.error {
+  color: red;
+}
