@@ -23,6 +23,23 @@ async function getAllCategoriesAdmin() {
   }
 }
 
+async function getCategoryById(id) {
+  try {
+    const {
+      rows: [category],
+    } = await client.query(
+      `
+      SELECT * FROM categories
+      WHERE id=$1
+    `,
+      [id]
+    );
+    return category;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function createCategory(title) {
   try {
     const {
@@ -36,8 +53,8 @@ async function createCategory(title) {
       [title]
     );
     return category;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     throw err;
   }
 }
@@ -49,7 +66,7 @@ async function editCategory(id, title) {
     } = await client.query(
       `
         UPDATE categories
-        SET title=$2
+        SET title=$2, updated_at=now()
         WHERE id=$1
         RETURNING *;
         `,
@@ -85,6 +102,7 @@ async function deleteCategory(id) {
 module.exports = {
   getAllCategories,
   getAllCategoriesAdmin,
+  getCategoryById,
   createCategory,
   editCategory,
   deleteCategory,

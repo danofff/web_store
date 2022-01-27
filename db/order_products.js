@@ -15,10 +15,11 @@ async function getOrderProductById(id) {
   }
 }
 async function getOrderProductsByOrderId(id) {
+  console.log("getorderproducts is working");
   try {
     const { rows: orderProducts } = await client.query(
       `
-        SELECT order_products.id as id, “orderId”, “productId”, order_products.price as price, order_products.quantity as quantity, sum, title, description
+        SELECT order_products.id as id, "orderId", "productId", order_products.price as price, order_products.quantity as quantity, sum, title, description
         FROM order_products JOIN products ON order_products."productId"=products.id
         WHERE "orderId"=$1;
             `,
@@ -33,7 +34,9 @@ async function getOrderProductsByOrderId(id) {
 async function createOrderProduct(orderId, productId, quantity, price) {
   try {
     let sum = price * quantity;
-    const { rows: orderProducts } = await client.query(
+    const {
+      rows: [orderProducts],
+    } = await client.query(
       `
             INSERT INTO order_products("orderId","productId",quantity,sum,price)
             VALUES($1,$2,$3,$4,$5)

@@ -4,6 +4,7 @@ const categoriesRouter = express.Router();
 const {
   getAllCategories,
   createCategory,
+  editCategory,
   deleteCategory,
 } = require("../db/categories");
 
@@ -17,7 +18,7 @@ categoriesRouter.get("/", checkIsUserAdmin, async (req, res, next) => {
 });
 
 categoriesRouter.post("/", checkIsUserAdmin, async (req, res, next) => {
-  const { title } = req.params;
+  const { title } = req.body;
   try {
     const creatingCategory = await createCategory(title);
     res.status(200).json({ category: creatingCategory });
@@ -33,8 +34,8 @@ categoriesRouter.patch(
     const { categoryId } = req.params;
     const { title } = req.body;
     try {
-      const editCategory = await editCategories(categoryId, title);
-      res.status(200).json(editCategory);
+      const editedCategory = await editCategory(categoryId, title);
+      res.status(200).json(editedCategory);
     } catch (error) {
       return next(error);
     }
