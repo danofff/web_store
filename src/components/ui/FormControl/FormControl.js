@@ -1,11 +1,18 @@
 import React from "react";
 import classes from "./FormControl.module.css";
 
-const FormControl = ({ handleChange, handleBlur, type, formik, name }) => {
+const FormControl = ({
+  handleChange,
+  handleBlur,
+  type,
+  formik,
+  name,
+  label,
+}) => {
   return (
     <div className={classes.form_control}>
       <label htmlFor={name} className={classes.label}>
-        {name}
+        {label}
       </label>
       <input
         className={classes.input}

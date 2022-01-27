@@ -3,20 +3,33 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: null,
+    email: null,
+    token: null,
+    isAdmin: null,
+    userId: null,
   },
   reducers: {
     loginUser(state, action) {
-      state.user = action.payload;
+      state.email = action.payload.email;
+      state.userId = action.payload.userId;
+      state.isAdmin = action.payload.isAdmin;
+      state.token = action.payload.token;
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
     logoutUser(state) {
-      state.user = null;
+      state.email = null;
+      state.userId = null;
+      state.isAdmin = null;
+      state.token = null;
     },
     checkUserLocalStorage(state) {
       const user = localStorage.getItem("user");
       if (user) {
-        state.user = JSON.parse(user);
+        const userParsed = JSON.parse(user);
+        state.email = userParsed.email;
+        state.userId = userParsed.userId;
+        state.isAdmin = userParsed.isAdmin;
+        state.token = userParsed.token;
       }
     },
   },

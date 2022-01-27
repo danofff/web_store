@@ -17,3 +17,16 @@ export const loginUser = async (email, password) => {
     throw new Error(error.error);
   }
 };
+
+export const registerUser = async (email, password, address, zip) => {
+  const response = await fetch(`${baseUrl}/users/register`, {
+    method: "POST",
+    headers: makeHeaders(),
+    body: JSON.stringify({
+      email,
+      password,
+      address,
+      zip,
+    }),
+  });
+};
