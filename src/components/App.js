@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import LoginForm from "./LoginForm/LoginForm";
 
-import {
-  getSomething
-} from '../api';
+import { userActions } from "../store/userState/userSlice";
+
+import Container from "./ui/Container";
 
 const App = () => {
-  const [message, setMessage] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getSomething()
-      .then(response => {
-        setMessage(response.message);
-      })
-      .catch(error => {
-        setMessage(error.message);
-      });
-  });
-
+    dispatch(userActions.checkUserLocalStorage());
+  }, []);
   return (
-    <div className="App">
-      <h1>Hello, World!</h1>
-      <h2>{ message }</h2>
-    </div>
+    <Container>
+      <div className="App">
+        <LoginForm />
+      </div>
+    </Container>
   );
-}
+};
 
 export default App;
