@@ -94,7 +94,7 @@ async function updateProduct(productData) {
     } = await client.query(
       `
           UPDATE products
-          SET ${updateStr}
+          SET ${updateStr}, updated_at=now()
           WHERE id = $1
           RETURNING *;
          `,
@@ -114,7 +114,7 @@ async function deleteProduct(id) {
     } = await client.query(
       `
         UPDATE products
-        SET "isActive"=false
+        SET "isActive"=false, updated_at=now()
         WHERE id = $1
         RETURNING *;
         `,

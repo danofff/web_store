@@ -1,6 +1,6 @@
-const { getProductById } = require(".");
-const client = require("./client");
 const { createOrderProductMultiple } = require("./order_products");
+const { getProductById } = require("./products");
+const client = require("./client");
 
 async function getAllOrders() {
   try {
@@ -29,10 +29,36 @@ async function getOrdersByUserId(userId) {
   }
 }
 
+async function getOrderById(id) {
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+        SELECT *
+        FROM orders
+        WHERE id=$1
+       `,
+      [id]
+    );
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function createOrder(cart, userId) {
   //retrieve product price from DB and recreate our cart based on DB price data
+  // console.log("this is cart", cart);
   const productsPromise = cart.map(async (prod) => {
     const product = await getProductById(prod.productId);
+    if (!product) {
+      throw new Error(
+        `Product with product id ${prod.productId} does not exist`
+      );
+    }
+
+    //checking if enough product quantity left
     if (product.quantity < prod.quantity) {
       throw new Error(
         "Dude, dont be greedy! We dont have that many products in stock"
@@ -76,4 +102,5 @@ module.exports = {
   getAllOrders,
   createOrder,
   getOrdersByUserId,
+  getOrderById,
 };
