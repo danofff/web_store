@@ -13,3 +13,15 @@ export const getCategories = async (token) => {
     throw new Error(error.error);
   }
 };
+
+export const getProducts = async () => {
+  const response = await fetch(`${baseUrl}/products`, {
+    method: 'GET',
+    headers: makeHeaders()
+  });
+  if (response.ok)
+    return  await response.json()
+  else{
+    const error =  await response.json();
+    throw new Error(error.error);}
+}

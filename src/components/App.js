@@ -7,22 +7,21 @@ import { userActions } from "../store/userState/userSlice";
 
 import Container from "./ui/Container";
 import CategoriesPage from "../pages/CategoriesPage";
+import ProductsPage from "../pages/ProductsPage";
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
   useEffect(() => {
     dispatch(userActions.checkUserLocalStorage());
   }, []);
 
-  console.log(user);
   return (
     <Container>
       <div className="App">
-        <LoginForm />
+        {/* <LoginForm />
         {/* <SignupForm /> */}
-        <CategoriesPage />
+        {/* <CategoriesPage />  */}
+        <ProductsPage/>
       </div>
     </Container>
   );
