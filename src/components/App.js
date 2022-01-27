@@ -6,6 +6,7 @@ import SignupForm from "./SingupForm/SignupForm";
 import { userActions } from "../store/userState/userSlice";
 
 import Container from "./ui/Container";
+import CategoriesPage from "../pages/CategoriesPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,8 +20,9 @@ const App = () => {
   return (
     <Container>
       <div className="App">
-        {/* <LoginForm /> */}
-        <SignupForm />
+        <LoginForm />
+        {/* <SignupForm /> */}
+        <CategoriesPage />
       </div>
     </Container>
   );
