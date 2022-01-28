@@ -7,7 +7,6 @@ import { registerUserAct } from "../../store/userState/userActions";
 import FormControl from "../ui/FormControl/FormControl";
 
 import classes from "./SignupForm.module.css";
-import { registerUser } from "../../api/userApi";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -21,35 +20,32 @@ const SignupForm = (props) => {
       zip: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email(),
-      password: Yup.string().min(
-        8,
-        "Password must be at least 8 characters long"
-      ),
-      passwordConfirmation: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "Passwords must match"
-      ),
+      email: Yup.string().email().required("Email is required field"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters long")
+        .required("Password is requried field"),
+      passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref("password")], "Passwords must match")
+        .required("Password confirmation is required field"),
       address: Yup.string(),
-      zip: Yup.string(/[0-9]/gi, "Zip code could only contain numbers").length(
-        5,
-        "Zip code must be 5 digits long"
+      zip: Yup.string().matches(
+        /^\d{5}(-\d{4})?$/,
+        "Zip code could contain only digits. Use XXXXX or XXXXX-XX pattern"
       ),
     }),
+    onSubmit: (values) => {
+      const { email, password, address, zip } = values;
+      dispatch(registerUserAct(email, password, address, zip));
+    },
   });
 
-  const onFormSubmit = (event) => {
-    event.preventDefault();
-    const { email, password, address, zip } = signup.values;
-    dispatch(registerUserAct(email, password, address, zip));
-  };
-
   return (
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={signup.handleSubmit}>
       <FormControl
         name="email"
         label="Email"
         type="email"
+        isRequired={true}
         value={signup.values.email}
         handleChange={signup.handleChange}
         handleBlur={signup.handleBlur}
@@ -59,6 +55,7 @@ const SignupForm = (props) => {
         name="password"
         label="Password"
         type="password"
+        isRequired={true}
         value={signup.values.password}
         handleChange={signup.handleChange}
         handleBlur={signup.handleBlur}
@@ -68,6 +65,7 @@ const SignupForm = (props) => {
         name="passwordConfirmation"
         label="Password Confirmation"
         type="password"
+        isRequired={true}
         value={signup.values["passwordConfirmation"]}
         handleChange={signup.handleChange}
         handleBlur={signup.handleBlur}
@@ -91,7 +89,7 @@ const SignupForm = (props) => {
         handleBlur={signup.handleBlur}
         formik={signup}
       />
-      <button>Register</button>
+      <button type="submit">Register</button>
     </form>
   );
 };

@@ -1,12 +1,55 @@
+.form_control {
+  width: 100%;
+  position: relative;
+  height: 5.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
 .label {
-  font-size: 3rem;
+  font-size: 1.25rem;
   color: var(--accent-color);
+  margin-bottom: 0.25rem;
 }
 
 .input {
-  border: 2px solid seagreen;
+  border: 2px solid var(--accent-color);
+  color: var(--font-color);
+  border-radius: 6px;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: transparent;
+  outline: none;
 }
 
-.error {
-  color: red;
+.input:-webkit-autofill,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:active {
+  border: 1px solid rgb(var(-success-color));
+  -webkit-text-fill-color: rgb(var(--success-color));
+  -webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset;
+  box-shadow: 0 0 0px 1000px var(--background-color) inset;
+}
+
+.error_input {
+  background-color: rgb(var(--error-color), 0.05);
+  border: 2px solid rgb(var(--error-color));
+  color: rgb(var(--error-color));
+}
+
+.success_input {
+  transition: all 0.1s ease-in-out;
+  color: rgb(var(--success-color));
+}
+
+.error_label {
+  color: rgb(var(--error-color));
+}
+
+.error_message {
+  position: absolute;
+  bottom: 0;
+  color: rgb(var(--error-color));
 }

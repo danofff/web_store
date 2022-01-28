@@ -16,12 +16,39 @@ export const getCategories = async (token) => {
 
 export const getProducts = async () => {
   const response = await fetch(`${baseUrl}/products`, {
-    method: 'GET',
-    headers: makeHeaders()
+    method: "GET",
+    headers: makeHeaders(),
   });
-  if (response.ok)
-    return  await response.json()
-  else{
-    const error =  await response.json();
-    throw new Error(error.error);}
-}
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+export const getAllOrders = async (token) => {
+  const response = await fetch(`${baseUrl}/orders`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+export const getOrderById = async (token, orderId) => {
+  const response = await fetch(`${baseUrl}/orders/${orderId}`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};

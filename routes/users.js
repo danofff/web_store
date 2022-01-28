@@ -8,7 +8,7 @@ const usersRouter = Router();
 
 //register a new user
 usersRouter.post("/register", async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, address, zip } = req.body;
 
   try {
     if (!email) {
@@ -20,7 +20,7 @@ usersRouter.post("/register", async (req, res, next) => {
       throw new Error(`User with email ${email} already exists`);
     }
 
-    const createdUser = await createUser(email, password);
+    const createdUser = await createUser(email, password, address, zip);
 
     res.status(201).json({ user: createdUser });
   } catch (error) {
