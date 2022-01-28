@@ -7,12 +7,12 @@ const Header = () => {
   const {userId, isAdmin} = useSelector((state) => state.user)
 
   return (
-    <nav>
+    <header>
       <div>
         <Logo />
         {/* need to import a logo to a file called Logo */}
       </div>
-      <div>
+      <nav>
         {/* there are things that need to be accessible to anyone and things that should
             be accessible to a specific group(aka admin, logged in user) */}
         <NavLink to="/products" >Home</NavLink>
@@ -25,8 +25,8 @@ const Header = () => {
         {isAdmin && <NavLink to="/allorders">All Orders</NavLink>}
         {/* the following links need a ternary to prove the user is an administrator */}
         {/* <NavLink>Product Orders</NavLink> */}
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
