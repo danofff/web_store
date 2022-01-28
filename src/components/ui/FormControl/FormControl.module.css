@@ -1,6 +1,6 @@
 .label {
   font-size: 3rem;
-  color: purple;
+  color: var(--accent-color);
 }
 
 .input {
