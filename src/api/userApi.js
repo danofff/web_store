@@ -14,6 +14,7 @@ export const loginUser = async (email, password) => {
     return await response.json();
   } else {
     const error = await response.json();
+    console.log(error);
     throw new Error(error.error);
   }
 };
