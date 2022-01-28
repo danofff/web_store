@@ -7,9 +7,13 @@ export const loginUserAct = (email, password) => {
       console.log("login user action is working");
       const user = await loginUser(email, password);
       dispatch(userActions.loginUser(user));
-      return user;
+
+      console.log("unreacheble code");
+      return true;
     } catch (error) {
+      console.log(error);
       //handle error
+      return false;
     }
   };
 };
@@ -19,6 +23,10 @@ export const registerUserAct = (email, password, address, zip) => {
     try {
       console.log("register user action is working");
       const user = await registerUser(email, password, address, zip);
-    } catch (error) {}
+      return true;
+    } catch (error) {
+      console.log(error);
+      //handle error
+    }
   };
 };

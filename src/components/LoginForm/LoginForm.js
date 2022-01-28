@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -9,6 +10,7 @@ import { loginUserAct } from "../../store/userState/userActions";
 import classes from "./LoginForm.module.css";
 
 const LoginForm = (props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useFormik({
     initialValues: {
@@ -24,16 +26,22 @@ const LoginForm = (props) => {
     },
   });
 
-  const onFormSubmit = (event) => {
+  const onFormSubmit = async (event) => {
     event.preventDefault();
-    // login.onSubmit();
-    console.log(login.values);
-    dispatch(loginUserAct(login.values.email, login.values.password));
+    const isSuccess = await dispatch(
+      loginUserAct(login.values.email, login.values.password)
+    );
+    if (isSuccess) {
+      navigate("/products");
+    } else {
+      login.setValues({ email: "", password: "" });
+    }
   };
   return (
     <form onSubmit={onFormSubmit}>
       <FormControl
         name="email"
+        label="Email"
         type="email"
         handleChange={login.handleChange}
         handleBlur={login.handleBlur}
@@ -41,6 +49,7 @@ const LoginForm = (props) => {
       />
       <FormControl
         name="password"
+        label="Password"
         type="password"
         handleChange={login.handleChange}
         handleBlur={login.handleBlur}
