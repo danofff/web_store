@@ -3,6 +3,9 @@ import classes from "./ProductsPage.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
 import { getProductsAct } from "../store/dataSlice/dataActions";
+import ProductCard from "../components/ProductCard/ProductCard";
+import ProductPageMenuBar from "../components/ProductPageMenuBar/ProductPageMenuBar";
+
 
 const ProductsPage = (props) => {
     const dispatch = useDispatch();
@@ -12,11 +15,13 @@ const ProductsPage = (props) => {
     },[])
   return (
     <div>
-      {products.map(product=>{
-          return <p>{product.title}</p>
+      <ProductPageMenuBar></ProductPageMenuBar>
+      <div className={`spacer ${classes.spacer}`}>
+      {products.map(product =>{
+        return <ProductCard product={product}/>
       })}
+    </div>
     </div>
   );
 }
-
 export default ProductsPage;

@@ -1,0 +1,14 @@
+p{
+    color: white;
+}
+
+.productCard{
+    width: 25%;
+    height: 32%;
+    border: 1px solid white;
+}
+
+.productImage{
+    height: 50px;
+    width: 50px;
+}
