@@ -9,6 +9,8 @@ import ProductsPage from "../pages/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import LoginPage from "../pages/LoginPage";
 
+import "./App.css";
+
 const App = () => {
   const dispatch = useDispatch();
 
