@@ -101,10 +101,25 @@ async function populateInitialData() {
     // create useful starting data
     //creating users
     console.log("starting to create users");
-    const u1 = await createUser("test@test.com", "testtest", true);
-    const u2 = await createUser("collin@test.com", "collintest");
-    const u3 = await createUser("danylo@test.com", "danylotest");
-    const u4 = await createUser("thomas@test.com", "thomastest");
+    const u1 = await createUser("test@test.com", "testtest", null, null, true);
+    const u2 = await createUser(
+      "collin@test.com",
+      "collintest",
+      "33 Elm st Collin City, CF",
+      "6660"
+    );
+    const u3 = await createUser(
+      "danylo@test.com",
+      "danylotest",
+      "44 Marple st Danylo City, DV",
+      "9990"
+    );
+    const u4 = await createUser(
+      "thomas@test.com",
+      "thomastest",
+      "55 Oak st Thomas City, TK",
+      "3330"
+    );
     console.log("created users ------->", u1, u2, u3, u4);
     console.log("finished creating users");
 
