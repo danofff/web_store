@@ -3,7 +3,13 @@ const bcrypt = require("bcrypt");
 var Isemail = require("isemail");
 const SALT_COUNT = parseInt(process.env.SALT_COUNT) || 10;
 
-async function createUser(email, password, isAdmin = false) {
+async function createUser(
+  email,
+  password,
+  address = null,
+  zip = null,
+  isAdmin = false
+) {
   try {
     const isValidEmail = Isemail.validate(email);
     if (!isValidEmail) {
@@ -17,11 +23,11 @@ async function createUser(email, password, isAdmin = false) {
       rows: [user],
     } = await client.query(
       `
-            INSERT INTO users(email, password, "isAdmin")
-            VALUES($1, $2, $3)
+            INSERT INTO users(email, password, address, zip, "isAdmin")
+            VALUES($1, $2, $3, $4, $5)
             RETURNING *;
         `,
-      [email, hashedPassword, isAdmin]
+      [email, hashedPassword, address, zip, isAdmin]
     );
     delete user.password;
     return user;

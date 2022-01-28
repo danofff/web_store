@@ -12,7 +12,7 @@ const checkIsUserAdmin = require("../middleware/checkIsUserAdmin");
 orderRouter.get("/", checkIsUserAdmin, async (req, res, next) => {
   try {
     const allOrders = await getAllOrders();
-    res.status(200).json(allOrders);
+    res.status(200).json({ orders: allOrders });
   } catch (error) {
     next(error);
   }
