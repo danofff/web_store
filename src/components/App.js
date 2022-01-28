@@ -8,6 +8,7 @@ import CategoriesPage from "../pages/CategoriesPage";
 import ProductsPage from "../pages/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import LoginPage from "../pages/LoginPage";
+import Header from "./Header/Header";
 
 import "./App.css";
 
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <Container>
       <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<Navigate replace to="/products" />} />
           <Route path="/products" element={<ProductsPage />} />
