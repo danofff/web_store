@@ -18,31 +18,32 @@ const LoginForm = (props) => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email(),
-      password: Yup.string().min(8),
+      email: Yup.string()
+        .email("Email must be a valid email")
+        .required("Emails field is required"),
+      password: Yup.string()
+        .min(8, "Password must me at least 8 characters")
+        .required("Password field is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const isSuccess = await dispatch(
+        loginUserAct(login.values.email, login.values.password)
+      );
+      if (isSuccess) {
+        navigate("/products");
+      } else {
+        login.setValues({ email: "", password: "" });
+      }
     },
   });
 
-  const onFormSubmit = async (event) => {
-    event.preventDefault();
-    const isSuccess = await dispatch(
-      loginUserAct(login.values.email, login.values.password)
-    );
-    if (isSuccess) {
-      navigate("/products");
-    } else {
-      login.setValues({ email: "", password: "" });
-    }
-  };
   return (
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={login.handleSubmit}>
       <FormControl
         name="email"
         label="Email"
         type="email"
+        isRequired={true}
         handleChange={login.handleChange}
         handleBlur={login.handleBlur}
         formik={login}
@@ -51,11 +52,12 @@ const LoginForm = (props) => {
         name="password"
         label="Password"
         type="password"
+        isRequired={true}
         handleChange={login.handleChange}
         handleBlur={login.handleBlur}
         formik={login}
       />
-      <button>Login</button>
+      <button type="submit">Login</button>
     </form>
   );
 };

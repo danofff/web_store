@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 const dataSlice = createSlice({
   name: "data",
-  initialState: { categories: [] , products: [] },
+  initialState: { categories: [], products: [], orders: [] },
   reducers: {
     setCategories(state, action) {
       state.categories = action.payload;
     },
     setProducts(state, action) {
       state.products = action.payload;
-    }
+    },
+    setAllOrders(state, action) {
+      state.orders = action.payload;
+    },
   },
 });
 
