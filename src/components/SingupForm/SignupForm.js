@@ -7,6 +7,7 @@ import { registerUserAct } from "../../store/userState/userActions";
 import FormControl from "../ui/FormControl/FormControl";
 
 import classes from "./SignupForm.module.css";
+import Button from "../ui/Button/Button";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const SignupForm = (props) => {
       address: Yup.string(),
       zip: Yup.string().matches(
         /^\d{5}(-\d{4})?$/,
-        "Zip code could contain only digits. Use XXXXX or XXXXX-XX pattern"
+        "Zip code could contain only digits. Use 00000 or 00000-0000 pattern"
       ),
     }),
     onSubmit: (values) => {
@@ -40,7 +41,7 @@ const SignupForm = (props) => {
   });
 
   return (
-    <form onSubmit={signup.handleSubmit}>
+    <form onSubmit={signup.handleSubmit} className={classes.form}>
       <FormControl
         name="email"
         label="Email"
@@ -89,7 +90,7 @@ const SignupForm = (props) => {
         handleBlur={signup.handleBlur}
         formik={signup}
       />
-      <button type="submit">Register</button>
+      <Button type="submit" style="plain" text="sign up" />
     </form>
   );
 };

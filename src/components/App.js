@@ -3,16 +3,15 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userActions } from "../store/userState/userSlice";
-import Container from "./ui/Container";
-import CategoriesPage from "../pages/CategoriesPage";
+import Container from "./ui/Container/Container";
 import ProductsPage from "../pages/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
-import OrdersPage from "../pages/OrdersPageA";
+import OrderPage from "../pages/OrderPage";
+import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
-import OrderPage from "../pages/OrderPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,13 +27,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate replace to="/products" />} />
           <Route path="/products" element={<ProductsPage />} />
-          {user.isAdmin && (
-            <Route path="/categories" element={<CategoriesPage />} />
-          )}
-          {user.isAdmin && <Route path="/allorders" element={<OrdersPage />} />}
           {user && <Route path="/orders/:orderId" element={<OrderPage />} />}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          {user.isAdmin && <Route path="/admin/*" element={<AdminPages />} />}
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </div>
