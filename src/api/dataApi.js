@@ -45,6 +45,7 @@ export const getOrderById = async (token, orderId) => {
     method: "GET",
     headers: makeHeaders(token),
   });
+
   if (response.ok) {
     return await response.json();
   } else {

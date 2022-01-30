@@ -1,3 +1,25 @@
-.title {
-  color: purple;
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form button {
+  /* align-self: flex-end; */
+}
+
+.form a {
+  align-self: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+
+.from a:hover {
+  color: var(--accent-color-hover);
+}
+
+@media (max-width: 400px) {
+  .form a {
+    font-size: 1rem;
+  }
 }

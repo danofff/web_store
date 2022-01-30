@@ -31,7 +31,7 @@ async function buildTables() {
       email varchar(255) UNIQUE NOT NULL,
       password varchar(255) NOT NULL,
       address varchar(255),
-      zip varchar(5),
+      zip varchar(10),
       "isAdmin" boolean DEFAULT false,
       created_at timestamp DEFAULT now()
     );

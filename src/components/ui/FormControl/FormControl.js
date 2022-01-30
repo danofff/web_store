@@ -11,7 +11,6 @@ const FormControl = ({
   isRequired,
 }) => {
   const isError = formik.touched[name] && formik.errors[name];
-  const isValid = formik.touched[name] && !formik.errors[name];
   return (
     <div className={classes.form_control}>
       <label
@@ -21,9 +20,7 @@ const FormControl = ({
         {`${label}${isRequired ? "*" : ""}`}
       </label>
       <input
-        className={`${classes.input} ${isError ? classes.error_input : ""} ${
-          isValid ? classes.success_input : ""
-        }`}
+        className={`${classes.input} ${isError ? classes.error_input : ""}`}
         type={type}
         name={name}
         id={name}

@@ -7,7 +7,7 @@ import classes from "./SignupPage.module.css";
 const SignupPage = (props) => {
   return (
     <div>
-      <h1 className={classes.title}>Sign up</h1>
+      <h1 className="title">Sign up</h1>
       <div className={classes.form_container}>
         <SignupForm />
       </div>
