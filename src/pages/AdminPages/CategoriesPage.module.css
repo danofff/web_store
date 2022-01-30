@@ -1,0 +1,31 @@
+.container {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  align-self: flex-end;
+  height: 0;
+  /* line-height: 50px; */
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.form_active {
+  height: 50px;
+}
+
+.container button {
+  align-self: flex-end;
+  margin-bottom: 1.5rem;
+}
+.container table {
+  width: 100%;
+  margin-top: 1rem;
+}
+.th_name {
+  width: 200px;
+}

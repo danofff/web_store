@@ -35,7 +35,7 @@ categoriesRouter.patch(
     const { title } = req.body;
     try {
       const editedCategory = await editCategory(categoryId, title);
-      res.status(200).json(editedCategory);
+      res.status(200).json({ category: editedCategory });
     } catch (error) {
       return next(error);
     }
@@ -48,7 +48,7 @@ categoriesRouter.delete(
     const { categoryId } = req.params;
     try {
       const deletedCategory = await deleteCategory(categoryId);
-      res.status(200).json(deletedCategory);
+      res.status(200).json({ category: deletedCategory });
     } catch (error) {
       return next(error);
     }

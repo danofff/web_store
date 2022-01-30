@@ -4,18 +4,18 @@ import "./Header.module.css";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const {userId, isAdmin} = useSelector((state) => state.user)
+  const { userId, isAdmin } = useSelector((state) => state.user);
 
   return (
     <header>
       <div>
-        <Logo />
+        {/* <Logo /> */}
         {/* need to import a logo to a file called Logo */}
       </div>
       <nav>
         {/* there are things that need to be accessible to anyone and things that should
             be accessible to a specific group(aka admin, logged in user) */}
-        <NavLink to="/products" >Home</NavLink>
+        <NavLink to="/products">Home</NavLink>
         <NavLink to="/products">Products</NavLink>
         <NavLink to="/">Login</NavLink>
         <NavLink to="/signup">SignUp</NavLink>

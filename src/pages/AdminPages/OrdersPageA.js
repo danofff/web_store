@@ -15,7 +15,7 @@ const OrdersPage = (props) => {
   }, [dispatch]);
   return (
     <div className={classes.container}>
-      <h1>All users orders</h1>
+      <h1 className="title"> All users orders</h1>
       <table>
         <thead>
           <tr>

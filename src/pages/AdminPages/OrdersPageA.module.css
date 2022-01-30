@@ -6,12 +6,8 @@
   align-items: center;
 }
 
-.container h1 {
-  font-size: 2rem;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-
 .container table {
   border-collapse: collapse;
+  width: 100%;
+  max-width: 600px;
 }

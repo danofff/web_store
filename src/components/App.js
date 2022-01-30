@@ -14,7 +14,6 @@ import SignupPage from "../pages/SignupPage";
 import OrderPage from "../pages/OrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
 
-
 import "./App.css";
 
 const App = () => {

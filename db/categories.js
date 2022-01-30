@@ -86,7 +86,7 @@ async function deleteCategory(id) {
     } = await client.query(
       `
           UPDATE categories
-          SET "isActive"=false
+          SET "isActive"=false, updated_at=now()
           WHERE id=$1
           RETURNING *;
           `,
