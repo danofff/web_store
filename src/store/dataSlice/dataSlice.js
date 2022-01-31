@@ -25,6 +25,13 @@ const dataSlice = createSlice({
     addProduct(state, action) {
       state.products.push(action.payload);
     },
+    editProduct(state, action) {
+      const newProd = action.payload;
+      const allProd = current(state.categories).slice();
+      const editedProdIdx = allProd.findIndex((prod) => prod.id === newProd.id);
+      allProd.splice(editedProdIdx, 1, newProd);
+      state.products = allProd;
+    },
 
     //orders
     setAllOrders(state, action) {

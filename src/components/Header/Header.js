@@ -17,7 +17,7 @@ const Header = () => {
             be accessible to a specific group(aka admin, logged in user) */}
         <NavLink to="/products">Home</NavLink>
         <NavLink to="/products">Products</NavLink>
-        <NavLink to="/">Login</NavLink>
+        <NavLink to="/login">Login</NavLink>
         <NavLink to="/signup">SignUp</NavLink>
         <NavLink to="/cart">Cart</NavLink>
         {userId && <NavLink to="/orders">Orders</NavLink>}

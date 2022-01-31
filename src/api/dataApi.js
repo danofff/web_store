@@ -45,13 +45,11 @@ export const addCategory = async (token, title) => {
   }
 };
 
-export const editCategory = async (token, categoryId, title) => {
+export const editCategory = async (token, categoryId, categoryData) => {
   const response = await fetch(`${baseUrl}/categories/${categoryId}`, {
     method: "PATCH",
     headers: makeHeaders(token),
-    body: JSON.stringify({
-      title,
-    }),
+    body: JSON.stringify(categoryData),
   });
 
   if (response.ok) {
@@ -89,9 +87,38 @@ export const getProducts = async () => {
   }
 };
 
+export const getProductById = async (productId) => {
+  const response = await fetch(`${baseUrl}/products/${productId}`, {
+    method: "GET",
+    headers: makeHeaders(),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
 export const addProduct = async (token, productData) => {
   const response = await fetch(`${baseUrl}/products`, {
     method: "POST",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      ...productData,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+export const editProduct = async (token, productId, productData) => {
+  const response = await fetch(`${baseUrl}/products/${productId}`, {
+    method: "PATCH",
     headers: makeHeaders(token),
     body: JSON.stringify({
       ...productData,

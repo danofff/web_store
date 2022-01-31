@@ -6,6 +6,7 @@ const {
   createCategory,
   editCategory,
   deleteCategory,
+  restoreCategory,
 } = require("../db/categories");
 
 categoriesRouter.get("/", async (req, res, next) => {
@@ -44,9 +45,14 @@ categoriesRouter.patch(
   checkIsUserAdmin,
   async (req, res, next) => {
     const { categoryId } = req.params;
-    const { title } = req.body;
+    const { title, isActive } = req.body;
     try {
-      const editedCategory = await editCategory(categoryId, title);
+      let editedCategory;
+      if (title) {
+        editedCategory = await editCategory(categoryId, title);
+      } else {
+        editedCategory = await restoreCategory(categoryId, Boolean(isActive));
+      }
       res.status(200).json({ category: editedCategory });
     } catch (error) {
       return next(error);

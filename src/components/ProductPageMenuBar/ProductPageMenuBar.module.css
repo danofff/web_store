@@ -1,10 +1,1 @@
 /* this selector will have to be changed but i couldnt get it to target correctly */
-form{
-    width: 100vw;
-    background-color: #40404B;
-    color: #E9DCCC;
-}
-span{
-    margin-left: 20px;
-    background-color: #40404B;
-}
