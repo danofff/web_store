@@ -20,7 +20,7 @@ const dataSlice = createSlice({
 
     //products
     setProducts(state, action) {
-      state.products = action.payload;
+      state.products = action.payload.sort((a, b) => a.id - b.id);
     },
     addProduct(state, action) {
       state.products.push(action.payload);

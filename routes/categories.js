@@ -2,6 +2,7 @@ const express = require("express");
 const checkIsUserAdmin = require("../middleware/checkIsUserAdmin");
 const categoriesRouter = express.Router();
 const {
+  getAllCategories,
   getAllCategoriesAdmin,
   createCategory,
   editCategory,
