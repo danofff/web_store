@@ -59,6 +59,6 @@ table th {
   padding: 0.5rem;
 }
 
-table tr:nth-child(even) {
+table tr:nth-child(odd) {
   background-color: var(--background-elem);
 }
