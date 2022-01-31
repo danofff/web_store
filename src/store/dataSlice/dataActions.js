@@ -1,4 +1,5 @@
 import {
+  getCategories,
   getCategoriesAdmin,
   getProducts,
   getAllOrders,
@@ -14,6 +15,18 @@ export const getCategoriesAdminAct = (token) => {
   return async (dispatch) => {
     try {
       const response = await getCategoriesAdmin(token);
+      dispatch(dataActions.setCategories(response.categories));
+    } catch (error) {
+      console.log(error); //handle error here!
+    }
+  };
+};
+
+// made this to get list of all categories for products page
+export const getCategoriesAct = (token) => {
+  return async (dispatch) => {
+    try {
+      const response = await getCategories(token);
       dispatch(dataActions.setCategories(response.categories));
     } catch (error) {
       console.log(error); //handle error here!
