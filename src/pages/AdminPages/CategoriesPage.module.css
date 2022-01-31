@@ -40,11 +40,17 @@
   height: 50px;
   overflow: visible;
 }
-
-.container table {
+.table_cont {
   width: 100%;
+  overflow-x: scroll;
   margin-top: 1rem;
 }
-.th_name {
+
+.table_cont table {
+  min-width: 750px;
+  width: 100%;
+}
+
+.ta .th_name {
   width: 200px;
 }
