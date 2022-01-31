@@ -75,6 +75,22 @@ export const getProducts = async () => {
   }
 };
 
+export const addProduct = async (token, productData) => {
+  const response = await fetch(`${baseUrl}/products`, {
+    method: "POST",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      ...productData,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
 //ORDERS API
 export const getAllOrders = async (token) => {
   const response = await fetch(`${baseUrl}/orders`, {

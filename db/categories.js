@@ -55,7 +55,7 @@ async function createCategory(title) {
     return category;
   } catch (error) {
     console.log(error);
-    throw err;
+    throw error;
   }
 }
 

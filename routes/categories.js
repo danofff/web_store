@@ -20,6 +20,9 @@ categoriesRouter.get("/", checkIsUserAdmin, async (req, res, next) => {
 categoriesRouter.post("/", checkIsUserAdmin, async (req, res, next) => {
   const { title } = req.body;
   try {
+    if (!title || title.length < 3) {
+      throw new Error("Category title must be at least 3 characters long");
+    }
     const creatingCategory = await createCategory(title);
     res.status(200).json({ category: creatingCategory });
   } catch (error) {

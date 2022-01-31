@@ -3,6 +3,7 @@ const dataSlice = createSlice({
   name: "data",
   initialState: { categories: [], products: [], orders: [] },
   reducers: {
+    //categories
     setCategories(state, action) {
       state.categories = action.payload.sort((a, b) => a.id - b.id);
     },
@@ -16,9 +17,16 @@ const dataSlice = createSlice({
     addCategory(state, action) {
       state.categories.push(action.payload);
     },
+
+    //products
     setProducts(state, action) {
       state.products = action.payload;
     },
+    addProduct(state, action) {
+      state.products.push(action.payload);
+    },
+
+    //orders
     setAllOrders(state, action) {
       state.orders = action.payload;
     },

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import {
   getCategoriesAct,
   addCategoryAct,
 } from "../../store/dataSlice/dataActions";
 import CategoryLi from "../../components/CategoryLi/CategoryLi";
 import Button from "../../components/ui/Button/Button";
+import StyledInput from "../../components/ui/StyledInput/StyledInput";
 
 import classes from "./CategoriesPage.module.css";
 
@@ -15,16 +19,26 @@ const CategoriesPage = (props) => {
   const categories = useSelector((state) => state.data.categories);
   const token = useSelector((state) => state.user.token);
   const [addCategory, setAddCategory] = useState(false);
-  const [categoryInput, setCategoryInput] = useState("");
+
+  const formik = useFormik({
+    initialValues: {
+      categoryInput: "",
+    },
+    validationSchema: Yup.object({
+      categoryInput: Yup.string()
+        .min(3, "Must be at least 3 char long")
+        .required("Category name must not be empty"),
+    }),
+    onSubmit: (values) => {
+      dispatch(addCategoryAct(token, values.categoryInput));
+      values.categoryInput = "";
+    },
+  });
 
   useEffect(() => {
     dispatch(getCategoriesAct(token));
   }, [dispatch]);
 
-  const onAddSubmit = (event) => {
-    event.preventDefault();
-    dispatch(addCategoryAct(token, categoryInput));
-  };
   return (
     <div className={classes.container}>
       <h1 className="title">Categories</h1>
@@ -39,14 +53,19 @@ const CategoriesPage = (props) => {
       />
       <form
         className={`${classes.form} ${addCategory ? classes.form_active : ""}`}
-        onSubmit={onAddSubmit}
+        onSubmit={formik.handleSubmit}
       >
-        <input
+        <StyledInput
           type="text"
-          value={categoryInput}
-          onChange={(e) => setCategoryInput(e.target.value)}
+          value={formik.values.categoryInput}
+          name="categoryInput"
+          setValue={formik.handleChange}
+          placeholder="Category Name..."
         />
         <Button type="submit" style="outlined" text="Add" />
+        {formik.touched.categoryInput && formik.errors.categoryInput ? (
+          <p className={classes.error_text}>{formik.errors.categoryInput}</p>
+        ) : null}
       </form>
       <table>
         <thead>

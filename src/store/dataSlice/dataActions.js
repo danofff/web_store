@@ -5,6 +5,7 @@ import {
   editCategory,
   deleteCategory,
   addCategory,
+  addProduct,
 } from "../../api/dataApi";
 import { dataActions } from "./dataSlice";
 
@@ -47,7 +48,7 @@ export const deleteCategoryAct = (token, categoryId) => {
   return async (dispatch) => {
     try {
       const response = await deleteCategory(token, categoryId);
-      dispatch(dataActions.editCategories(response.category));
+      dispatch(dataActions.editCategory(response.category));
     } catch (error) {
       //handle error
       console.error(error);
@@ -63,6 +64,17 @@ export const getProductsAct = () => {
       dispatch(dataActions.setProducts(response.products));
     } catch (error) {
       //handle error here!
+      console.log(error);
+    }
+  };
+};
+
+export const addProductAct = (token, productData) => {
+  return async (dispatch) => {
+    try {
+      const response = await addProduct(token, productData);
+      dispatch(dataActions.addProduct(response.product));
+    } catch (error) {
       console.log(error);
     }
   };

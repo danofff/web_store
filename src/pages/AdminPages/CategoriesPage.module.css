@@ -6,22 +6,41 @@
   align-items: center;
 }
 
-.form {
+.container button {
   align-self: flex-end;
+}
+
+.form {
+  margin-top: 1.5rem;
+  align-self: flex-end;
+  width: 100%;
+  max-width: 500px;
   height: 0;
-  /* line-height: 50px; */
   transition: all 0.3s ease-in-out;
   overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.error_text {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  color: rgb(var(--error-color));
+}
+
+.form button {
+  align-self: center;
+  border-width: 2px;
 }
 
 .form_active {
   height: 50px;
+  overflow: visible;
 }
 
-.container button {
-  align-self: flex-end;
-  margin-bottom: 1.5rem;
-}
 .container table {
   width: 100%;
   margin-top: 1rem;
