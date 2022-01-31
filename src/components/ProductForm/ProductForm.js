@@ -8,7 +8,7 @@ import Button from "../ui/Button/Button";
 import StyledSelect from "../ui/StyledSelect/StyledSelect";
 import {
   addProductAct,
-  getCategoriesAct,
+  getCategoriesAdminAct,
 } from "../../store/dataSlice/dataActions";
 
 import classes from "./ProductForm.module.css";
@@ -22,7 +22,7 @@ const ProductForm = (props) => {
 
   useEffect(() => {
     if (categories.length === 0) {
-      dispatch(getCategoriesAct(token));
+      dispatch(getCategoriesAdminAct(token));
     }
   }, [dispatch]);
 
@@ -55,9 +55,11 @@ const ProductForm = (props) => {
     },
   });
 
-  const categoriesOptions = categories.map((cat) => {
-    return { value: cat.id, name: cat.title };
-  });
+  const categoriesOptions = categories
+    .filter((cat) => cat.isActive)
+    .map((cat) => {
+      return { value: cat.id, name: cat.title };
+    });
 
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>

@@ -2,15 +2,24 @@ const express = require("express");
 const checkIsUserAdmin = require("../middleware/checkIsUserAdmin");
 const categoriesRouter = express.Router();
 const {
-  getAllCategories,
+  getAllCategoriesAdmin,
   createCategory,
   editCategory,
   deleteCategory,
 } = require("../db/categories");
 
-categoriesRouter.get("/", checkIsUserAdmin, async (req, res, next) => {
+categoriesRouter.get("/", async (req, res, next) => {
   try {
     const gettingCategories = await getAllCategories();
+    res.status(200).json({ categories: gettingCategories });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+categoriesRouter.get("/admin", checkIsUserAdmin, async (req, res, next) => {
+  try {
+    const gettingCategories = await getAllCategoriesAdmin();
     res.status(200).json({ categories: gettingCategories });
   } catch (error) {
     return next(error);

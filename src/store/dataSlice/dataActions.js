@@ -1,5 +1,5 @@
 import {
-  getCategories,
+  getCategoriesAdmin,
   getProducts,
   getAllOrders,
   editCategory,
@@ -10,10 +10,10 @@ import {
 import { dataActions } from "./dataSlice";
 
 /*****CATEGORIES ACTIONS****/
-export const getCategoriesAct = (token) => {
+export const getCategoriesAdminAct = (token) => {
   return async (dispatch) => {
     try {
-      const response = await getCategories(token);
+      const response = await getCategoriesAdmin(token);
       dispatch(dataActions.setCategories(response.categories));
     } catch (error) {
       console.log(error); //handle error here!
