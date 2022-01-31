@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import {
-  getCategoriesAct,
+  getCategoriesAdminAct,
   addCategoryAct,
 } from "../../store/dataSlice/dataActions";
 import CategoryLi from "../../components/CategoryLi/CategoryLi";
@@ -36,7 +36,7 @@ const CategoriesPage = (props) => {
   });
 
   useEffect(() => {
-    dispatch(getCategoriesAct(token));
+    dispatch(getCategoriesAdminAct(token));
   }, [dispatch]);
 
   return (

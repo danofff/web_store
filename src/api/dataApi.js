@@ -2,8 +2,22 @@ import baseUrl from "./baseUrl";
 import makeHeaders from "./makeHeaders";
 
 //CATEGORIES API
+export const getCategoriesAdmin = async (token) => {
+  const response = await fetch(`${baseUrl}/categories/admin`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+//categories for non admin
 export const getCategories = async (token) => {
-  const response = await fetch(`${baseUrl}/categories`, {
+  const response = await fetch(`${baseUrl}/categories/`, {
     method: "GET",
     headers: makeHeaders(token),
   });
