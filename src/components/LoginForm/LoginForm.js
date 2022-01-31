@@ -10,7 +10,7 @@ import Button from "../ui/Button/Button";
 
 import classes from "./LoginForm.module.css";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useFormik({

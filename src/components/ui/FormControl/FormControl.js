@@ -41,9 +41,7 @@ const FormControl = ({
         onChange={handleChange}
         onBlur={handleBlur}
         value={formik.values[name]}
-        min={min}
-        max={max}
-        step={step}
+        rows={4}
       />
     );
   } else {

@@ -15,12 +15,16 @@ const CategoryLi = ({ category }) => {
 
   const onEditSubmit = (event) => {
     event.preventDefault();
-    dispatch(editCategoryAct(token, category.id, titleInput));
+    dispatch(editCategoryAct(token, category.id, { title: titleInput }));
     setEditMode(false);
   };
 
-  const onDeleteSubmit = (event) => {
-    dispatch(deleteCategoryAct(token, category.id));
+  const onDeleteRestoreSubmit = (event) => {
+    if (category.isActive) {
+      dispatch(deleteCategoryAct(token, category.id));
+    } else {
+      dispatch(editCategoryAct(token, category.id, { isActive: true }));
+    }
   };
   return (
     <tr>
@@ -49,8 +53,8 @@ const CategoryLi = ({ category }) => {
         <span className={classes.edit} onClick={(e) => setEditMode(true)}>
           Edit
         </span>
-        <span className={classes.delete} onClick={onDeleteSubmit}>
-          Delete
+        <span className={classes.delete} onClick={onDeleteRestoreSubmit}>
+          {category.isActive ? "Delete" : "Restore"}
         </span>
       </td>
     </tr>
