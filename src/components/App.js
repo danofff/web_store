@@ -15,6 +15,7 @@ import OrderPage from "../pages/OrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
+import StarRating from "./StarRating/StarRating";
 
 const App = () => {
   const dispatch = useDispatch();

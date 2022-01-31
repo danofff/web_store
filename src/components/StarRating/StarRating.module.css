@@ -1,0 +1,15 @@
+.rating {
+  display: flex;
+}
+
+.rate {
+  color: var(--font-color);
+}
+
+.rate_zero {
+  opacity: 0;
+}
+
+.rating_digit {
+  margin-left: 0.25rem;
+}
