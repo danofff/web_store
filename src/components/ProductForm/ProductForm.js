@@ -8,32 +8,52 @@ import Button from "../ui/Button/Button";
 import StyledSelect from "../ui/StyledSelect/StyledSelect";
 import {
   addProductAct,
+  editProductAct,
   getCategoriesAdminAct,
 } from "../../store/dataSlice/dataActions";
 
 import classes from "./ProductForm.module.css";
+import { getProductById } from "../../api/dataApi";
 
-const ProductForm = (props) => {
+const ProductForm = ({ mode = "add", productId = null }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
   const categories = useSelector((state) => state.data.categories);
 
+  const [product, setProduct] = useState({
+    title: "",
+    description: "",
+    price: 0,
+    quantity: 0,
+    imageURL: "",
+  });
   const [categoryId, setCategoryId] = useState(1);
 
   useEffect(() => {
-    if (categories.length === 0) {
-      dispatch(getCategoriesAdminAct(token));
+    dispatch(getCategoriesAdminAct(token));
+    if (mode === "edit") {
+      getProductById(productId)
+        .then((result) => {
+          const product = result.product;
+          setProduct({
+            title: product.title,
+            description: product.description,
+            imageURL: product.imageURL,
+            price: product.price,
+            quantity: product.quantity,
+          });
+          setCategoryId(parseInt(product.categoryId));
+        })
+        .catch((error) => {
+          console.log(error);
+          //handle error
+        });
     }
   }, [dispatch]);
 
   const formik = useFormik({
-    initialValues: {
-      title: "",
-      description: "",
-      imageURL: "",
-      price: 0,
-      quantity: 0,
-    },
+    initialValues: product,
+    enableReinitialize: true,
     validationSchema: Yup.object({
       title: Yup.string().min(3).required(),
       description: Yup.string().required().min(12),
@@ -50,8 +70,11 @@ const ProductForm = (props) => {
         quantity: values.quantity,
         categoryId,
       };
-      console.log(productData);
-      dispatch(addProductAct(token, productData));
+      if (mode === "add") {
+        dispatch(addProductAct(token, productData));
+      } else {
+        dispatch(editProductAct(token, productId, productData));
+      }
     },
   });
 
@@ -60,7 +83,6 @@ const ProductForm = (props) => {
     .map((cat) => {
       return { value: cat.id, name: cat.title };
     });
-
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
       <FormControl
@@ -121,7 +143,11 @@ const ProductForm = (props) => {
         handleBlur={formik.handleBlur}
         formik={formik}
       />
-      <Button type="submit" text="Add product" style="plain" />
+      <Button
+        type="submit"
+        text={mode === "add" ? "Add product" : "Edit product"}
+        style="plain"
+      />
     </form>
   );
 };
