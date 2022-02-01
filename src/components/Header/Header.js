@@ -49,16 +49,6 @@ const Header = () => {
             All Orders
           </NavLink>
         )} */}
-// =======
-//         <NavLink to="/products">Home</NavLink>
-//         <NavLink to="/products">Products</NavLink>
-//         <NavLink to="/login">Login</NavLink>
-//         <NavLink to="/signup">SignUp</NavLink>
-//         <NavLink to="/cart">Cart</NavLink>
-//         {userId && <NavLink to="/orders">Orders</NavLink>}
-//         {isAdmin && <NavLink to="/categories">Categories</NavLink>}
-//         {isAdmin && <NavLink to="/allorders">All Orders</NavLink>}
-// >>>>>>> master
         {/* the following links need a ternary to prove the user is an administrator */}
         {/* <NavLink>Product Orders</NavLink> */}
       </nav>
