@@ -15,7 +15,7 @@ import OrderPage from "../pages/OrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
-import StarRating from "./StarRating/StarRating";
+import Loader from "./ui/Loader/Loader";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ const App = () => {
   return (
     <Container>
       <div className="App">
+        <Loader />
         <Header />
         <Routes>
           <Route path="/" element={<Navigate replace to="/products" />} />

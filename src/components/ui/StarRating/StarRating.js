@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { editProductAct } from "../../store/dataSlice/dataActions";
+import { editProductAct } from "../../../store/dataSlice/dataActions";
 import classes from "./StarRating.module.css";
 
 const StarRating = ({ rating = 0, disabled = true }) => {
