@@ -1,14 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import classes from "./Header.module.css";
 import { useSelector } from "react-redux";
 
 const Header = () => {
   const { userId, isAdmin } = useSelector((state) => state.user);
+  const { quantityTotal } = useSelector((state) => state.cart);
   console.log(classes);
-  console.log("Im here");
-  return (
+  console.log(quantityTotal);
 
+  return (
     <header className={classes.header}>
       <div className={classes.image}>
         <img
@@ -31,14 +32,17 @@ const Header = () => {
         <NavLink className={classes.navbar_links} to="/signup">
           SignUp
         </NavLink>
-        <NavLink className={classes.navbar_links} to="/cart">
-          Cart
-        </NavLink>
         {userId && (
           <NavLink className={classes.navbar_links} to="/orders">
             Orders
           </NavLink>
         )}
+        <Link className={classes.navbar_links} to="/cart">
+          <div className={classes.cart}>
+            <i className="fas fa-shopping-cart"></i>
+            <span>{quantityTotal}</span>
+          </div>
+        </Link>
         {/* {isAdmin && (
           <NavLink className={classes.navbar_links} to="/categories">
             Categories
