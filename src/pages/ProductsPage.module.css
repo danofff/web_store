@@ -1,0 +1,7 @@
+.spacer {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}

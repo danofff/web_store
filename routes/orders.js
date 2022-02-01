@@ -42,7 +42,7 @@ orderRouter.get("/:orderId", checkUser, async (req, res, next) => {
       throw new Error("You are not allowed check not yours order");
     }
     let orderProd = await getOrderProductsByOrderId(orderId);
-    res.status(200).json({ order: orderProd });
+    res.status(200).json({ order: { ...order, products: orderProd } });
   } catch (error) {
     next(error);
   }

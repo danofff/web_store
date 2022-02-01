@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import classes from "./OrderLi.module.css";
 
 const OrderLi = ({ order }) => {
@@ -13,14 +14,14 @@ const OrderLi = ({ order }) => {
     minute: "2-digit",
   });
   return (
-    <div>
-      <Link to={`/orders/${order.id}`}>
-        <span>Order ID: {order.id} | </span>
-      </Link>
-      <span>Order Sum: {order.orderSum} | </span>
-      <span>Order Date: {dateStr} | </span>
-      <span>Order Complete Status: {order.isComplete ? "YES" : "NO"}</span>
-    </div>
+    <tr>
+      <td>
+        <Link to={`/admin/orders/${order.id}`}>Order ID: {order.id}</Link>
+      </td>
+      <td>{dateStr}</td>
+      <td>{order.isComplete ? "YES" : "NO"}</td>
+      <td>{order.orderSum}</td>
+    </tr>
   );
 };
 

@@ -1,0 +1,20 @@
+.select_control {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  color: var(--accent-color);
+  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+}
+
+.select {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: var(--background-elem);
+  border: 2px solid var(--accent-color);
+  border-radius: 6px;
+  color: var(--font-color);
+  outline: none;
+}

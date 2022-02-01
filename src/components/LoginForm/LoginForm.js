@@ -1,15 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import FormControl from "../ui/FormControl/FormControl";
 import { loginUserAct } from "../../store/userState/userActions";
+import Button from "../ui/Button/Button";
 
 import classes from "./LoginForm.module.css";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useFormik({
@@ -38,7 +39,7 @@ const LoginForm = (props) => {
   });
 
   return (
-    <form onSubmit={login.handleSubmit}>
+    <form onSubmit={login.handleSubmit} className={classes.form}>
       <FormControl
         name="email"
         label="Email"
@@ -57,7 +58,8 @@ const LoginForm = (props) => {
         handleBlur={login.handleBlur}
         formik={login}
       />
-      <button type="submit">Login</button>
+      <Link to="/signup">For registration click here</Link>
+      <Button type="submit" style="plain" text="login" />
     </form>
   );
 };

@@ -1,0 +1,60 @@
+.container {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container button {
+  align-self: flex-end;
+}
+
+.form {
+  margin-top: 1.5rem;
+  align-self: flex-end;
+  width: 100%;
+  max-width: 500px;
+  height: 0;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.error_text {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  color: rgb(var(--error-color));
+}
+
+.form button {
+  align-self: center;
+  border-width: 2px;
+}
+
+.form_active {
+  height: 50px;
+  overflow: visible;
+}
+.table_cont {
+  width: 100%;
+  overflow-x: scroll;
+  margin-top: 1rem;
+}
+
+.table_cont table {
+  table-layout: auto;
+  min-width: 750px;
+  width: 100%;
+}
+.table_cont table td:nth-child(2) {
+  width: 300px;
+}
+
+.ta .th_name {
+  width: 200px;
+}

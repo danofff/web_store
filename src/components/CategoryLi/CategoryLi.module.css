@@ -1,0 +1,15 @@
+.action span {
+  transition: all 0.1s ease-in-out;
+}
+
+.action span:hover {
+  cursor: pointer;
+  color: var(--accent-color);
+}
+.edit {
+  margin-right: 0.5rem;
+}
+
+.edit_form {
+  display: flex;
+}

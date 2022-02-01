@@ -1,0 +1,29 @@
+.container {
+  width: 95%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container h2 {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+.container h2 span {
+  font-size: inherit;
+  text-align: center;
+}
+
+.order_total {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 400px) {
+  .container h2 {
+    font-size: 1.5rem;
+  }
+}

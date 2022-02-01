@@ -55,7 +55,7 @@ async function createCategory(title) {
     return category;
   } catch (error) {
     console.log(error);
-    throw err;
+    throw error;
   }
 }
 
@@ -73,9 +73,29 @@ async function editCategory(id, title) {
       [id, title]
     );
     return category;
-  } catch (err) {
-    console.log(err);
-    throw err;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+async function restoreCategory(id, isActive) {
+  try {
+    const {
+      rows: [category],
+    } = await client.query(
+      `
+        UPDATE categories
+        SET "isActive"=$2, updated_at=now()
+        WHERE id=$1
+        RETURNING *;
+        `,
+      [id, isActive]
+    );
+    return category;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 
@@ -86,7 +106,7 @@ async function deleteCategory(id) {
     } = await client.query(
       `
           UPDATE categories
-          SET "isActive"=false
+          SET "isActive"=false, updated_at=now()
           WHERE id=$1
           RETURNING *;
           `,
@@ -105,5 +125,6 @@ module.exports = {
   getCategoryById,
   createCategory,
   editCategory,
+  restoreCategory,
   deleteCategory,
 };

@@ -5,7 +5,10 @@ import classes from "./LoginPage.module.css";
 const LoginPage = () => {
   return (
     <div>
-      <LoginForm />
+      <h1 className="title">Login</h1>
+      <div className={classes.form_container}>
+        <LoginForm />
+      </div>
     </div>
   );
 };

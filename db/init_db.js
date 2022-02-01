@@ -31,7 +31,7 @@ async function buildTables() {
       email varchar(255) UNIQUE NOT NULL,
       password varchar(255) NOT NULL,
       address varchar(255),
-      zip varchar(5),
+      zip varchar(10),
       "isAdmin" boolean DEFAULT false,
       created_at timestamp DEFAULT now()
     );
@@ -137,7 +137,7 @@ async function populateInitialData() {
         title: "Super cool red hoodie",
         description:
           "This is super cool red hoodie will make you as cool as possible",
-        price: 29.99,
+        price: 29,
         quantity: 100,
         imageUrl:
           "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
@@ -171,7 +171,124 @@ async function populateInitialData() {
         quantity: 100,
         imageUrl:
           "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
+      }, {
+        categoryId: 1,
+        title: "cool red hoodie",
+        description:
+          "This is super cool red hoodie will make you as cool as possible",
+        price: 29.99,
+        quantity: 100,
+        imageUrl:
+          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
       },
+      {
+        categoryId: 1,
+        title: " cool yellow hoodie",
+        description:
+          "This is super cool eyes melting hoodie will make you the most hated person around",
+        price: 21.99,
+        quantity: 100,
+        imageUrl:
+          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
+      },
+      {
+        categoryId: 2,
+        title: " cool black t-shirt",
+        description:
+          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
+        price: 18.99,
+        quantity: 100,
+        imageUrl:
+          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
+      },
+      {
+        categoryId: 3,
+        title: " cool blue long sleeve",
+        description:
+          "What can we add in description? Nothing! Title tells by itself. Ladies and gentlements - blue long sleeve",
+        price: 23.99,
+        quantity: 100,
+        imageUrl:
+          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
+      }, {
+        categoryId: 1,
+        title: " cool red hoodie",
+        description:
+          "This is super cool red hoodie will make you as cool as possible",
+        price: 29.99,
+        quantity: 100,
+        imageUrl:
+          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
+      },
+      {
+        categoryId: 1,
+        title: "Super  yellow hoodie",
+        description:
+          "This is super cool eyes melting hoodie will make you the most hated person around",
+        price: 21.99,
+        quantity: 100,
+        imageUrl:
+          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
+      },
+      {
+        categoryId: 2,
+        title: "Super  black t-shirt",
+        description:
+          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
+        price: 18.99,
+        quantity: 100,
+        imageUrl:
+          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
+      },
+      {
+        categoryId: 3,
+        title: "Super  blue long sleeve",
+        description:
+          "What can we add in description? Nothing! Title tells by itself. Ladies and gentlements - blue long sleeve",
+        price: 23.99,
+        quantity: 100,
+        imageUrl:
+          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
+      }, {
+        categoryId: 1,
+        title: "Super  red hoodie",
+        description:
+          "This is super cool red hoodie will make you as cool as possible",
+        price: 29.99,
+        quantity: 100,
+        imageUrl:
+          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
+      },
+      {
+        categoryId: 1,
+        title: "Super cool yellow ",
+        description:
+          "This is super cool eyes melting hoodie will make you the most hated person around",
+        price: 21.99,
+        quantity: 100,
+        imageUrl:
+          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
+      },
+      {
+        categoryId: 2,
+        title: "Super cool black",
+        description:
+          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
+        price: 18.99,
+        quantity: 100,
+        imageUrl:
+          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
+      },
+      {
+        categoryId: 3,
+        title: "Super cool blue",
+        description:
+          "What can we add in description? Nothing! Title tells by itself. Ladies and gentlements - blue long sleeve",
+        price: 23.99,
+        quantity: 100,
+        imageUrl:
+          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
+      }
     ];
 
     //creating products
