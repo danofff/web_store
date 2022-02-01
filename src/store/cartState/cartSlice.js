@@ -18,11 +18,9 @@ const cartSlice = createSlice({
     },
     addProduct(state, action) {
       const addedProduct = action.payload;
-      console.log(addedProduct);
       const cartCopy = current(state.cart).slice();
       const prodIdx = cartCopy.findIndex((prod) => prod.id === addedProduct.id);
       if (prodIdx !== -1) {
-        console.log("this if should not work");
         let editedProd = {};
         Object.assign(editedProd, cartCopy[prodIdx]);
         editedProd.quantity = editedProd.quantity + 1;

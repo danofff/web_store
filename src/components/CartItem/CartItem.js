@@ -12,22 +12,27 @@ const CartItem = ({ product }) => {
   const dispatch = useDispatch();
 
   const onQuantityChange = (event) => {
+    const newQuantity = event.target.value;
     //check if quantity > then prev quantity addProduct
     //else subtract product
-    const newQuantity = event.target.value;
     if (newQuantity > quantityInput) {
-      //check if we have enoght products left
-      dispatch(
-        cartActions.addProduct({
-          id: product.id,
-          price: product.price,
-          categoryId: product.categoryId,
-        })
-      );
+      //check if we have enogh products left
+      if (newQuantity > product.maxQuantity) {
+        //handle not enought error
+      } else {
+        dispatch(
+          cartActions.addProduct({
+            id: product.id,
+            price: product.price,
+            categoryId: product.categoryId,
+          })
+        );
+        setQuantityInput(event.target.value);
+      }
     } else {
       dispatch(cartActions.subtractProduct(product.id));
+      setQuantityInput(event.target.value);
     }
-    setQuantityInput(event.target.value);
   };
 
   const onDeleteHandler = (event) => {

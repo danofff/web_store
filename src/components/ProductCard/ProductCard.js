@@ -7,12 +7,13 @@ const ProductCard = (props) => {
   const dispatch = useDispatch();
 
   const handleAddClick = () => {
-    console.log("handle click is working");
     dispatch(
       cartActions.addProduct({
         id: product.id,
         price: product.price,
         title: product.title,
+        categoryId: product.categoryId,
+        maxQuantity: product.quantity,
       })
     );
   };
