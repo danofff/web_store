@@ -23,7 +23,7 @@ export const registerUserAct = (email, password, address, zip) => {
   return async (dispatch) => {
     try {
       uiActions.setLoader(true);
-      const user = await registerUser(email, password, address, zip);
+      await registerUser(email, password, address, zip);
       return true;
     } catch (error) {
       console.log(error);
