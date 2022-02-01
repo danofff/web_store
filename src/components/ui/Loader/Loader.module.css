@@ -1,0 +1,44 @@
+.path {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 5px;
+  width: 100vw;
+  z-index: 1000;
+  background-color: transparent;
+}
+
+.running {
+  position: absolute;
+  display: block;
+  width: 0%;
+  height: 100%;
+  background-color: var(--accent-color);
+}
+
+.active {
+  animation: k_run_path 1s linear infinite;
+}
+
+@keyframes k_run_path {
+  0% {
+    width: 0%;
+    left: 0;
+  }
+  25% {
+    width: 33%;
+    left: 0;
+  }
+  50% {
+    width: 75%;
+    left: 33%;
+  }
+  75% {
+    left: 100%;
+    width: 33%;
+  }
+  100% {
+    left: 100%;
+    width: 0;
+  }
+}
