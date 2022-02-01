@@ -10,6 +10,12 @@ html {
   --background-color: #222;
   --background-elem: #393939;
   --font-color: #fff;
+
+  --accent-color: #4af6cd;
+  --error-color: 255, 0, 0;
+  --accent-color: #1aacf4;
+  --accent-color-hover: #0099e6;
+  --darkFont-color: darkgrey;
   --accent-color: #1aacf4;
   --accent-color-hover: #0099e6;
   --error-color: 156, 43, 46;

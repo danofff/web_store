@@ -1,3 +1,36 @@
-.hi {
-  font-size: large;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.navbar {
+  background-color: transparent;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar_links {
+  display: flex;
+  margin-left: 1rem;
+  color: var(--darkFont-color);
+  text-decoration: none;
+  font-size: x-large;
+  justify-content: center;
+}
+
+.navbar_links:hover {
+  color: var(--accent-color);
+  cursor: pointer;
+}
+
+.image {
+  width: 50px;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
 }
