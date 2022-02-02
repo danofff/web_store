@@ -24,16 +24,10 @@ const CartPage = (props) => {
   };
 
   const onOrderHandler = async (event) => {
-    try {
-      if (cartData.quantityTotal > 0) {
-        await addOrder(cartData.cart, token);
-        dispatch(cartActions.clearCart());
-      } else {
-        //show error like you cant order an empty cart
-      }
-    } catch (error) {
-      console.log(error);
-      //handle error here
+    if (cartData.quantityTotal > 0) {
+      navigate("/cart/confirm");
+    } else {
+      //show error like "you can't order an empty cart"
     }
   };
   return (
