@@ -159,3 +159,16 @@ export const getOrderById = async (token, orderId) => {
     throw new Error(error.error);
   }
 };
+
+export const getOrdersByUserId = async (token, userId) => {
+  const response = await fetch(`${baseUrl}/orders/users/${userId}`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};

@@ -1,10 +1,31 @@
 const { Router } = require("express");
-const { verifyUser, getUserByEmail, createUser } = require("../db");
+const {
+  verifyUser,
+  getUserByEmail,
+  createUser,
+  getUserById,
+} = require("../db");
 const jwt = require("jsonwebtoken");
+
+const checkUser = require("../middleware/checkUser");
 
 const JWT_SECRET = process.env.JWT_SECRET || "shopper dirty secret";
 
 const usersRouter = Router();
+
+//get user info by id
+usersRouter.get("/:userId", checkUser, async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    if (req.user.id !== +userId && !req.user.isAdmin) {
+      throw new Error("You are not authorized for this operation");
+    }
+    const user = await getUserById(userId);
+    res.status(200).json({ user });
+  } catch (error) {
+    return next(error);
+  }
+});
 
 //register a new user
 usersRouter.post("/register", async (req, res, next) => {

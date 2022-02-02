@@ -1,6 +1,20 @@
 import baseUrl from "./baseUrl";
 import makeHeaders from "./makeHeaders";
 
+export const getUserById = async (token, userId) => {
+  const response = await fetch(`${baseUrl}/users/${userId}`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    console.log(error);
+    throw new Error(error.error);
+  }
+};
+
 export const loginUser = async (email, password) => {
   const response = await fetch(`${baseUrl}/users/login`, {
     method: "POST",

@@ -13,8 +13,10 @@ import Header from "./Header/Header";
 import Loader from "./ui/Loader/Loader";
 
 import SignupPage from "../pages/SignupPage";
+import OrdersPage from "../pages/OrdersPage";
 import OrderPage from "../pages/OrderPage";
 import CartPage from "../pages/CartPage";
+import ConfirmOrderPage from "../pages/ConfirmOrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
@@ -22,7 +24,7 @@ import "./App.css";
 const App = () => {
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.user.id);
+  const userId = useSelector((state) => state.user.userId);
   const isAdmin = useSelector((state) => state.user.isAdmin);
   useEffect(() => {
     dispatch(userActions.checkUserLocalStorage());
@@ -37,8 +39,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate replace to="/products" />} />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          {userId && <Route path="/orders" element={<OrdersPage />} />}
           {userId && <Route path="/orders/:orderId" element={<OrderPage />} />}
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart/confirm" element={<ConfirmOrderPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/singleProductPage" element={<SingleProductPage />} />

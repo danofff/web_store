@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { cartActions } from "../store/cartState/cartSlice";
+import { addOrder } from "../api/cartApi";
 import CartItem from "../components/CartItem/CartItem";
 import Button from "../components/ui/Button/Button";
 
@@ -10,7 +11,8 @@ import classes from "./CartPage.module.css";
 
 const CartPage = (props) => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+  const cartData = useSelector((state) => state.cart);
+  const token = useSelector((state) => state.user.token);
   const navigate = useNavigate();
 
   const onClearHandler = (event) => {
@@ -20,19 +22,24 @@ const CartPage = (props) => {
   const onBackHandler = (event) => {
     navigate(-1);
   };
+
+  const onOrderHandler = async (event) => {
+    if (cartData.quantityTotal > 0) {
+      navigate("/cart/confirm");
+    } else {
+      //show error like "you can't order an empty cart"
+    }
+  };
   return (
     <section className={classes.main}>
       <h1 className="title">Cart</h1>
-      <Button
-        style="plain"
-        text="&#8592; back"
-        type="button"
-        onClickHandler={onBackHandler}
-      />
-      {cart.length > 0 ? (
+      <Button style="plain" type="button" onClickHandler={onBackHandler}>
+        &#8592; back
+      </Button>
+      {cartData.cart.length > 0 ? (
         <div className={classes.cart_container}>
-          {cart.map((prod) => {
-            return <CartItem key={prod.id} product={prod} />;
+          {cartData.cart.map((prod) => {
+            return <CartItem key={prod.productId} product={prod} />;
           })}
         </div>
       ) : (
@@ -41,7 +48,7 @@ const CartPage = (props) => {
       <div className={classes.total}>
         TOTAL:{" $"}
         {Math.round(
-          cart.reduce((acc, item) => {
+          cartData.cart.reduce((acc, item) => {
             return acc + item.price * item.quantity;
           }, 0) * 100
         ) / 100}
@@ -50,11 +57,21 @@ const CartPage = (props) => {
         <Button
           type="button"
           style="outlined"
-          text="Clear"
           onClickHandler={onClearHandler}
-        />
+          width="80px"
+        >
+          Clear
+        </Button>
         <div className={classes.last_btn}>
-          <Button type="button" style="plain" text="Order" />
+          <Button
+            type={"button"}
+            isDisabled={cartData.quantityTotal === 0}
+            style={cartData.quantityTotal > 0 ? "plain" : "disabled"}
+            onClickHandler={onOrderHandler}
+            width="80px"
+          >
+            Order
+          </Button>
         </div>
       </div>
     </section>

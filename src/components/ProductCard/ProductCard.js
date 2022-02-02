@@ -1,6 +1,7 @@
 import { cartActions } from "../../store/cartState/cartSlice";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button/Button";
+
 import classes from "./ProductCard.module.css";
 const ProductCard = (props) => {
   let { product } = props;
@@ -9,10 +10,9 @@ const ProductCard = (props) => {
   const handleAddClick = () => {
     dispatch(
       cartActions.addProduct({
-        id: product.id,
+        productId: product.id,
         price: product.price,
         title: product.title,
-        categoryId: product.categoryId,
         maxQuantity: product.quantity,
       })
     );
@@ -31,13 +31,11 @@ const ProductCard = (props) => {
         </div>
         <div className={classes.buttonLine}>
           {/* need to make this button link to a single product display form */}
-          <Button style="outlined" text="learn more"></Button>
+          <Button style="outlined">learn more</Button>
           {/* need to make this button actually add to cart */}
-          <Button
-            style="plain"
-            text="add to cart"
-            onClickHandler={handleAddClick}
-          ></Button>
+          <Button style="plain" onClickHandler={handleAddClick}>
+            add to cart
+          </Button>
         </div>
       </div>
     </div>

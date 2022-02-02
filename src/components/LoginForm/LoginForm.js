@@ -48,6 +48,7 @@ const LoginForm = () => {
         handleChange={login.handleChange}
         handleBlur={login.handleBlur}
         formik={login}
+        autocomplete="on"
       />
       <FormControl
         name="password"
@@ -57,9 +58,12 @@ const LoginForm = () => {
         handleChange={login.handleChange}
         handleBlur={login.handleBlur}
         formik={login}
+        autocomplete="current-password"
       />
       <Link to="/signup">For registration click here</Link>
-      <Button type="submit" style="plain" text="login" />
+      <Button type="submit" style="plain">
+        Login
+      </Button>
     </form>
   );
 };
