@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const { userId, isAdmin } = useSelector((state) => state.user);
   const { quantityTotal } = useSelector((state) => state.cart);
-  console.log(classes);
-  console.log(quantityTotal);
 
   return (
     <header className={classes.header}>
