@@ -14,9 +14,6 @@
 }
 .titles{
     background-color: #40404B;
-}
-.category{
-    background-color: #40404B;
     border: none;
     color: var(--accent-color);
 }

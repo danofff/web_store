@@ -1,10 +1,11 @@
 import classes from "./ProductCard.module.css";
 import Button from "../ui/Button/Button";
+
 const ProductCard = (props) => {
-    let {product} = props;
+    let {product, border} = props;
+    console.log(border)
     return(
-        <div id={product.id} className={classes.productCard}>
-            {/* if image url is an array of images this might need to be changed */}
+        <div id={product.id} className={`${classes.productCard} ${classes[border]}`}>
             <img className={classes.productImage} src={product.imageURL}/>
             <p className={classes.title}>{product.title}</p>
             <div className={classes.infoBox}>
