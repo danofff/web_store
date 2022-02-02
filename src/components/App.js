@@ -16,6 +16,7 @@ import SignupPage from "../pages/SignupPage";
 import OrdersPage from "../pages/OrdersPage";
 import OrderPage from "../pages/OrderPage";
 import CartPage from "../pages/CartPage";
+import ConfirmOrderPage from "../pages/ConfirmOrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
@@ -41,6 +42,7 @@ const App = () => {
           {userId && <Route path="/orders" element={<OrdersPage />} />}
           {userId && <Route path="/orders/:orderId" element={<OrderPage />} />}
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart/confirm" element={<ConfirmOrderPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           {isAdmin && <Route path="/admin/*" element={<AdminPages />} />}

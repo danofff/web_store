@@ -69,3 +69,7 @@ table th {
 table tr:nth-child(odd) {
   background-color: var(--background-elem);
 }
+
+.active {
+  color: var(--accent-color-hover);
+}
