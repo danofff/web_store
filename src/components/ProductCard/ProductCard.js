@@ -1,6 +1,7 @@
 import { cartActions } from "../../store/cartState/cartSlice";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button/Button";
+
 import classes from "./ProductCard.module.css";
 const ProductCard = (props) => {
   let { product } = props;
@@ -38,6 +39,7 @@ const ProductCard = (props) => {
             text="add to cart"
             onClickHandler={handleAddClick}
           ></Button>
+
         </div>
       </div>
     </div>
