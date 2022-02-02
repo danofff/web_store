@@ -12,6 +12,7 @@ const FormControl = ({
   min = 1,
   max = 100000,
   step = 1,
+  autocomplete = "off",
 }) => {
   const isError = formik.touched[name] && formik.errors[name];
 
@@ -55,6 +56,7 @@ const FormControl = ({
         onBlur={handleBlur}
         value={formik.values[name]}
         placeholder={label}
+        autoComplete={autocomplete}
       />
     );
   }

@@ -19,6 +19,7 @@
   text-decoration: none;
   font-size: x-large;
   justify-content: center;
+  transition: all 0.2s ease-in;
 }
 
 .navbar_links:hover {
@@ -58,4 +59,25 @@
   background-color: var(--accent-color-hover);
   width: 18px;
   height: 18px;
+}
+
+.logout {
+  margin-left: 1rem;
+}
+
+.bouncing {
+  animation: k_bouncing_cart 0.3s linear;
+}
+
+@keyframes k_bouncing_cart {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

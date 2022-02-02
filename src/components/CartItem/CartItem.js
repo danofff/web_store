@@ -22,21 +22,20 @@ const CartItem = ({ product }) => {
       } else {
         dispatch(
           cartActions.addProduct({
-            id: product.id,
+            productId: product.productId,
             price: product.price,
-            categoryId: product.categoryId,
           })
         );
         setQuantityInput(event.target.value);
       }
     } else {
-      dispatch(cartActions.subtractProduct(product.id));
+      dispatch(cartActions.subtractProduct(product.productId));
       setQuantityInput(event.target.value);
     }
   };
 
   const onDeleteHandler = (event) => {
-    dispatch(cartActions.deleteProduct(product.id));
+    dispatch(cartActions.deleteProduct(product.productId));
   };
   return (
     <div className={classes.cart_item}>
@@ -58,12 +57,9 @@ const CartItem = ({ product }) => {
         <span>${(product.price * quantityInput).toFixed(2)}</span>
       </div>
 
-      <Button
-        type="button"
-        style="plain"
-        text="&#x2715;"
-        onClickHandler={onDeleteHandler}
-      />
+      <Button type="button" style="plain" onClickHandler={onDeleteHandler}>
+        &#x2715;
+      </Button>
     </div>
   );
 };

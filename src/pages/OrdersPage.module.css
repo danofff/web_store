@@ -5,6 +5,9 @@
   align-items: center;
 }
 
-.container table {
-  border-collapse: collapse;
+.nothing_yet {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem;
+  color: var(--dark-grey);
 }

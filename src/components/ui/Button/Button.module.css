@@ -1,5 +1,5 @@
 .button {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   color: var(--font-color);
   text-transform: uppercase;
   border-radius: 6px;
@@ -7,6 +7,14 @@
   border: none;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
+}
+
+.medium {
+  font-size: 0.75rem;
+}
+
+.small {
+  font-size: 0.5rem;
 }
 
 .plain {
@@ -28,4 +36,13 @@
 .outlined:hover,
 .outlined:active {
   background-color: var(--background-elem);
+}
+
+.disabled {
+  background-color: var(--dark-grey);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  transition: none;
 }
