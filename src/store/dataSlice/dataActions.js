@@ -8,6 +8,7 @@ import {
   addCategory,
   addProduct,
   editProduct,
+  getOrdersByUserId,
 } from "../../api/dataApi";
 import { dataActions } from "./dataSlice";
 import { uiActions } from "../uiSlice/uiSlice";
@@ -135,6 +136,21 @@ export const getAllOrdersAct = (token) => {
     try {
       dispatch(uiActions.setLoader(true));
       const response = await getAllOrders(token);
+      dispatch(dataActions.setAllOrders(response.orders));
+    } catch (error) {
+      //handle error
+      console.log(error);
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+
+export const getOrderByUserIdAct = (token, userId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const response = await getOrdersByUserId(token, userId);
       dispatch(dataActions.setAllOrders(response.orders));
     } catch (error) {
       //handle error

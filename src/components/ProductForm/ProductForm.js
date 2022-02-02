@@ -143,11 +143,9 @@ const ProductForm = ({ mode = "add", productId = null }) => {
         handleBlur={formik.handleBlur}
         formik={formik}
       />
-      <Button
-        type="submit"
-        text={mode === "add" ? "Add product" : "Edit product"}
-        style="plain"
-      />
+      <Button type="submit" style="plain">
+        {mode === "add" ? "Add product" : "Edit product"}
+      </Button>
     </form>
   );
 };

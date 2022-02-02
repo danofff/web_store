@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getOrderById } from "../api/dataApi";
+import OrderItem from "../components/OrderItem/OrderItem";
 import classes from "./OrderPage.module.css";
 
 const OrderPage = (props) => {
@@ -14,14 +15,14 @@ const OrderPage = (props) => {
     if (token) {
       getOrderById(token, orderId)
         .then((order) => {
-          setOrder(order);
+          setOrder(order.order);
         })
         .catch((error) => {
           console.log(error);
         });
     }
   }, [token]);
-  return <div></div>;
+  return <div>{order ? <OrderItem order={order} /> : <p>Loading...</p>}</div>;
 };
 
 export default OrderPage;

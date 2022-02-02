@@ -21,6 +21,7 @@ const userSlice = createSlice({
       state.userId = null;
       state.isAdmin = null;
       state.token = null;
+      localStorage.removeItem("user");
     },
     checkUserLocalStorage(state) {
       const user = localStorage.getItem("user");

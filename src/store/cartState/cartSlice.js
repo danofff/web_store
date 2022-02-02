@@ -8,7 +8,6 @@ const cartSlice = createSlice({
   },
   reducers: {
     retrieveFromLocal(state, action) {
-      console.log("retrive from local is working");
       const cartLocal = localStorage.getItem("cart");
       if (cartLocal) {
         const cartParsed = JSON.parse(cartLocal);
@@ -18,8 +17,11 @@ const cartSlice = createSlice({
     },
     addProduct(state, action) {
       const addedProduct = action.payload;
+
       const cartCopy = current(state.cart).slice();
-      const prodIdx = cartCopy.findIndex((prod) => prod.id === addedProduct.id);
+      const prodIdx = cartCopy.findIndex((prod) => {
+        return prod.productId === addedProduct.productId;
+      });
       if (prodIdx !== -1) {
         let editedProd = {};
         Object.assign(editedProd, cartCopy[prodIdx]);
@@ -41,7 +43,9 @@ const cartSlice = createSlice({
     deleteProduct(state, action) {
       const delProdId = action.payload;
       const cartCopy = current(state.cart).slice();
-      const prodIdx = cartCopy.findIndex((prod) => prod.id === delProdId);
+      const prodIdx = cartCopy.findIndex(
+        (prod) => prod.productId === delProdId
+      );
       if (prodIdx !== -1) {
         const newQuantity = state.quantityTotal - cartCopy[prodIdx].quantity;
         state.quantityTotal = newQuantity;
@@ -57,7 +61,9 @@ const cartSlice = createSlice({
     subtractProduct(state, action) {
       const subsProdId = action.payload;
       const cartCopy = current(state.cart).slice();
-      const prodIdx = cartCopy.findIndex((prod) => prod.id === subsProdId);
+      const prodIdx = cartCopy.findIndex(
+        (prod) => prod.productId === subsProdId
+      );
       if (prodIdx !== -1) {
         let editedProd = {};
         Object.assign(editedProd, state.cart[prodIdx]);
@@ -79,7 +85,7 @@ const cartSlice = createSlice({
     },
     clearCart(state, action) {
       state.cart = [];
-      state.quantity = 0;
+      state.quantityTotal = 0;
       localStorage.removeItem("cart");
     },
   },

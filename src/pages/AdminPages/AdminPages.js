@@ -10,7 +10,7 @@ const AdminPages = (props) => {
   return (
     <Routes>
       <Route path="/categories" element={<CategoriesPage />} />
-      <Route path="/orders" element={<OrdersPage />} />
+      <Route path="/orders" element={<OrdersPage mode="admin" />} />
       <Route path="/orders/:orderId" element={<OrderPageA />} />
       <Route path="/products/add" element={<AddProductPage />} />
       <Route path="/products/edit/:productId" element={<EditProductPage />} />
