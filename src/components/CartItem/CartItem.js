@@ -28,6 +28,7 @@ const CartItem = ({ product }) => {
         );
         setQuantityInput(event.target.value);
       }
+      return;
     } else {
       dispatch(cartActions.subtractProduct(product.productId));
       setQuantityInput(event.target.value);
@@ -45,7 +46,7 @@ const CartItem = ({ product }) => {
         <span>Quantity</span>
         <span>Summ</span>
         <span className={classes.item_title}>{product.title}</span>
-        <span className={classes.item_price}> ${product.price}</span>
+        <span className={classes.item_price}> {`\$${product.price}`}</span>
         <span className={classes.item_quantity}>
           <StyledInput
             type="number"
