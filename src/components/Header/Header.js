@@ -10,6 +10,8 @@ import classes from "./Header.module.css";
 const Header = () => {
   const { userId, isAdmin } = useSelector((state) => state.user);
   const { quantityTotal } = useSelector((state) => state.cart);
+
+
   const [isCartBouncing, setIsCartBouncing] = useState(false);
 
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const Header = () => {
   const onLogoutHandler = (event) => {
     dispatch(userActions.logoutUser());
   };
+
 
   return (
     <header className={classes.header}>

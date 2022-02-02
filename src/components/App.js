@@ -8,7 +8,7 @@ import Container from "./ui/Container/Container";
 import ProductsPage from "../pages/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import LoginPage from "../pages/LoginPage";
-
+import SingleProductPage from "../pages/SingleProductPage" ;
 import Header from "./Header/Header";
 import Loader from "./ui/Loader/Loader";
 
@@ -45,6 +45,7 @@ const App = () => {
           <Route path="/cart/confirm" element={<ConfirmOrderPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/singleProductPage" element={<SingleProductPage />} />
           {isAdmin && <Route path="/admin/*" element={<AdminPages />} />}
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
