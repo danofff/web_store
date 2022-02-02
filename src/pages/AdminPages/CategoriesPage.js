@@ -67,23 +67,25 @@ const CategoriesPage = (props) => {
           <p className={classes.error_text}>{formik.errors.categoryInput}</p>
         ) : null}
       </form>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th className={classes.th_name}>Name</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Active</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((category) => {
-            return <CategoryLi category={category} key={category.id} />;
-          })}
-        </tbody>
-      </table>
+      <div className={classes.table_cont}>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th className={classes.th_name}>Name</th>
+              <th>Created</th>
+              <th>Updated</th>
+              <th>Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((category) => {
+              return <CategoryLi category={category} key={category.id} />;
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -40,11 +40,21 @@
   height: 50px;
   overflow: visible;
 }
-
-.container table {
+.table_cont {
   width: 100%;
+  overflow-x: scroll;
   margin-top: 1rem;
 }
-.th_name {
+
+.table_cont table {
+  table-layout: auto;
+  min-width: 750px;
+  width: 100%;
+}
+.table_cont table td:nth-child(2) {
+  width: 300px;
+}
+
+.ta .th_name {
   width: 200px;
 }
