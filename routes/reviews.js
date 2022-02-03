@@ -22,16 +22,26 @@ reviewRouter.get("/", async (req, res, next) => {
 reviewRouter.get("/:productId", async (req, res, next) => {
   try {
     //check if that product exists first?
+
     const allReviewsOfProduct = await getReviewsByProductId(
       req.params.productId
     );
-    res.status(200).json(allReviewsOfProduct);
+
+    const reviewsToSend = allReviewsOfProduct.map((review) => {
+      const username = review.userEmail.split("@")[0];
+      delete review.userEmail;
+      return {
+        ...review,
+        username,
+      };
+    });
+    res.status(200).json(reviewsToSend);
   } catch (error) {
     next(error);
   }
 });
 
-reviewRouter.get("/:userId", async (req, res, next) => {
+reviewRouter.get("/users/:userId", async (req, res, next) => {
   try {
     //check if that user exists first?
     const allReviewsByUser = await getReviewsByUserId(req.params.userId);

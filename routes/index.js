@@ -17,7 +17,7 @@ apiRouter.use("/users", usersRouter);
 apiRouter.use("/categories", categoriesRouter);
 apiRouter.use("/products", productsRouter);
 apiRouter.use("/orders", ordersRouter);
-apiRouter.use("/reviws", reviewsRouter);
+apiRouter.use("/reviews", reviewsRouter);
 
 //temporary dummy route, then should get rid of it
 apiRouter.get("/", (req, res, next) => {
