@@ -12,26 +12,27 @@ const CartItem = ({ product }) => {
   const dispatch = useDispatch();
 
   const onQuantityChange = (event) => {
-    const newQuantity = event.target.value;
+    const newQuantity = +event.target.value;
+
+    if (newQuantity === 0) {
+      dispatch(cartActions.deleteProduct(product.productId));
+      return;
+    }
     //check if quantity > then prev quantity addProduct
-    //else subtract product
-    if (newQuantity > quantityInput) {
-      //check if we have enogh products left
-      if (newQuantity > product.maxQuantity) {
-        //handle not enought error
-      } else {
-        dispatch(
-          cartActions.addProduct({
+    //check if we have enought products left
+    if (newQuantity > product.maxQuantity) {
+      //handle not enought error
+    } else {
+      dispatch(
+        cartActions.changeProduct({
+          product: {
             productId: product.productId,
             price: product.price,
-          })
-        );
-        setQuantityInput(event.target.value);
-      }
-      return;
-    } else {
-      dispatch(cartActions.subtractProduct(product.productId));
-      setQuantityInput(event.target.value);
+          },
+          newQuantity: newQuantity,
+        })
+      );
+      setQuantityInput(newQuantity);
     }
   };
 
@@ -53,12 +54,20 @@ const CartItem = ({ product }) => {
             name="quantity"
             value={quantityInput}
             setValue={onQuantityChange}
+            min="1"
+            max={product.maxQuantity}
+            step="1"
           />
         </span>
         <span>${(product.price * quantityInput).toFixed(2)}</span>
       </div>
 
-      <Button type="button" style="plain" onClickHandler={onDeleteHandler}>
+      <Button
+        type="button"
+        style="plain"
+        onClickHandler={onDeleteHandler}
+        width="33px"
+      >
         &#x2715;
       </Button>
     </div>
