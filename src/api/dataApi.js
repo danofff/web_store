@@ -172,3 +172,19 @@ export const getOrdersByUserId = async (token, userId) => {
     throw new Error(error.error);
   }
 };
+
+
+//REVIEWS API
+
+export const getReviewsByProductId = async(productId) => {
+  const response = await fetch(`${baseUrl}/reviews/${productId}`, {
+    method: 'GET',
+    headers: makeHeaders()
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+}
