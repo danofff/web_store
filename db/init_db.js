@@ -62,7 +62,8 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
       "isComplete" boolean DEFAULT false,
-      phone varchar(20) NOT NULL,
+      email varchar(255) NOT NULL,
+      phone varchar(255) NOT NULL,
       "deliveryAddress" varchar(255) NOT NULL,
       fullname varchar(255) NOT NULL,
       "orderSum" decimal,
@@ -104,7 +105,21 @@ async function populateInitialData() {
     // create useful starting data
     //creating users
     console.log("starting to create users");
-    const u1 = await createUser("test@test.com", "testtest", null, null, true);
+    const u0 = await createUser(
+      "nobody@noemail.com",
+      "nopassword",
+      "nowhere",
+      "nozip",
+      false,
+      true
+    );
+    const u1 = await createUser(
+      "test@test.com",
+      "testtest",
+      " 3355 Test St Testerville, TS",
+      "test",
+      true
+    );
     const u2 = await createUser(
       "collin@test.com",
       "collintest",
@@ -318,6 +333,7 @@ async function populateInitialData() {
     console.log("starting to create order");
     const order1 = {
       userId: 1,
+      email: "test1@test.com",
       address: "Super cool address to deliver 77777",
       phone: "312 312 3121",
       fullname: "Test Testerson",
@@ -336,6 +352,7 @@ async function populateInitialData() {
     };
     const order2 = {
       userId: 2,
+      email: "test2@test.com",
       address: "bum f* Oklahoma 00000",
       phone: "312 312 3112",
       fullname: "Easy Peazy",
@@ -356,6 +373,7 @@ async function populateInitialData() {
     const createdOrder1 = await createOrder(
       order1.cart,
       order1.userId,
+      order1.email,
       order1.phone,
       order1.address,
       order1.fullname
@@ -363,6 +381,7 @@ async function populateInitialData() {
     const createdOrder2 = await createOrder(
       order2.cart,
       order2.userId,
+      order2.email,
       order2.phone,
       order2.address,
       order2.fullname

@@ -5,8 +5,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { getUserByIdAct } from "../store/userState/userActions";
+import { addOrder } from "../api/cartApi";
+import { cartActions } from "../store/cartState/cartSlice";
 import Button from "../components/ui/Button/Button";
-
 import FormControl from "../components/ui/FormControl/FormControl";
 
 import classes from "./ConfirmOrderPage.module.css";
@@ -16,6 +17,7 @@ const phoneRegExp =
 
 const ConfirmOrderPage = (props) => {
   const user = useSelector((state) => state.user);
+
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,24 +36,59 @@ const ConfirmOrderPage = (props) => {
     initialValues: {
       email: user && user.userData ? user.userData.email : "",
       phone: "",
-      address: user && user.userData ? user.userData.address : "",
-      zip: user && user.userData ? user.userData.zip : "",
+      address:
+        user && user.userData && user.userData.address
+          ? user.userData.address
+          : "",
+      zip: user && user.userData && user.userData.zip ? user.userData.zip : "",
       fullname: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Email must be valid email"),
-      address: Yup.string(),
-      phone: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
-      zip: Yup.string().matches(
-        /^\d{5}(-\d{4})?$/,
-        "Zip code could contain only digits. Use 00000 or 00000-0000 pattern"
-      ),
-      fullname: Yup.string().min(
-        5,
-        "Fullname must be at least 5 characters long"
-      ),
+      email: Yup.string()
+        .email("Email must be valid email")
+        .required("Email is required"),
+      address: Yup.string().required("Address is required"),
+      phone: Yup.string()
+        .matches(phoneRegExp, "Phone number is not valid")
+        .required("Phone number is required"),
+      zip: Yup.string()
+        .matches(
+          /^\d{5}(-\d{4})?$/,
+          "Zip code could contain only digits. Use 00000 or 00000-0000 pattern"
+        )
+        .required("ZIP code is required"),
+      fullname: Yup.string()
+        .min(5, "Fullname must be at least 5 characters long")
+        .required("Fullname is required"),
     }),
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      addOrder(
+        user.token,
+        cart,
+        values.email,
+        values.phone,
+        `${values.address} ${values.zip}`,
+        values.fullname
+      )
+        .then((response) => {
+          //show snackbar with success status
+
+          //clear cart
+          dispatch(cartActions.clearCart());
+          // navigate user to all user orders
+          //if user authenticated, otherwise to main paige
+          if (user.userId) {
+            navigate("/orders");
+          } else {
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          //handle error here
+          //show snackbar with error
+        });
+    },
     enableReinitialize: true,
   });
 
