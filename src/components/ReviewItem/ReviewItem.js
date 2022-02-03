@@ -10,6 +10,7 @@ const ReviewItem = ({ review }) => {
         <StarRating rating={review.starRating} />
       </div>
       <p className={classes.text}>{review.reviewText}</p>
+      <p>{review.username}</p>
     </div>
   );
 };
