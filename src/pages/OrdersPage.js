@@ -16,15 +16,18 @@ const OrdersPage = () => {
 
   return (
     <section>
+      <h1 className="title">Orders</h1>
       {orders.length > 0 ? (
         <div className={classes.container}>
-          <h1 className="title">Orders</h1>
           <table>
             <thead>
               <tr>
                 <th>Order #</th>
                 <th>Date</th>
                 <th>Complete</th>
+                <th>Delivery Address</th>
+                <th>Phone</th>
+                <th>Email</th>
                 <th>Total</th>
               </tr>
             </thead>

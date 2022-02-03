@@ -27,6 +27,9 @@ const OrdersPage = ({ mode = "user" }) => {
             <th>Order #</th>
             <th>Date</th>
             <th>Complete</th>
+            <th>Delivery Address</th>
+            <th>Phone</th>
+            <th>Email</th>
             <th>Total</th>
           </tr>
         </thead>

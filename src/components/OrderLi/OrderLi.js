@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Button from "../ui/Button/Button";
+
 import classes from "./OrderLi.module.css";
 
 const OrderLi = ({ order }) => {
@@ -23,8 +25,18 @@ const OrderLi = ({ order }) => {
         </Link>
       </td>
       <td>{dateStr}</td>
-      <td>{order.isComplete ? "YES" : "NO"}</td>
-      <td>{order.orderSum}</td>
+      <td className={classes.status}>
+        <span>{order.isComplete ? "YES" : "NO"}</span>
+        {isAdmin && (
+          <Button type="button" style="outlined" size="small">
+            {order.isComplete ? "✕" : "✔"}
+          </Button>
+        )}
+      </td>
+      <td>{order.deliveryAddress}</td>
+      <td>{order.phone}</td>
+      <td>{order.email}</td>
+      <td>{`\$${order.orderSum}`}</td>
     </tr>
   );
 };

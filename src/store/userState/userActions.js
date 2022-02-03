@@ -26,7 +26,13 @@ export const loginUserAct = (email, password) => {
       return true;
     } catch (error) {
       console.log(error);
-      //handle error
+      dispatch(
+        uiActions.setSnackbar({
+          type: "error",
+          isActive: true,
+          text: error.message,
+        })
+      );
       return false;
     } finally {
       dispatch(uiActions.setLoader(false));
