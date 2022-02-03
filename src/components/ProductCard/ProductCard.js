@@ -17,6 +17,7 @@ const ProductCard = (props) => {
           maxQuantity: product.quantity,
         },
         newQuantity: 1,
+        mode: "button",
       })
     );
   };

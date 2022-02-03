@@ -56,19 +56,6 @@ input {
   text-decoration: none;
 }
 
-Button {
-  padding: 0.5rem 1rem;
-  font-size: small;
-  background-color: var(--darkFont-color);
-  text-transform: uppercase;
-  border-radius: 6px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-  width: 5rem;
-}
-
 .review {
   display: grid;
   grid-template-rows: repeat(3, 1fr);

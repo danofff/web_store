@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { cartActions } from "../../store/cartState/cartSlice";
 import StyledInput from "../ui/StyledInput/StyledInput";
@@ -30,6 +31,7 @@ const CartItem = ({ product }) => {
             price: product.price,
           },
           newQuantity: newQuantity,
+          mode: "input",
         })
       );
       setQuantityInput(newQuantity);
@@ -46,7 +48,9 @@ const CartItem = ({ product }) => {
         <span>Price</span>
         <span>Quantity</span>
         <span>Summ</span>
-        <span className={classes.item_title}>{product.title}</span>
+        <span className={classes.item_title}>
+          <Link to={`/products/${product.productId}`}>{product.title}</Link>
+        </span>
         <span className={classes.item_price}> {`\$${product.price}`}</span>
         <span className={classes.item_quantity}>
           <StyledInput

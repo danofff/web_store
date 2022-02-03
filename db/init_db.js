@@ -62,6 +62,9 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
       "isComplete" boolean DEFAULT false,
+      phone varchar(20) NOT NULL,
+      "deliveryAddress" varchar(255) NOT NULL,
+      fullname varchar(255) NOT NULL,
       "orderSum" decimal,
       created_at timestamp DEFAULT now(),
       updated_at timestamp DEFAULT now()
@@ -171,7 +174,8 @@ async function populateInitialData() {
         quantity: 100,
         imageUrl:
           "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }, {
+      },
+      {
         categoryId: 1,
         title: "cool red hoodie",
         description:
@@ -210,7 +214,8 @@ async function populateInitialData() {
         quantity: 100,
         imageUrl:
           "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }, {
+      },
+      {
         categoryId: 1,
         title: " cool red hoodie",
         description:
@@ -249,7 +254,8 @@ async function populateInitialData() {
         quantity: 100,
         imageUrl:
           "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }, {
+      },
+      {
         categoryId: 1,
         title: "Super  red hoodie",
         description:
@@ -288,7 +294,7 @@ async function populateInitialData() {
         quantity: 100,
         imageUrl:
           "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }
+      },
     ];
 
     //creating products
@@ -312,6 +318,9 @@ async function populateInitialData() {
     console.log("starting to create order");
     const order1 = {
       userId: 1,
+      address: "Super cool address to deliver 77777",
+      phone: "312 312 3121",
+      fullname: "Test Testerson",
       cart: [
         {
           productId: 1,
@@ -327,6 +336,9 @@ async function populateInitialData() {
     };
     const order2 = {
       userId: 2,
+      address: "bum f* Oklahoma 00000",
+      phone: "312 312 3112",
+      fullname: "Easy Peazy",
       cart: [
         {
           userId: 2,
@@ -341,8 +353,20 @@ async function populateInitialData() {
         },
       ],
     };
-    const createdOrder1 = await createOrder(order1.cart, order1.userId);
-    const createdOrder2 = await createOrder(order2.cart, order2.userId);
+    const createdOrder1 = await createOrder(
+      order1.cart,
+      order1.userId,
+      order1.phone,
+      order1.address,
+      order1.fullname
+    );
+    const createdOrder2 = await createOrder(
+      order2.cart,
+      order2.userId,
+      order2.phone,
+      order2.address,
+      order2.fullname
+    );
     console.log("order 1------->", createdOrder1);
     console.log("order 2------->", createdOrder2);
     console.log("finished to create order");

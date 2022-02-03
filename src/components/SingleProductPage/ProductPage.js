@@ -18,7 +18,6 @@ const ProductPage = () => {
 
   useEffect(() => {
     const prod = products.find((prod) => prod.id === +productId);
-    console.log(prod);
     if (prod) {
       setProduct(prod);
     }
