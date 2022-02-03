@@ -61,9 +61,11 @@ input {
   text-decoration: none;
 }
 
+
 .quantity {
   margin-bottom: 1rem;
 }
+
 
 .review {
   display: grid;

@@ -16,7 +16,6 @@ const SignupForm = (props) => {
       email: "",
       password: "",
       passwordConfirmation: "",
-      fullname: "",
       address: "",
       zip: "",
     },

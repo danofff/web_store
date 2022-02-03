@@ -17,7 +17,7 @@ const cartSlice = createSlice({
     },
     changeProduct(state, action) {
       //retrieve info form payload
-      const { product, newQuantity } = action.payload;
+      const { product, newQuantity, mode } = action.payload;
 
       //find if product already exists in cart
       const prodIdx = state.cart.findIndex((prod) => {
@@ -28,10 +28,19 @@ const cartSlice = createSlice({
       let newTotalQuantity;
 
       if (prodIdx !== -1) {
+        if (mode === "input") {
+          newTotalQuantity =
+            state.quantityTotal - state.cart[prodIdx].quantity + newQuantity;
+          state.cart[prodIdx] = {
+            ...state.cart[prodIdx],
+            quantity: newQuantity,
+          };
+        } else {
+          newTotalQuantity = state.quantityTotal + newQuantity;
+          state.cart[prodIdx].quantity =
+            state.cart[prodIdx].quantity + newQuantity;
+        }
         //subtract previous quantity from totalQuantity and add a new quantity
-        newTotalQuantity =
-          state.quantityTotal - state.cart[prodIdx].quantity + newQuantity;
-        state.cart[prodIdx] = { ...state.cart[prodIdx], quantity: newQuantity };
       } else {
         state.cart.push({ ...product, quantity: 1 });
         newTotalQuantity = state.quantityTotal + 1;

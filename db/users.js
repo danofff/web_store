@@ -8,7 +8,8 @@ async function createUser(
   password,
   address = null,
   zip = null,
-  isAdmin = false
+  isAdmin = false,
+  userZero = false
 ) {
   try {
     const isValidEmail = Isemail.validate(email);
@@ -19,18 +20,33 @@ async function createUser(
       throw new Error("Password length must be at least 8 characters!");
     }
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
-    const {
-      rows: [user],
-    } = await client.query(
-      `
-            INSERT INTO users(email, password, address, zip, "isAdmin")
-            VALUES($1, $2, $3, $4, $5)
-            RETURNING *;
-        `,
-      [email, hashedPassword, address, zip, isAdmin]
-    );
-    delete user.password;
-    return user;
+    if (userZero) {
+      const {
+        rows: [user],
+      } = await client.query(
+        `
+              INSERT INTO users(email, password, address, zip, "isAdmin", id)
+              VALUES($1, $2, $3, $4, $5, $6)
+              RETURNING *;
+          `,
+        [email, hashedPassword, address, zip, isAdmin, 0]
+      );
+      delete user.password;
+      return user;
+    } else {
+      const {
+        rows: [user],
+      } = await client.query(
+        `
+              INSERT INTO users(email, password, address, zip, "isAdmin")
+              VALUES($1, $2, $3, $4, $5)
+              RETURNING *;
+          `,
+        [email, hashedPassword, address, zip, isAdmin]
+      );
+      delete user.password;
+      return user;
+    }
   } catch (err) {
     console.log(err);
     throw err;

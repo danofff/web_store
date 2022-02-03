@@ -58,7 +58,7 @@ const CartPage = (props) => {
           type="button"
           style="outlined"
           onClickHandler={onClearHandler}
-          width="80px"
+          width="100px"
         >
           Clear
         </Button>
@@ -68,9 +68,9 @@ const CartPage = (props) => {
             isDisabled={cartData.quantityTotal === 0}
             style={cartData.quantityTotal > 0 ? "plain" : "disabled"}
             onClickHandler={onOrderHandler}
-            width="80px"
+            width="100px"
           >
-            Order
+            CONFIRM
           </Button>
         </div>
       </div>
