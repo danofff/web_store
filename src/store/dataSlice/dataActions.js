@@ -9,6 +9,7 @@ import {
   addProduct,
   editProduct,
   getOrdersByUserId,
+  getReviewsByProductId,
 } from "../../api/dataApi";
 import { dataActions } from "./dataSlice";
 import { uiActions } from "../uiSlice/uiSlice";
@@ -155,6 +156,29 @@ export const getOrderByUserIdAct = (token, userId) => {
     } catch (error) {
       //handle error
       console.log(error);
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+
+/*****REVIEWS ACTIONS****/
+
+export const getReviewsByProductIdAct = (productId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const reviews = await getReviewsByProductId(productId);
+      dispatch(dataActions.setAllReviews(reviews));
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }

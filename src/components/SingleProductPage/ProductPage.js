@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+
 
 import { cartActions } from "../../store/cartState/cartSlice";
 import Button from "../ui/Button/Button";
@@ -9,30 +9,33 @@ import StarRating from "../ui/StarRating/StarRating";
 
 import classes from "./ProductPage.module.css";
 
-const ProductPage = () => {
+const ProductPage = (props) => {
   const [product, setProduct] = useState(null);
-  const { productId } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.data.products);
   const userId = useSelector((state) => state.user.userId);
 
   useEffect(() => {
-    const prod = products.find((prod) => prod.id === +productId);
+    const prod = products.find((prod) => prod.id === +props.productId);
     if (prod) {
       setProduct(prod);
     }
   }, [products]);
 console.log(product)
-  const onAddHandler = (event) => {
-    dispatch(
-      cartActions.addProduct({
+const handleAddClick = () => {
+  dispatch(
+    cartActions.changeProduct({
+      product: {
         productId: product.id,
         price: product.price,
         title: product.title,
         maxQuantity: product.quantity,
-      })
-    );
-  };
+      },
+      newQuantity: 1,
+      mode: "button",
+    })
+  );
+};
 
   return (
     <React.Fragment>
@@ -62,7 +65,7 @@ console.log(product)
                   type="button"
                   style="plain"
                   width="120px"
-                  onClickHandler={onAddHandler}
+                  onClickHandler={handleAddClick}
                 >
                   Add to Cart!
                 </Button>

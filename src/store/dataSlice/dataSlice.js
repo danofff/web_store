@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 const dataSlice = createSlice({
   name: "data",
-  initialState: { categories: [], products: [], orders: [] },
+  initialState: { categories: [], products: [], orders: [], reviews: [] },
   reducers: {
     //categories
     setCategories(state, action) {
@@ -37,6 +37,10 @@ const dataSlice = createSlice({
     setAllOrders(state, action) {
       state.orders = action.payload;
     },
+    //reviews
+    setAllReviews(state, action){
+      state.reviews = action.payload
+    }
   },
 });
 
