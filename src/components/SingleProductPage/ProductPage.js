@@ -22,7 +22,7 @@ const ProductPage = () => {
       setProduct(prod);
     }
   }, [products]);
-
+console.log(product)
   const onAddHandler = (event) => {
     dispatch(
       cartActions.addProduct({
@@ -40,27 +40,24 @@ const ProductPage = () => {
         <div>
           <div className={classes.container}>
             <div className={classes.imgContainer}>
-              <h4 className={classes.title}>{product.title}</h4>
               <div className={classes.img}>
                 <img className={classes.productImage} src={product.imageURL} />
               </div>
             </div>
             <div className={classes.description}>
+              <p className={classes.productTitle}>{product.title}</p>
               <p className={classes.productDescription}>
-                Product Description: {product.description}
+                {product.description}
               </p>
-              <div className={classes.priceline}>
-                <p className={classes.price}>Price: {product.price}</p>
                 <StarRating
                   rating={product.rating}
                   disabled={userId ? false : true}
                 />
+              <div className={classes.priceline}>
+                <p className={classes.price}>Price: {product.price}</p>
                 <p className={classes.quantity}>
                   Left in Stock: {product.quantity}
                 </p>
-                <div className={classes.quantity_inp}>
-                  <StyledInput type="number" value={1} />
-                </div>
                 <Button
                   type="button"
                   style="plain"
