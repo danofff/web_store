@@ -54,7 +54,7 @@ orderRouter.post("/", async (req, res, next) => {
     //order id is created in the first step of creatOrder function
     //the req.body should be a cart of items assuming cart will be an array
     let errorMessage = "";
-    const { cart } = req.body;
+    const { cart, address, email, phone, fullname } = req.body;
     cart.forEach((orderItem, index) => {
       if (!orderItem.productId)
         errorMessage =
@@ -69,12 +69,19 @@ orderRouter.post("/", async (req, res, next) => {
     //don't check if user authenticated, if it's a guest, so use dummy user id instead
     let userId = req.user && req.user.id ? req.user.id : 0;
 
-    const createdOrder = await createOrder(cart, userId);
+    const createdOrder = await createOrder(
+      cart,
+      userId,
+      email,
+      phone,
+      address,
+      fullname
+    );
     res.status(200).json({ order: createdOrder });
   } catch (error) {
     next(error);
   }
 });
-//need a delete and update order router?
+//need a delete and update order routes?
 
 module.exports = orderRouter;

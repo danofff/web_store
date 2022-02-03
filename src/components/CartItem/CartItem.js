@@ -70,7 +70,7 @@ const CartItem = ({ product }) => {
         type="button"
         style="plain"
         onClickHandler={onDeleteHandler}
-        width="33px"
+        width="36px"
       >
         &#x2715;
       </Button>
