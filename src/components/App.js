@@ -8,7 +8,7 @@ import Container from "./ui/Container/Container";
 import ProductsPage from "../pages/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import LoginPage from "../pages/LoginPage";
-import SingleProductPage from "../pages/SingleProductPage" ;
+import SingleProductPage from "../pages/SingleProductPage";
 import Header from "./Header/Header";
 import Loader from "./ui/Loader/Loader";
 
@@ -20,6 +20,7 @@ import ConfirmOrderPage from "../pages/ConfirmOrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
+import Snackbar from "./ui/Snackbar/Snackbar";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </div>
+      <Snackbar />
     </Container>
   );
 };

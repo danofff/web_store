@@ -11,6 +11,7 @@ import Button from "../components/ui/Button/Button";
 import FormControl from "../components/ui/FormControl/FormControl";
 
 import classes from "./ConfirmOrderPage.module.css";
+import { uiActions } from "../store/uiSlice/uiSlice";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -72,7 +73,13 @@ const ConfirmOrderPage = (props) => {
       )
         .then((response) => {
           //show snackbar with success status
-
+          dispatch(
+            uiActions.setSnackbar({
+              isActive: true,
+              type: "success",
+              text: "You're succesfully confirmed order",
+            })
+          );
           //clear cart
           dispatch(cartActions.clearCart());
           // navigate user to all user orders
@@ -136,6 +143,7 @@ const ConfirmOrderPage = (props) => {
             name="address"
             label="Address"
             type="address"
+            isRequired={true}
             value={formik.values.address}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
@@ -145,6 +153,7 @@ const ConfirmOrderPage = (props) => {
             name="zip"
             label="ZIP"
             type="zip"
+            isRequired={true}
             value={formik.values.zip}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
