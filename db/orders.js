@@ -47,7 +47,7 @@ async function getOrderById(id) {
   }
 }
 
-async function createOrder(cart, userId) {
+async function createOrder(cart, userId, phone, address, fullname) {
   //retrieve product price from DB and recreate our cart based on DB price data
   // console.log("this is cart", cart);
   const productsPromise = cart.map(async (prod) => {
@@ -82,11 +82,11 @@ async function createOrder(cart, userId) {
       rows: [order],
     } = await client.query(
       `
-        INSERT INTO orders("userId", "orderSum")
-        VALUES ($1, $2)
+        INSERT INTO orders("userId", "orderSum", phone, "deliveryAddress", fullname)
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING *
       `,
-      [userId, sum]
+      [userId, sum, phone, address, fullname]
     );
 
     const orderProducts = await createOrderProductMultiple(cart, order.id);
