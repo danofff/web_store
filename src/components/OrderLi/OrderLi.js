@@ -36,7 +36,7 @@ const OrderLi = ({ order }) => {
       <td>{order.deliveryAddress}</td>
       <td>{order.phone}</td>
       <td>{order.email}</td>
-      <td>{`\$${order.orderSum}`}</td>
+      <td>{`\$${(+order.orderSum).toFixed(2)}`}</td>
     </tr>
   );
 };
