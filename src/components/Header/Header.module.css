@@ -4,11 +4,13 @@
   align-items: center;
   margin-top: 5px;
 }
-@media (max-width: 650px) {
-  .header {
+
+/* @media (max-width: 650px) { */
+  /* .header { */
     
-  }
-}
+  /* } */
+/* } */
+
 .navbar {
   background-color: transparent;
   text-decoration: none;

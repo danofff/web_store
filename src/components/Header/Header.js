@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Button from "../ui/Button/Button";
@@ -33,11 +33,13 @@ const Header = () => {
 
   return (
     <header className={classes.header}>
-      <div className={classes.image}>
-        <img
-          src={`https://miro.medium.com/fit/c/160/160/1*NqIybBxOwC1uYDBgOp-7Sg.png`}
-        />
-      </div>
+      <Link to="/products">
+        <div className={classes.image}>
+          <img
+            src={`https://miro.medium.com/fit/c/160/160/1*NqIybBxOwC1uYDBgOp-7Sg.png`}
+          />
+        </div>
+      </Link>
       <nav className={classes.navbar}>
         {/* there are things that need to be accessible to anyone and things that should
             be accessible to a specific group(aka admin, logged in user) */}
