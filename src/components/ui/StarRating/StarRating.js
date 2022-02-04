@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { editProductAct } from "../../../store/dataSlice/dataActions";
 import classes from "./StarRating.module.css";
 
-const StarRating = ({ rating = 0, disabled = true }) => {
-  const [innerRate, setInnerRate] = useState(Math.round(rating));
+const StarRating = ({
+  rating = 0,
+  disabled = true,
+  handleOutler = () => {},
+}) => {
+  const [innerRate, setInnerRate] = useState(Math.round(rating * 10) / 10);
   const ratingArr = [0, 0, 0, 0, 0];
 
   const handleStarClick = (event) => {
@@ -11,6 +14,7 @@ const StarRating = ({ rating = 0, disabled = true }) => {
       const parsedRate = parseInt(event.target.parentNode.dataset.value);
       const newRate = isNaN(parsedRate) ? innerRate : parsedRate;
       rating = setInnerRate(newRate);
+      handleOutler(newRate);
     }
   };
   return (

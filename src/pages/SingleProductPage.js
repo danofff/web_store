@@ -31,6 +31,7 @@ const SingleProductPage = (props) => {
         <div>
           <ProductReviews productId={productId} />
         </div>
+
       </div>
     </div>
   );

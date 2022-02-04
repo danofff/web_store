@@ -17,6 +17,10 @@
     border: none;
     color: var(--accent-color);
 }
+.titles:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
 .category:hover{
     cursor: pointer;
     text-decoration: underline;
