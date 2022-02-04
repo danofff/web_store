@@ -54,22 +54,21 @@ reviewRouter.get("/users/:userId", async (req, res, next) => {
 reviewRouter.post("/", checkUser, async (req, res, next) => {
   try {
     //createReview needs productId,userId,reviewText,and starRating
-    let userId = req.user.Id;
+    let userId = req.user.id;
     let productId = req.body.productId;
     let reviewText = req.body.reviewText;
-    let starRating = req.body.starRating;
+    let starRating = req.body.starRating || 0;
 
     //optional - verify user has purchased product before review?
     if (!productId) throw new Error("productId must be submitted!");
     if (!reviewText) throw new Error("userId must be submitted!");
-    if (!starRating) throw new Error("Star rating must be submitted!");
     let createdReview = await createReview(
       productId,
       userId,
       reviewText,
       starRating
     );
-    res.status(200).json(createdReview);
+    res.status(200).json({ review: createdReview });
   } catch (error) {
     next(error);
   }
