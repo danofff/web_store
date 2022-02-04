@@ -42,7 +42,6 @@
 }
 .starRating{
     width: 50%;
-    font-size: 18pt;
 }
 .buttonLine{
     width: 100%;
@@ -55,6 +54,7 @@
 }
 .addToCartButtonBox{
     width: 50%;
+    flex-grow: 1;
 }
 .a{
     border-right: 4px solid #3a3a3a;

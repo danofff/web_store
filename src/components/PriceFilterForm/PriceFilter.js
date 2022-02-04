@@ -16,17 +16,23 @@ const PriceFilterForm = (props) => {
     }
     return (
         <form className={classes.priceForm} onMouseLeave={handlePriceClick}>
-            <p>Sort By</p>
+            <div className={classes.typeLine}>
+                <div className={classes.horizontalLine}></div>
+                <p className={classes.textDescriptor}>Sort By</p>
+                <div className={classes.horizontalLine}></div>
+            </div>
+            <div className={classes.radioButtonLine}>
                 <div>
-                    <label>Highest Price: </label>
+                    <label className={classes.label}>Highest Price: </label>
                     <input type="radio" name="price" value="high" className="PriceSortOptions"></input> 
                 </div>
                 <div>
-                    <label>Lowest Price: </label>
+                    <label className={classes.label}>Lowest Price: </label>
                     <input type="radio" name="price" value="low" className="PriceSortOptions"></input>
                 </div>
-            <div className="Buttons container">
-                <button onClick={handleSubmit}>apply</button> <button onClick={resetButton}>reset</button>
+            </div>
+            <div className={classes.buttonContainer}>
+                <div className={classes.button} onClick={handleSubmit} >apply</div><div className={classes.divider}></div> <div className={classes.button} onClick={resetButton}>reset</div>
             </div>
         </form>
     )

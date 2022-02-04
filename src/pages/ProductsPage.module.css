@@ -11,3 +11,9 @@
     flex-grow: 1;
     margin: 4px;
 }
+.buttonLine{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 10px;
+}
