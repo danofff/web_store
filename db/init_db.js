@@ -127,7 +127,7 @@ async function populateInitialData() {
     console.log("starting create categories");
     const c1 = await createCategory("hoodies");
     const c2 = await createCategory("t-shirts");
-    const c3 = await createCategory("long sleevs");
+    const c3 = await createCategory("long sleeves");
     console.log("created categories------->", c1, c2, c3);
     console.log("finished creating categories");
 
@@ -368,7 +368,7 @@ async function populateInitialData() {
       2
     );
     const r4 = await createReview(
-      1,
+      7,
       2,
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, incidunt.",
       5
