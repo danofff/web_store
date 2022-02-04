@@ -1,7 +1,6 @@
 .container{
   background-color: var(--background-elem);
-  padding: 3rem 3rem .5rem 1rem;
-  font: ;
+  padding: 3rem;
 }
 
 .date{

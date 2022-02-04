@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { cartActions } from "../../store/cartState/cartSlice";
 import Button from "../ui/Button/Button";
 import StyledInput from "../ui/StyledInput/StyledInput";
@@ -21,21 +20,21 @@ const ProductPage = (props) => {
       setProduct(prod);
     }
   }, [products]);
-console.log(product)
-const handleAddClick = () => {
-  dispatch(
-    cartActions.changeProduct({
-      product: {
-        productId: product.id,
-        price: product.price,
-        title: product.title,
-        maxQuantity: product.quantity,
-      },
-      newQuantity: 1,
-      mode: "button",
-    })
-  );
-};
+  console.log(product);
+  const handleAddClick = () => {
+    dispatch(
+      cartActions.changeProduct({
+        product: {
+          productId: product.id,
+          price: product.price,
+          title: product.title,
+          maxQuantity: product.quantity,
+        },
+        newQuantity: 1,
+        mode: "button",
+      })
+    );
+  };
 
   return (
     <React.Fragment>
@@ -48,19 +47,18 @@ const handleAddClick = () => {
               </div>
             </div>
             <div className={classes.description}>
-              <p className={classes.productTitle}>{product.title}</p>
-              <p className={classes.productDescription}>
-                {product.description}
-              </p>
-                <StarRating
-                  rating={product.rating}
-                  disabled={true}
-                />
-              <div className={classes.priceline}>
-                <p className={classes.price}>Price: ${product.price}</p>
-                <p className={classes.quantity}>
-                  Left in Stock: {product.quantity}
+              <div className={classes.productInfo}>
+                <p className={classes.productTitle}>{product.title}</p>
+                <p className={classes.productDescription}>
+                  {product.description}
                 </p>
+                <StarRating rating={product.rating} />
+                <div className={classes.priceline}>
+                  <p className={classes.price}>Price: ${product.price}</p>
+                  <p className={classes.quantity}>
+                    Left in Stock: {product.quantity}
+                  </p>
+              </div>
                 <Button
                   type="button"
                   style="plain"
