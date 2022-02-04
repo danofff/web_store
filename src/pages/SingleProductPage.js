@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 import ProductPage from "../components/SingleProductPage/ProductPage";
 import ProductReviews from "../components/SingleProductPage/ProductReview";
 import { useSelector } from "react-redux";
+import classes from "./SingleProductPage.module.css";
 
 const SingleProductPage = (props) => {
   const dispatch = useDispatch();
@@ -23,11 +24,14 @@ const SingleProductPage = (props) => {
 
   return (
     <div>
-      <div>
-        <ProductPage productId={productId} />
-      </div>
-      <div>
-        <ProductReviews productId={productId} />
+      <div className={classes.container}>
+        <div>
+          <ProductPage productId={productId} />
+        </div>
+        <div>
+          <ProductReviews productId={productId} />
+        </div>
+
       </div>
     </div>
   );

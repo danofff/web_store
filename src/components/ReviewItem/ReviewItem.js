@@ -20,6 +20,7 @@ const ReviewItem = ({ review }) => {
         </div>
         <p className={classes.text}>{review.reviewText}</p>
         <p className={classes.username}>@{review.username}</p>
+        <div className={classes.user} ></div>
       </div>
     </div>
   );
