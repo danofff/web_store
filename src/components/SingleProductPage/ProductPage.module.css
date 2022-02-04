@@ -3,13 +3,12 @@
   grid-template-columns: repeat(2, 1fr);
   margin-top: 2rem;
   grid-gap: 2em;
-  padding: 3rem 3rem 3rem 1rem;
+  padding: 3rem;
   /* border: solid 5px var(--accent-color); */
   border-top-left-radius: 2%;
   border-top-right-radius: 2%;
   background-color: var(--background-elem);
 }
-
 
 .img {
   width: 450px;
@@ -35,7 +34,10 @@
 .description {
   padding: 2rem;
   color: var(--darkFont-color);
-
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 .productTitle {
   margin-bottom: 1rem;
@@ -44,8 +46,9 @@
   color: white;
 }
 .productDescription {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   font-size: x-large;
+  margin-bottom: 2.5rem;
 }
 
 .priceline {
@@ -58,18 +61,18 @@
   margin-bottom: 2.5rem;
 }
 
-
 input {
   width: 2.5rem;
   background-color: var(--darkFont-color);
   text-decoration: none;
 }
 
-
-.quantity {
-  margin-bottom: 80%;
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
-
 
 .review {
   display: grid;
