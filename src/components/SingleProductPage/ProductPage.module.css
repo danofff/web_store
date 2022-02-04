@@ -3,9 +3,10 @@
   grid-template-columns: repeat(2, 1fr);
   margin-top: 2rem;
   grid-gap: 2em;
-  padding: 1rem;
+  padding: 3rem 3rem 3rem 1rem;
   /* border: solid 5px var(--accent-color); */
-  border-radius: 2.5%;
+  border-top-left-radius: 2%;
+  border-top-right-radius: 2%;
   background-color: var(--background-elem);
 }
 
@@ -20,6 +21,8 @@
   width: 100%;
   height: auto;
   box-shadow: 8px 8px 20px var(--accent-color);
+  border-radius: 15%;
+  background-color: transparent;
 }
 
 .title {
@@ -27,21 +30,22 @@
   font: large;
   width: 450px;
   justify-content: center;
-  color: var(--darkFont-color);
 }
 
 .description {
-  padding: 25px;
+  padding: 2rem;
   color: var(--darkFont-color);
+
 }
 .productTitle {
   margin-bottom: 1rem;
-  font-size: x-large;
+  font-size: xx-large;
   font-weight: bolder;
+  color: white;
 }
 .productDescription {
   margin-bottom: .5rem;
-  font-size: large;
+  font-size: x-large;
 }
 
 .priceline {
@@ -50,8 +54,8 @@
 
 .price {
   font-size: x-large;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 
@@ -63,7 +67,7 @@ input {
 
 
 .quantity {
-  margin-bottom: 1rem;
+  margin-bottom: 80%;
 }
 
 

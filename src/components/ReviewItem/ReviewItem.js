@@ -1,16 +1,28 @@
 import React from "react";
 import StarRating from "../ui/StarRating/StarRating";
 import classes from "./ReviewItem.module.css";
+import { useSelector } from "react-redux";
 
 const ReviewItem = ({ review }) => {
+  const date = new Date(review.updated_at);
+  const dateStr = date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "numeric",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return (
     <div>
-      <div className={classes.date}>{review.updated_at}</div>
-      <div className={classes.starRating}>
-        <StarRating rating={review.starRating} />
+      <div className={classes.container}>
+        <div className={classes.date}>{dateStr}</div>
+        <div className={classes.starRating}>
+          <StarRating rating={review.starRating} />
+        </div>
+        <p className={classes.text}>{review.reviewText}</p>
+        <p className={classes.username}>@{review.username}</p>
       </div>
-      <p className={classes.text}>{review.reviewText}</p>
-      <p>{review.username}</p>
     </div>
   );
 };

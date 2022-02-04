@@ -54,26 +54,22 @@ const handleAddClick = () => {
               </p>
                 <StarRating
                   rating={product.rating}
-                  disabled={userId ? false : true}
+                  disabled={true}
                 />
               <div className={classes.priceline}>
-                <p className={classes.price}>Price: {product.price}</p>
+                <p className={classes.price}>Price: ${product.price}</p>
                 <p className={classes.quantity}>
                   Left in Stock: {product.quantity}
                 </p>
                 <Button
                   type="button"
                   style="plain"
-                  width="120px"
+                  width="100%"
                   onClickHandler={handleAddClick}
                 >
                   Add to Cart!
                 </Button>
               </div>
-            </div>
-            <div className={classes.review}>
-              <p>Reviews will go here</p>
-              <div>review1</div>
             </div>
           </div>
         </div>
