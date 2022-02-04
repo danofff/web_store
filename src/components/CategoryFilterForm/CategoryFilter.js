@@ -16,16 +16,14 @@ const CategoryFilterForm = (props) => {
     //let categories = [{"title": "hoodies"},{"title": "t-shirt"},{"title": "baseball Tee"},{"title": "hoodies"},{"title": "elephant tusk"} ]
     function handleSubmit(e) {
         e.preventDefault();
-        let formData = document.getElementsByClassName("CategoryOption");
+        let formData = document.getElementsByClassName(`${classes.categoryOption}`);
         let formDataArray=[...formData]
         let categoriesToSort= [];
-        console.log(formData[0]);
         formDataArray.forEach(element =>{
             if (element.checked)
                 categoriesToSort.push(element.id)
         });
         setSortCategories({"categories": categoriesToSort});
-        console.log(sortCategories);
     }
     return (
         <form className={classes.categoriesForm}>

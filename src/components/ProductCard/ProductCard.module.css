@@ -26,11 +26,8 @@
     display: flex;
     align-items: center;
 }
-.description{
-    margin: 10px;
-    color: grey;
-    font-size: 18px;
-    height: 4em;
+.infoBox{
+    width: 100%;
 }
 .priceLine{
     width: 100%;
@@ -40,9 +37,11 @@
     color: rgba(245, 245, 245, 0.897);
 }
 .price{
+    width: 50%;
     font-size: 18pt;
 }
 .starRating{
+    width: 50%;
     font-size: 18pt;
 }
 .buttonLine{
@@ -52,10 +51,10 @@
     justify-content: space-around;
 }
 .learnMoreButtonBox{
-    width: 45%;
+    width: 50%;
 }
 .addToCartButtonBox{
-    width: 45%;
+    width: 50%;
 }
 .a{
     border-right: 4px solid #3a3a3a;

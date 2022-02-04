@@ -17,7 +17,6 @@ const ProductsPage = (props) => {
     useEffect(()=>{
         dispatch(getProductsAct())
     },[]);
-    console.log(products);
     if (sortCategories.categories)
       products.forEach(product=>{
         sortCategories.categories.forEach(category=>{

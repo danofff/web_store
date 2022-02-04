@@ -1,12 +1,11 @@
 import { cartActions } from "../../store/cartState/cartSlice";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button/Button";
-
 import classes from "./ProductCard.module.css";
+
 const ProductCard = (props) => {
   let { product , border } = props;
   const dispatch = useDispatch();
-
   const handleAddClick = () => {
     dispatch(
       cartActions.changeProduct({
@@ -34,10 +33,10 @@ const ProductCard = (props) => {
         </div>
         <div className={classes.buttonLine}>
           <div className={classes.learnMoreButtonBox}>
-            <Button style="outlined" text="learn more" className={classes.learnMoreButton}></Button>
+            <Button style="outlined" size="medium" className={classes.learnMoreButton}>Learn More</Button>
           </div>
           <div className={classes.addToCartButtonBox}>
-          <Button style="plain" text="add to cart" onClickHandler={handleAddClick} ></Button>
+          <Button style="plain" size="medium" onClickHandler={handleAddClick} >Add To Cart</Button>
           </div>
         </div>
       </div>
