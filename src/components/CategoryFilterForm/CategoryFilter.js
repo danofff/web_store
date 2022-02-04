@@ -12,8 +12,6 @@ const CategoryFilterForm = (props) => {
         dispatch(getCategoriesAct())
     }, [])
     const categories = useSelector(state => state.data.categories)
-    //this line for trials
-    //let categories = [{"title": "hoodies"},{"title": "t-shirt"},{"title": "baseball Tee"},{"title": "hoodies"},{"title": "elephant tusk"} ]
     function handleSubmit(e) {
         e.preventDefault();
         let formData = document.getElementsByClassName(`${classes.categoryOption}`);
@@ -26,7 +24,7 @@ const CategoryFilterForm = (props) => {
         setSortCategories({"categories": categoriesToSort});
     }
     return (
-        <form className={classes.categoriesForm}>
+        <form className={classes.categoriesForm} onMouseLeave={handleCategoryClick}>
             <div className={classes.typeLine}>
                 <div className={classes.horizontalLine}></div>
                 <p className={classes.textDescriptor}>Types</p>
@@ -37,7 +35,7 @@ const CategoryFilterForm = (props) => {
                         return (
                             <div id={category.id}>
                                 <input type="checkbox" id={category.id} className={classes.categoryOption}></input>
-                                <label> {category.title}</label>
+                                <label className={classes.label}> {category.title}</label>
                             </div>
                         )
                     })}

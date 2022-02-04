@@ -5,19 +5,24 @@ import { useEffect, useState } from "react";
 import { getProductsAct } from "../store/dataSlice/dataActions";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ProductPageMenuBar from "../components/ProductPageMenuBar/ProductPageMenuBar";
+import Button from "../components/ui/Button/Button"
 
 
 const ProductsPage = (props) => {
     const dispatch = useDispatch();
     const products = useSelector(state=>state.data.products);
-    const [sortCategories, setSortCategories] = useState({categories: null})
-    const [sortPriority, setSortPriority] = useState({category: null, order: null})
+    const [sortCategories, setSortCategories] = useState({"categories": null})
+    const [sortPriority, setSortPriority] = useState({"category": null, "order": null})
     let sortedProducts=[];
     let border = "";
     useEffect(()=>{
         dispatch(getProductsAct())
-    },[]);
-    if (sortCategories.categories)
+    },[]); let handleClearAllFilters = (e) =>{
+      e.preventDefault();
+      setSortCategories({"categories": null});
+      setSortPriority({"category": null, "order": null});
+    }
+    if (sortCategories.categories)   
       products.forEach(product=>{
         sortCategories.categories.forEach(category=>{
           console.log(category)
@@ -46,6 +51,9 @@ const ProductsPage = (props) => {
         sortCategories={sortCategories} setSortCategories={setSortCategories}
         sortPriority={sortPriority} setSortPriority={setSortPriority}
       ></ProductPageMenuBar>
+      <div className={classes.buttonLine}>
+        {sortCategories.categories != null || sortPriority.category !=null ? <Button style="outlined" size="medium" onClickHandler={handleClearAllFilters}>Clear All Filters</Button> : null}
+      </div>
       <div className={classes.spacer}>
           {sortedProducts.map((product, index) =>{
           border = null;

@@ -1,6 +1,7 @@
 import { cartActions } from "../../store/cartState/cartSlice";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button/Button";
+import StarRating from "../ui/StarRating/StarRating"
 import classes from "./ProductCard.module.css";
 
 const ProductCard = (props) => {
@@ -20,6 +21,8 @@ const ProductCard = (props) => {
       })
     );
   };
+  let priceToFix= parseFloat(product.price);
+  let fixedPrice= priceToFix.toFixed(2);
   return (
     <div id={product.id} className={`${classes.productCard} ${classes[border]}`}>
       {/* if image url is an array of images this might need to be changed */}
@@ -28,8 +31,8 @@ const ProductCard = (props) => {
       <div className={classes.infoBox}>
         <div className={classes.priceLine}>
           {/* add to fixed to this line */}
-          <p className={classes.price}>${product.price}</p>
-          <p className={classes.starRating}>{product.rating} Stars</p>
+          <p className={classes.price}>${fixedPrice}</p>
+          <StarRating rating={product.rating} className={classes.StarRating}></StarRating>
         </div>
         <div className={classes.buttonLine}>
           <div className={classes.learnMoreButtonBox}>
