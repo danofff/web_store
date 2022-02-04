@@ -44,25 +44,29 @@ const ReviewPage = ({ productId }) => {
   return (
     <React.Fragment>
       {userId && (
-        <form onSubmit={formik.handleSubmit}>
-          <FormControl
-            type="textarea"
-            label="Review Text"
-            name="reviewText"
-            isRequired={true}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            formik={formik}
-          />
-          <StarRating
-            rating={formik.rating}
-            disabled={false}
-            handleOutler={setRating}
-          />
-          <Button type="submit" style="plain">
-            Send review
-          </Button>
-        </form>
+        <div className={classes.container}>
+          <form onSubmit={formik.handleSubmit}>
+            <FormControl
+              type="textarea"
+              label="Review Text"
+              name="reviewText"
+              isRequired={true}
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              formik={formik}
+            />
+            <div className={classes.starRating}>
+              <StarRating
+                rating={formik.rating}
+                disabled={false}
+                handleOutler={setRating}
+                />
+            </div>
+            <Button type="submit" style="plain">
+              Send review
+            </Button>
+          </form>
+        </div>
       )}
       {reviews.map((review) => {
         return <ReviewItem review={review} key={`review${review.id}`} />;
