@@ -6,3 +6,8 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+.dummyBox{
+    width: 32%;
+    flex-grow: 1;
+    margin: 4px;
+}

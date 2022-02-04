@@ -1,0 +1,53 @@
+.categoriesForm{
+    background-color: #19191963;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.typeLine{
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.horizontalLine{
+    height: 1px;
+    flex-grow: 1;
+    background-color: var(--accent-color);
+}
+.textDescriptor{
+    margin: 10px;
+    color: var(--accent-color);
+    flex-grow: 0;
+}
+.categoriesBox{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 75%;
+    justify-content: space-between;
+}
+.categoryOption{
+    margin-left: 25%;
+}
+.buttonContainer{
+    width: 100%;
+    height: 2em;
+    background-color: rgba(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button{
+    color: var(--accent-color)
+}
+.button:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.divider{
+    width: 2px;
+    height: 80%;
+    background-color: rgba(26, 171, 244, 0.596);
+    margin: 15px;
+}
