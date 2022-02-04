@@ -3,8 +3,8 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   grid-gap: 1.5em;
-
   border-top-left-radius: 2%;
   border-top-right-radius: 2%;
 }
