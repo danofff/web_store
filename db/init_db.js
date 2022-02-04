@@ -62,6 +62,10 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
       "isComplete" boolean DEFAULT false,
+      email varchar(255) NOT NULL,
+      phone varchar(255) NOT NULL,
+      "deliveryAddress" varchar(255) NOT NULL,
+      fullname varchar(255) NOT NULL,
       "orderSum" decimal,
       created_at timestamp DEFAULT now(),
       updated_at timestamp DEFAULT now()
@@ -82,7 +86,7 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "productId" INTEGER REFERENCES products(id),
       "reviewText" text,
-      "userId" INTEGER REFERENCES users(id),
+      "userId" INTEGER REFERENCES users(id) NOT NULL,
       "starRating" INTEGER,
       created_at timestamp DEFAULT now(),
       updated_at timestamp DEFAULT now(),
@@ -101,7 +105,21 @@ async function populateInitialData() {
     // create useful starting data
     //creating users
     console.log("starting to create users");
-    const u1 = await createUser("test@test.com", "testtest", null, null, true);
+    const u0 = await createUser(
+      "nobody@noemail.com",
+      "nopassword",
+      "nowhere",
+      "nozip",
+      false,
+      true
+    );
+    const u1 = await createUser(
+      "test@test.com",
+      "testtest",
+      " 3355 Test St Testerville, TS",
+      "test",
+      true
+    );
     const u2 = await createUser(
       "collin@test.com",
       "collintest",
@@ -171,124 +189,7 @@ async function populateInitialData() {
         quantity: 100,
         imageUrl:
           "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }, {
-        categoryId: 1,
-        title: "cool red hoodie",
-        description:
-          "This is super cool red hoodie will make you as cool as possible",
-        price: 29.99,
-        quantity: 100,
-        imageUrl:
-          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
       },
-      {
-        categoryId: 1,
-        title: " cool yellow hoodie",
-        description:
-          "This is super cool eyes melting hoodie will make you the most hated person around",
-        price: 21.99,
-        quantity: 100,
-        imageUrl:
-          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
-      },
-      {
-        categoryId: 2,
-        title: " cool black t-shirt",
-        description:
-          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
-        price: 18.99,
-        quantity: 100,
-        imageUrl:
-          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
-      },
-      {
-        categoryId: 3,
-        title: " cool blue long sleeve",
-        description:
-          "What can we add in description? Nothing! Title tells by itself. Ladies and gentlements - blue long sleeve",
-        price: 23.99,
-        quantity: 100,
-        imageUrl:
-          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }, {
-        categoryId: 1,
-        title: " cool red hoodie",
-        description:
-          "This is super cool red hoodie will make you as cool as possible",
-        price: 29.99,
-        quantity: 100,
-        imageUrl:
-          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
-      },
-      {
-        categoryId: 1,
-        title: "Super  yellow hoodie",
-        description:
-          "This is super cool eyes melting hoodie will make you the most hated person around",
-        price: 21.99,
-        quantity: 100,
-        imageUrl:
-          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
-      },
-      {
-        categoryId: 2,
-        title: "Super  black t-shirt",
-        description:
-          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
-        price: 18.99,
-        quantity: 100,
-        imageUrl:
-          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
-      },
-      {
-        categoryId: 3,
-        title: "Super  blue long sleeve",
-        description:
-          "What can we add in description? Nothing! Title tells by itself. Ladies and gentlements - blue long sleeve",
-        price: 23.99,
-        quantity: 100,
-        imageUrl:
-          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }, {
-        categoryId: 1,
-        title: "Super  red hoodie",
-        description:
-          "This is super cool red hoodie will make you as cool as possible",
-        price: 29.99,
-        quantity: 100,
-        imageUrl:
-          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
-      },
-      {
-        categoryId: 1,
-        title: "Super cool yellow ",
-        description:
-          "This is super cool eyes melting hoodie will make you the most hated person around",
-        price: 21.99,
-        quantity: 100,
-        imageUrl:
-          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
-      },
-      {
-        categoryId: 2,
-        title: "Super cool black",
-        description:
-          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
-        price: 18.99,
-        quantity: 100,
-        imageUrl:
-          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
-      },
-      {
-        categoryId: 3,
-        title: "Super cool blue",
-        description:
-          "What can we add in description? Nothing! Title tells by itself. Ladies and gentlements - blue long sleeve",
-        price: 23.99,
-        quantity: 100,
-        imageUrl:
-          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
-      }
     ];
 
     //creating products
@@ -312,6 +213,10 @@ async function populateInitialData() {
     console.log("starting to create order");
     const order1 = {
       userId: 1,
+      email: "test1@test.com",
+      address: "Super cool address to deliver 77777",
+      phone: "312 312 3121",
+      fullname: "Test Testerson",
       cart: [
         {
           productId: 1,
@@ -327,6 +232,10 @@ async function populateInitialData() {
     };
     const order2 = {
       userId: 2,
+      email: "test2@test.com",
+      address: "bum f* Oklahoma 00000",
+      phone: "312 312 3112",
+      fullname: "Easy Peazy",
       cart: [
         {
           userId: 2,
@@ -341,8 +250,22 @@ async function populateInitialData() {
         },
       ],
     };
-    const createdOrder1 = await createOrder(order1.cart, order1.userId);
-    const createdOrder2 = await createOrder(order2.cart, order2.userId);
+    const createdOrder1 = await createOrder(
+      order1.cart,
+      order1.userId,
+      order1.email,
+      order1.phone,
+      order1.address,
+      order1.fullname
+    );
+    const createdOrder2 = await createOrder(
+      order2.cart,
+      order2.userId,
+      order2.email,
+      order2.phone,
+      order2.address,
+      order2.fullname
+    );
     console.log("order 1------->", createdOrder1);
     console.log("order 2------->", createdOrder2);
     console.log("finished to create order");

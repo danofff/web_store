@@ -1,0 +1,20 @@
+.container{
+  background-color: var(--background-elem);
+  padding: 3rem;
+}
+
+.date{
+  margin-bottom: .5rem;
+}
+
+.starRating{
+  margin-bottom: .5rem;
+}
+
+.text{
+  margin-bottom: .5rem;
+}
+
+.username{
+  
+}

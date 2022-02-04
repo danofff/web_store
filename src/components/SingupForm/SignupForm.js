@@ -16,7 +16,6 @@ const SignupForm = (props) => {
       email: "",
       password: "",
       passwordConfirmation: "",
-      fullname: "",
       address: "",
       zip: "",
     },
@@ -61,6 +60,7 @@ const SignupForm = (props) => {
         handleChange={signup.handleChange}
         handleBlur={signup.handleBlur}
         formik={signup}
+        autocomplete="new-password"
       />
       <FormControl
         name="passwordConfirmation"
@@ -90,7 +90,9 @@ const SignupForm = (props) => {
         handleBlur={signup.handleBlur}
         formik={signup}
       />
-      <Button type="submit" style="plain" text="sign up" />
+      <Button type="submit" style="plain">
+        Sign up
+      </Button>
     </form>
   );
 };

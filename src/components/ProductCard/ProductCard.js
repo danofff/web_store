@@ -9,12 +9,15 @@ const ProductCard = (props) => {
 
   const handleAddClick = () => {
     dispatch(
-      cartActions.addProduct({
-        id: product.id,
-        price: product.price,
-        title: product.title,
-        categoryId: product.categoryId,
-        maxQuantity: product.quantity,
+      cartActions.changeProduct({
+        product: {
+          productId: product.id,
+          price: product.price,
+          title: product.title,
+          maxQuantity: product.quantity,
+        },
+        newQuantity: 1,
+        mode: "button",
       })
     );
   };

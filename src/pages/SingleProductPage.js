@@ -1,20 +1,36 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getProductsAct } from '../store/dataSlice/dataActions';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  getProductsAct,
+  getReviewsByProductIdAct,
+} from "../store/dataSlice/dataActions";
+import { useParams } from "react-router";
+
+import ProductPage from "../components/SingleProductPage/ProductPage";
+import ProductReviews from "../components/SingleProductPage/ProductReview";
+import { useSelector } from "react-redux";
 
 const SingleProductPage = (props) => {
   const dispatch = useDispatch();
-  const product = useSelector(state=>state.data.products)
-  console.log(useSelector(state=>state.data.products))
+  const products = useSelector((state) => state.data.products);
+  const reviews = useSelector((state) => state.data.reviews);
+  const { productId } = useParams();
+
   useEffect(() => {
-    dispatch(getProductsAct())
-  }, [])
+    dispatch(getProductsAct());
+    dispatch(getReviewsByProductIdAct(productId));
+  }, []);
 
-
-  return 
-  <div>
-
-  </div>;
-}
+  return (
+    <div>
+      <div>
+        <ProductPage productId={productId} />
+      </div>
+      <div>
+        <ProductReviews productId={productId} />
+      </div>
+    </div>
+  );
+};
 
 export default SingleProductPage;

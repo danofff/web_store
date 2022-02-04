@@ -29,11 +29,12 @@ const OrderItem = ({ order }) => {
       <Button
         type="button"
         style="plain"
-        text="&#8592; back"
         onClickHandler={(e) => {
           navigate(-1);
         }}
-      />
+      >
+        &#8592; back
+      </Button>
     </div>
   );
 };

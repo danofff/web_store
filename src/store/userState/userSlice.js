@@ -7,6 +7,7 @@ const userSlice = createSlice({
     token: null,
     isAdmin: null,
     userId: null,
+    userData: null,
   },
   reducers: {
     loginUser(state, action) {
@@ -21,6 +22,7 @@ const userSlice = createSlice({
       state.userId = null;
       state.isAdmin = null;
       state.token = null;
+      localStorage.removeItem("user");
     },
     checkUserLocalStorage(state) {
       const user = localStorage.getItem("user");
@@ -31,6 +33,9 @@ const userSlice = createSlice({
         state.isAdmin = userParsed.isAdmin;
         state.token = userParsed.token;
       }
+    },
+    setUserData(state, action) {
+      state.userData = action.payload;
     },
   },
 });

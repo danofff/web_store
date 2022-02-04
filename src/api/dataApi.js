@@ -159,3 +159,48 @@ export const getOrderById = async (token, orderId) => {
     throw new Error(error.error);
   }
 };
+
+export const getOrdersByUserId = async (token, userId) => {
+  const response = await fetch(`${baseUrl}/orders/users/${userId}`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+//REVIEWS API
+export const getReviewsByProductId = async (productId) => {
+  const response = await fetch(`${baseUrl}/reviews/${productId}`, {
+    method: "GET",
+    headers: makeHeaders(),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+export const addReview = async (token, productId, reviewText, starRating) => {
+  const response = await fetch(`${baseUrl}/reviews`, {
+    method: "POST",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      productId,
+      reviewText,
+      starRating,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};

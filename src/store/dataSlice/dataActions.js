@@ -8,6 +8,9 @@ import {
   addCategory,
   addProduct,
   editProduct,
+  getOrdersByUserId,
+  getReviewsByProductId,
+  addReview,
 } from "../../api/dataApi";
 import { dataActions } from "./dataSlice";
 import { uiActions } from "../uiSlice/uiSlice";
@@ -139,6 +142,69 @@ export const getAllOrdersAct = (token) => {
     } catch (error) {
       //handle error
       console.log(error);
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+
+export const getOrderByUserIdAct = (token, userId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const response = await getOrdersByUserId(token, userId);
+      dispatch(dataActions.setAllOrders(response.orders));
+    } catch (error) {
+      //handle error
+      console.log(error);
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+
+/*****REVIEWS ACTIONS****/
+export const getReviewsByProductIdAct = (productId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const reviews = await getReviewsByProductId(productId);
+      dispatch(dataActions.setAllReviews(reviews));
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+export const addReviewAct = (
+  token,
+  productId,
+  reviewText,
+  starRating,
+  username
+) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const review = await addReview(token, productId, reviewText, starRating);
+      dispatch(dataActions.addReview({ ...review.review, username }));
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }

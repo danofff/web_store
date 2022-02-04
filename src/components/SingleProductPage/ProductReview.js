@@ -1,21 +1,74 @@
-import classes from "./ProductReview.module.css";
-import Button from "../ui/Button/Button";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-const ProductPage = (props) => {
-  let {product} = props;
+import FormControl from "../ui/FormControl/FormControl";
+import Button from "../ui/Button/Button";
+import StarRating from "../ui/StarRating/StarRating";
+import ReviewItem from "../ReviewItem/ReviewItem";
+
+import classes from "./ProductReview.module.css";
+import { addReviewAct } from "../../store/dataSlice/dataActions";
+
+const ReviewPage = ({ productId }) => {
+  const reviews = useSelector((state) => state.data.reviews);
+  const { userId, token, email } = useSelector((state) => state.user);
+  const [rating, setRating] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      reviewText: "",
+      rating: 0,
+    },
+    validationSchema: Yup.object({
+      reviewText: Yup.string()
+        .min(12, "Review text must be at least 12 characters long")
+        .required("Review text is required"),
+    }),
+    onSubmit: (values) => {
+      dispatch(
+        addReviewAct(
+          token,
+          productId,
+          values.reviewText,
+          rating,
+          email.split("@")[0]
+        )
+      );
+    },
+  });
+
   return (
-    <div>
-      <img className={classes.productImage} src={product.imageURL} />
-      <h4 className={classes.title}>{product.title}</h4>
-      <div className={classes.description} >
-        <p className={classes.productDescription}>{product.description}</p>
-        <div className={classes.priceline}>
-          <p className={classes.price}>{product.price}</p>
-          <p className={classes.rating}>{product.rating}</p>
-        </div>
-      </div>
-    </div>
+    <React.Fragment>
+      {userId && (
+        <form onSubmit={formik.handleSubmit}>
+          <FormControl
+            type="textarea"
+            label="Review Text"
+            name="reviewText"
+            isRequired={true}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            formik={formik}
+          />
+          <StarRating
+            rating={formik.rating}
+            disabled={false}
+            handleOutler={setRating}
+          />
+          <Button type="submit" style="plain">
+            Send review
+          </Button>
+        </form>
+      )}
+      {reviews.map((review) => {
+        return <ReviewItem review={review} key={`review${review.id}`} />;
+      })}
+    </React.Fragment>
   );
 };
 
-export default ProductPage;
+export default ReviewPage;

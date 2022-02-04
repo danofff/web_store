@@ -20,9 +20,11 @@ async function getReviewsByProductId(productId) {
   try {
     const { rows: reviews } = await client.query(
       `
-            SELECT *
+            SELECT reviews.*, users.email as "userEmail"
             FROM reviews
-            WHERE "productId" = $1;
+            JOIN users ON users.id = reviews."userId"
+            WHERE "productId" = $1
+            ORDER BY reviews.updated_at DESC;
           `,
       [productId]
     );
@@ -38,7 +40,8 @@ async function getReviewsByUserId(userId) {
       `
             SELECT *
             FROM reviews
-            WHERE "userId" = $1;
+            WHERE "userId" = $1
+            SORT BY updated_at ASC;
           `,
       [userId]
     );
@@ -71,7 +74,7 @@ async function createReview(productId, userId, reviewText, starRating) {
     } = await client.query(
       `
             INSERT INTO reviews ("productId", "userId", "reviewText", "starRating")
-            VAlUES ($1, $2, $3, $4)
+            VAlUES ($1, $2, $3, $4) 
             RETURNING *;
           `,
       [productId, userId, reviewText, starRating]

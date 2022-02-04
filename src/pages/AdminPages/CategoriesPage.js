@@ -43,14 +43,15 @@ const CategoriesPage = (props) => {
     <div className={classes.container}>
       <h1 className="title">Categories</h1>
       <Button
-        width="100px"
+        width="80px"
         type="button"
         style="plain"
-        text={addCategory ? "close" : "Add"}
         onClickHandler={() => {
           setAddCategory((prevState) => !prevState);
         }}
-      />
+      >
+        {addCategory ? "Close" : "Add"}
+      </Button>
       <form
         className={`${classes.form} ${addCategory ? classes.form_active : ""}`}
         onSubmit={formik.handleSubmit}
@@ -62,7 +63,9 @@ const CategoriesPage = (props) => {
           setValue={formik.handleChange}
           placeholder="Category Name..."
         />
-        <Button type="submit" style="outlined" text="Add" />
+        <Button type="submit" style="outlined" text="Add">
+          ADD
+        </Button>
         {formik.touched.categoryInput && formik.errors.categoryInput ? (
           <p className={classes.error_text}>{formik.errors.categoryInput}</p>
         ) : null}

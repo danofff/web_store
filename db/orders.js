@@ -47,7 +47,7 @@ async function getOrderById(id) {
   }
 }
 
-async function createOrder(cart, userId) {
+async function createOrder(cart, userId, email, phone, address, fullname) {
   //retrieve product price from DB and recreate our cart based on DB price data
   // console.log("this is cart", cart);
   const productsPromise = cart.map(async (prod) => {
@@ -72,9 +72,12 @@ async function createOrder(cart, userId) {
     return mappedProduct;
   });
   const checkedCart = await Promise.all(productsPromise);
-  const sum = checkedCart.reduce((acc, item) => {
-    return acc + item.price * item.quantity;
-  }, 0);
+  const sum =
+    Math.round(
+      checkedCart.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0) * 100
+    ) / 100;
 
   //calculate sum of order and add sum of order to order table
   try {
@@ -82,11 +85,11 @@ async function createOrder(cart, userId) {
       rows: [order],
     } = await client.query(
       `
-        INSERT INTO orders("userId", "orderSum")
-        VALUES ($1, $2)
+        INSERT INTO orders("userId", "orderSum", email, phone, "deliveryAddress", fullname)
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *
       `,
-      [userId, sum]
+      [userId, sum, email, phone, address, fullname]
     );
 
     const orderProducts = await createOrderProductMultiple(cart, order.id);

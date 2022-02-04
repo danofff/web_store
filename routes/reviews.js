@@ -22,16 +22,26 @@ reviewRouter.get("/", async (req, res, next) => {
 reviewRouter.get("/:productId", async (req, res, next) => {
   try {
     //check if that product exists first?
+
     const allReviewsOfProduct = await getReviewsByProductId(
       req.params.productId
     );
-    res.status(200).json(allReviewsOfProduct);
+
+    const reviewsToSend = allReviewsOfProduct.map((review) => {
+      const username = review.userEmail.split("@")[0];
+      delete review.userEmail;
+      return {
+        ...review,
+        username,
+      };
+    });
+    res.status(200).json(reviewsToSend);
   } catch (error) {
     next(error);
   }
 });
 
-reviewRouter.get("/:userId", async (req, res, next) => {
+reviewRouter.get("/users/:userId", async (req, res, next) => {
   try {
     //check if that user exists first?
     const allReviewsByUser = await getReviewsByUserId(req.params.userId);
@@ -44,22 +54,21 @@ reviewRouter.get("/:userId", async (req, res, next) => {
 reviewRouter.post("/", checkUser, async (req, res, next) => {
   try {
     //createReview needs productId,userId,reviewText,and starRating
-    let userId = req.user.Id;
+    let userId = req.user.id;
     let productId = req.body.productId;
     let reviewText = req.body.reviewText;
-    let starRating = req.body.starRating;
+    let starRating = req.body.starRating || 0;
 
     //optional - verify user has purchased product before review?
     if (!productId) throw new Error("productId must be submitted!");
     if (!reviewText) throw new Error("userId must be submitted!");
-    if (!starRating) throw new Error("Star rating must be submitted!");
     let createdReview = await createReview(
       productId,
       userId,
       reviewText,
       starRating
     );
-    res.status(200).json(createdReview);
+    res.status(200).json({ review: createdReview });
   } catch (error) {
     next(error);
   }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { cartActions } from "../../store/cartState/cartSlice";
 import StyledInput from "../ui/StyledInput/StyledInput";
@@ -12,31 +13,33 @@ const CartItem = ({ product }) => {
   const dispatch = useDispatch();
 
   const onQuantityChange = (event) => {
-    const newQuantity = event.target.value;
+    const newQuantity = +event.target.value;
+
+    if (newQuantity === 0) {
+      dispatch(cartActions.deleteProduct(product.productId));
+      return;
+    }
     //check if quantity > then prev quantity addProduct
-    //else subtract product
-    if (newQuantity > quantityInput) {
-      //check if we have enogh products left
-      if (newQuantity > product.maxQuantity) {
-        //handle not enought error
-      } else {
-        dispatch(
-          cartActions.addProduct({
-            id: product.id,
-            price: product.price,
-            categoryId: product.categoryId,
-          })
-        );
-        setQuantityInput(event.target.value);
-      }
+    //check if we have enought products left
+    if (newQuantity > product.maxQuantity) {
+      //handle not enought error
     } else {
-      dispatch(cartActions.subtractProduct(product.id));
-      setQuantityInput(event.target.value);
+      dispatch(
+        cartActions.changeProduct({
+          product: {
+            productId: product.productId,
+            price: product.price,
+          },
+          newQuantity: newQuantity,
+          mode: "input",
+        })
+      );
+      setQuantityInput(newQuantity);
     }
   };
 
   const onDeleteHandler = (event) => {
-    dispatch(cartActions.deleteProduct(product.id));
+    dispatch(cartActions.deleteProduct(product.productId));
   };
   return (
     <div className={classes.cart_item}>
@@ -45,14 +48,19 @@ const CartItem = ({ product }) => {
         <span>Price</span>
         <span>Quantity</span>
         <span>Summ</span>
-        <span className={classes.item_title}>{product.title}</span>
-        <span className={classes.item_price}> ${product.price}</span>
+        <span className={classes.item_title}>
+          <Link to={`/products/${product.productId}`}>{product.title}</Link>
+        </span>
+        <span className={classes.item_price}> {`\$${product.price}`}</span>
         <span className={classes.item_quantity}>
           <StyledInput
             type="number"
             name="quantity"
             value={quantityInput}
             setValue={onQuantityChange}
+            min="1"
+            max={product.maxQuantity}
+            step="1"
           />
         </span>
         <span>${(product.price * quantityInput).toFixed(2)}</span>
@@ -61,9 +69,11 @@ const CartItem = ({ product }) => {
       <Button
         type="button"
         style="plain"
-        text="&#x2715;"
         onClickHandler={onDeleteHandler}
-      />
+        width="36px"
+      >
+        &#x2715;
+      </Button>
     </div>
   );
 };

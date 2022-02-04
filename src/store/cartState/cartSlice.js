@@ -8,7 +8,6 @@ const cartSlice = createSlice({
   },
   reducers: {
     retrieveFromLocal(state, action) {
-      console.log("retrive from local is working");
       const cartLocal = localStorage.getItem("cart");
       if (cartLocal) {
         const cartParsed = JSON.parse(cartLocal);
@@ -16,32 +15,49 @@ const cartSlice = createSlice({
         state.quantityTotal = cartParsed.quantityTotal;
       }
     },
-    addProduct(state, action) {
-      const addedProduct = action.payload;
-      const cartCopy = current(state.cart).slice();
-      const prodIdx = cartCopy.findIndex((prod) => prod.id === addedProduct.id);
+    changeProduct(state, action) {
+      //retrieve info form payload
+      const { product, newQuantity, mode } = action.payload;
+
+      //find if product already exists in cart
+      const prodIdx = state.cart.findIndex((prod) => {
+        return prod.productId === product.productId;
+      });
+
+      //service variables
+      let newTotalQuantity;
+
       if (prodIdx !== -1) {
-        let editedProd = {};
-        Object.assign(editedProd, cartCopy[prodIdx]);
-        editedProd.quantity = editedProd.quantity + 1;
-        cartCopy.splice(prodIdx, 1, editedProd);
-        state.cart = cartCopy;
+        if (mode === "input") {
+          newTotalQuantity =
+            state.quantityTotal - state.cart[prodIdx].quantity + newQuantity;
+          state.cart[prodIdx] = {
+            ...state.cart[prodIdx],
+            quantity: newQuantity,
+          };
+        } else {
+          newTotalQuantity = state.quantityTotal + newQuantity;
+          state.cart[prodIdx].quantity =
+            state.cart[prodIdx].quantity + newQuantity;
+        }
+        //subtract previous quantity from totalQuantity and add a new quantity
       } else {
-        cartCopy.push({ ...addedProduct, quantity: 1 });
+        state.cart.push({ ...product, quantity: 1 });
+        newTotalQuantity = state.quantityTotal + 1;
       }
-      const newQuantity = state.quantityTotal + 1;
-      state.quantityTotal = newQuantity;
-      state.cart = cartCopy;
+      state.quantityTotal = newTotalQuantity;
       localStorage.removeItem("cart");
       localStorage.setItem(
         "cart",
-        JSON.stringify({ cart: cartCopy, quantityTotal: newQuantity })
+        JSON.stringify({ cart: state.cart, quantityTotal: newTotalQuantity })
       );
     },
     deleteProduct(state, action) {
       const delProdId = action.payload;
       const cartCopy = current(state.cart).slice();
-      const prodIdx = cartCopy.findIndex((prod) => prod.id === delProdId);
+      const prodIdx = cartCopy.findIndex(
+        (prod) => prod.productId === delProdId
+      );
       if (prodIdx !== -1) {
         const newQuantity = state.quantityTotal - cartCopy[prodIdx].quantity;
         state.quantityTotal = newQuantity;
@@ -54,35 +70,38 @@ const cartSlice = createSlice({
         );
       }
     },
-    subtractProduct(state, action) {
-      const subsProdId = action.payload;
-      const cartCopy = current(state.cart).slice();
-      const prodIdx = cartCopy.findIndex((prod) => prod.id === subsProdId);
-      if (prodIdx !== -1) {
-        let editedProd = {};
-        Object.assign(editedProd, state.cart[prodIdx]);
-        editedProd.quantity = editedProd.quantity - 1;
-        if (editedProd.quantity === 0) {
-          cartCopy.splice(prodIdx, 1);
-        } else {
-          cartCopy.splice(prodIdx, 1, editedProd);
-        }
-        const newQuantity = state.quantityTotal - 1;
-        state.quantityTotal = newQuantity;
-        state.cart = cartCopy;
-        localStorage.removeItem("cart");
-        localStorage.setItem(
-          "cart",
-          JSON.stringify({ cart: cartCopy, quantityTotal: newQuantity })
-        );
-      }
-    },
+    // subtractProduct(state, action) {
+    //   const subsProdId = action.payload;
+    //   const cartCopy = current(state.cart).slice();
+    //   const prodIdx = cartCopy.findIndex(
+    //     (prod) => prod.productId === subsProdId
+    //   );
+    //   if (prodIdx !== -1) {
+    //     let editedProd = {};
+    //     Object.assign(editedProd, state.cart[prodIdx]);
+    //     editedProd.quantity = editedProd.quantity - 1;
+    //     if (editedProd.quantity === 0) {
+    //       cartCopy.splice(prodIdx, 1);
+    //     } else {
+    //       cartCopy.splice(prodIdx, 1, editedProd);
+    //     }
+    //     const newQuantity = state.quantityTotal - 1;
+    //     state.quantityTotal = newQuantity;
+    //     state.cart = cartCopy;
+    //     localStorage.removeItem("cart");
+    //     localStorage.setItem(
+    //       "cart",
+    //       JSON.stringify({ cart: cartCopy, quantityTotal: newQuantity })
+    //     );
+    //   }
+    // },
     clearCart(state, action) {
       state.cart = [];
-      state.quantity = 0;
+      state.quantityTotal = 0;
       localStorage.removeItem("cart");
     },
   },
+  extraReducers: {},
 });
 
 export const cartActions = cartSlice.actions;

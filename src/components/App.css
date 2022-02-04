@@ -20,7 +20,7 @@ html {
   --accent-color-hover: #0099e6;
   --dark-grey: darkgrey;
   --error-color: 156, 43, 46;
-  --success-color: 0, 255, 0;
+  --success-color: rgb(25, 135, 83);
 
   /* media sizes */
   --layout-width: 960px;
@@ -68,4 +68,8 @@ table th {
 
 table tr:nth-child(odd) {
   background-color: var(--background-elem);
+}
+
+.active {
+  color: var(--accent-color-hover);
 }
