@@ -4,6 +4,7 @@ const {
   getUserByEmail,
   createUser,
   getUserById,
+  changePassword,
 } = require("../db");
 const jwt = require("jsonwebtoken");
 
@@ -75,6 +76,16 @@ usersRouter.post("/login", async (req, res, next) => {
       userId: user.id,
       isAdmin: user.isAdmin,
     });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+usersRouter.post("/password", checkUser, async (req, res, next) => {
+  const { passwordOld, passwordNew } = req.body;
+  try {
+    const result = await changePassword(passwordOld, passwordNew, req.user.id);
+    res.status(201).json({ isSuccess: result });
   } catch (error) {
     return next(error);
   }

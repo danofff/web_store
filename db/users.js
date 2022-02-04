@@ -47,9 +47,9 @@ async function createUser(
       delete user.password;
       return user;
     }
-  } catch (err) {
-    console.log(err);
-    throw err;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 async function verifyUser(email, password) {
@@ -61,9 +61,9 @@ async function verifyUser(email, password) {
       delete user.password;
       return user;
     } else return false;
-  } catch (err) {
-    console.log(err);
-    throw err;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 async function getUserByEmail(email) {
@@ -96,9 +96,44 @@ async function getUserById(id) {
     );
     delete user.password;
     return user;
-  } catch (err) {
-    console.log(err);
-    throw err;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+async function changePassword(passwordOld, passwordNew, userId) {
+  try {
+    if (passwordNew < 8 || passwordOld < 8) {
+      throw new Error("Passowrds should be at least 8 characters long");
+    }
+    const {
+      rows: [user],
+    } = await client.query(
+      `SELECT * from users
+       WHERE id=$1`,
+      [userId]
+    );
+    const hashedPassword = user.password;
+    const result = await bcrypt.compare(passwordOld, hashedPassword);
+    if (result) {
+      const newHashedPassword = await bcrypt.hash(passwordNew, SALT_COUNT);
+
+      await client.query(
+        `
+        UPDATE users
+        SET password=$1
+        WHERE id=$2
+      `,
+        [newHashedPassword, userId]
+      );
+      return true;
+    } else {
+      throw new Error("Your old password is wrong");
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 
@@ -107,4 +142,5 @@ module.exports = {
   getUserByEmail,
   getUserById,
   verifyUser,
+  changePassword,
 };
