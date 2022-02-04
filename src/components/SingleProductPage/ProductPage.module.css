@@ -2,12 +2,9 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 2rem;
-  grid-gap: 2em;
-  padding: 3rem;
-  /* border: solid 5px var(--accent-color); */
+  grid-gap: 1.5em;
   border-top-left-radius: 2%;
   border-top-right-radius: 2%;
-  background-color: var(--background-elem);
 }
 
 .img {
@@ -21,7 +18,6 @@
   height: auto;
   box-shadow: 8px 8px 20px var(--accent-color);
   border-radius: 15%;
-  background-color: transparent;
 }
 
 .title {
