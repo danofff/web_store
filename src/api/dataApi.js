@@ -173,13 +173,11 @@ export const getOrdersByUserId = async (token, userId) => {
   }
 };
 
-
 //REVIEWS API
-
-export const getReviewsByProductId = async(productId) => {
+export const getReviewsByProductId = async (productId) => {
   const response = await fetch(`${baseUrl}/reviews/${productId}`, {
-    method: 'GET',
-    headers: makeHeaders()
+    method: "GET",
+    headers: makeHeaders(),
   });
   if (response.ok) {
     return await response.json();
@@ -187,4 +185,22 @@ export const getReviewsByProductId = async(productId) => {
     const error = await response.json();
     throw new Error(error.error);
   }
-}
+};
+
+export const addReview = async (token, productId, reviewText, starRating) => {
+  const response = await fetch(`${baseUrl}/reviews`, {
+    method: "POST",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      productId,
+      reviewText,
+      starRating,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};

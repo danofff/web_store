@@ -86,7 +86,7 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "productId" INTEGER REFERENCES products(id),
       "reviewText" text,
-      "userId" INTEGER REFERENCES users(id),
+      "userId" INTEGER REFERENCES users(id) NOT NULL,
       "starRating" INTEGER,
       created_at timestamp DEFAULT now(),
       updated_at timestamp DEFAULT now(),

@@ -20,7 +20,6 @@ const ProductPage = (props) => {
       setProduct(prod);
     }
   }, [products]);
-  console.log(product);
   const handleAddClick = () => {
     dispatch(
       cartActions.changeProduct({
@@ -41,10 +40,8 @@ const ProductPage = (props) => {
       {product ? (
         <div>
           <div className={classes.container}>
-            <div className={classes.imgContainer}>
-              <div className={classes.img}>
-                <img className={classes.productImage} src={product.imageURL} />
-              </div>
+            <div className={classes.img}>
+              <img className={classes.productImage} src={product.imageURL} />
             </div>
             <div className={classes.description}>
               <div className={classes.productInfo}>
@@ -58,16 +55,16 @@ const ProductPage = (props) => {
                   <p className={classes.quantity}>
                     Left in Stock: {product.quantity}
                   </p>
+                </div>
               </div>
-                <Button
-                  type="button"
-                  style="plain"
-                  width="100%"
-                  onClickHandler={handleAddClick}
-                >
-                  Add to Cart!
-                </Button>
-              </div>
+              <Button
+                type="button"
+                style="plain"
+                width="100%"
+                onClickHandler={handleAddClick}
+              >
+                Add to Cart!
+              </Button>
             </div>
           </div>
         </div>
