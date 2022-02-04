@@ -44,4 +44,29 @@ export const registerUser = async (email, password, address, zip) => {
       zip,
     }),
   });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    console.log(error);
+    throw new Error(error.error);
+  }
+};
+
+export const changePassword = async (token, passwordOld, passwordNew) => {
+  const response = await fetch(`${baseUrl}/users/password`, {
+    method: "POST",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      passwordOld,
+      passwordNew,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    console.log(error);
+    throw new Error(error.error);
+  }
 };

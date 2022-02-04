@@ -121,9 +121,9 @@ async function deleteProduct(id) {
       [id]
     );
     return product;
-  } catch (err) {
-    console.log(err);
-    throw err;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 

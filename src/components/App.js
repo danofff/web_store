@@ -18,9 +18,10 @@ import OrderPage from "../pages/OrderPage";
 import CartPage from "../pages/CartPage";
 import ConfirmOrderPage from "../pages/ConfirmOrderPage";
 import AdminPages from "../pages/AdminPages/AdminPages";
+import ProfilePage from "../pages/ProfilePage";
+import Snackbar from "./ui/Snackbar/Snackbar";
 
 import "./App.css";
-import Snackbar from "./ui/Snackbar/Snackbar";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const App = () => {
         <Loader />
         <Header />
         <Routes>
+          {userId && <Route path="/profile" element={<ProfilePage />} />}
           <Route path="/" element={<Navigate replace to="/products" />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="products/:productId" element={<SingleProductPage />} />
