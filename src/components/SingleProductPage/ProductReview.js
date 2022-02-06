@@ -28,7 +28,7 @@ const ReviewPage = ({ productId }) => {
         .min(12, "Review text must be at least 12 characters long")
         .required("Review text is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       dispatch(
         addReviewAct(
           token,
@@ -38,6 +38,7 @@ const ReviewPage = ({ productId }) => {
           email.split("@")[0]
         )
       );
+      resetForm();
     },
   });
 
@@ -60,7 +61,7 @@ const ReviewPage = ({ productId }) => {
                 rating={formik.rating}
                 disabled={false}
                 handleOutler={setRating}
-                />
+              />
             </div>
             <Button type="submit" style="plain">
               Send review

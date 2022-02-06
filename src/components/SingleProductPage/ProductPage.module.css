@@ -51,6 +51,10 @@
   margin-bottom: 1.5rem;
 }
 
+.quantity {
+  margin-bottom: 1rem;
+}
+
 .productInfo {
   display: flex;
   flex-direction: column;

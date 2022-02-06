@@ -22,6 +22,11 @@
   border-left-width: 1rem;
 }
 
+@media (max-width: 650px) {
+  .container {
+    padding: 1rem 0;
+  }
+}
 
 /* dotted - Defines a dotted border
 dashed - Defines a dashed border

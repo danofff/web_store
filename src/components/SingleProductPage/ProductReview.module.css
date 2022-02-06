@@ -1,7 +1,13 @@
-.container{
+.container {
   padding: 1rem 3rem;
 }
 
-.starRating{
+.starRating {
   padding: 0 0 2rem 0;
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 1rem 0;
+  }
 }

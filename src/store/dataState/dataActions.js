@@ -24,7 +24,14 @@ export const getCategoriesAdminAct = (token) => {
       const response = await getCategoriesAdmin(token);
       dispatch(dataActions.setCategories(response.categories));
     } catch (error) {
-      console.log(error); //handle error here!
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -38,7 +45,14 @@ export const getCategoriesAct = (token) => {
       const response = await getCategories(token);
       dispatch(dataActions.setCategories(response.categories));
     } catch (error) {
-      console.log(error); //handle error here!
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     }
   };
 };
@@ -49,8 +63,22 @@ export const addCategoryAct = (token, title) => {
       dispatch(uiActions.setLoader(true));
       const response = await addCategory(token, title);
       dispatch(dataActions.addCategory(response.category));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Category added successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
-      console.log(error); //handle error here!
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -63,9 +91,22 @@ export const editCategoryAct = (token, categoryId, categoryData) => {
       dispatch(uiActions.setLoader(true));
       const response = await editCategory(token, categoryId, categoryData);
       dispatch(dataActions.editCategory(response.category));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Category edited successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
-      //handle error
       console.error(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -78,9 +119,23 @@ export const deleteCategoryAct = (token, categoryId) => {
       dispatch(uiActions.setLoader(true));
       const response = await deleteCategory(token, categoryId);
       dispatch(dataActions.editCategory(response.category));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Category deleted successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
       //handle error
       console.error(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -97,6 +152,13 @@ export const getProductsAct = () => {
     } catch (error) {
       //handle error here!
       console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -109,9 +171,23 @@ export const addProductAct = (token, productData) => {
       dispatch(uiActions.setLoader(true));
       const response = await addProduct(token, productData);
       dispatch(dataActions.addProduct(response.product));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Product added successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
       //handle error here
       console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -124,9 +200,23 @@ export const editProductAct = (token, productId, productData) => {
       dispatch(uiActions.setLoader(true));
       const response = await editProduct(token, productId, productData);
       dispatch(dataActions.editProduct(response.product));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Product edited successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
       // handle error here
       console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -143,6 +233,13 @@ export const getAllOrdersAct = (token) => {
     } catch (error) {
       //handle error
       console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -158,6 +255,13 @@ export const getOrderByUserIdAct = (token, userId) => {
     } catch (error) {
       //handle error
       console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -170,6 +274,13 @@ export const editOrderAct = (token, orderId, isComplete) => {
       dispatch(uiActions.setLoader(true));
       const order = await editOrder(token, orderId, isComplete);
       dispatch(dataActions.editOrder(order.order));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Order edited successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
       console.log(error);
       dispatch(
@@ -218,8 +329,18 @@ export const addReviewAct = (
       dispatch(uiActions.setLoader(true));
       const review = await addReview(token, productId, reviewText, starRating);
       dispatch(dataActions.addReview({ ...review.review, username }));
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: "Review added successfully",
+          type: "success",
+        })
+      );
     } catch (error) {
       console.log(error);
+      if (error.message.includes("duplicate key value")) {
+        error.message = "You've already left a review for this product";
+      }
       dispatch(
         uiActions.setSnackbar({
           isActive: true,
