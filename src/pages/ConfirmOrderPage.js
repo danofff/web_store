@@ -94,13 +94,18 @@ const ConfirmOrderPage = (props) => {
           console.log(error);
           //handle error here
           //show snackbar with error
+          uiActions.setSnackbar({
+            isActive: true,
+            type: "error",
+            text: error.message,
+          });
         });
     },
     enableReinitialize: true,
   });
 
   return (
-    <div>
+    <div className={classes.main}>
       <h1 className="title">Confirm order</h1>
       <Button type="button" style="plain" onClickHandler={onToCartHandler}>
         ← Cart

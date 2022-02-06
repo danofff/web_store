@@ -1,0 +1,10 @@
+.main {
+  margin-top: 2rem;
+}
+
+.main h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  color: var(--dark-grey);
+}

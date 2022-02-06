@@ -1,7 +1,7 @@
 .form_control {
   width: 100%;
   position: relative;
-  height: 6.7rem;
+  height: 5.5rem;
   margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
@@ -56,11 +56,12 @@ textarea.input {
   color: rgb(var(--error-color));
 }
 
-@media (max-width: 400px) {
+@media (max-width: 570px) {
   .form_control {
-    height: 5rem;
     margin-bottom: 0.25rem;
+    height: 6.2rem;
   }
+
   .label {
     font-size: 1rem;
   }

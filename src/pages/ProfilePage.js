@@ -5,6 +5,7 @@ import ProfileChangeAddress from "../components/ProfileChangeAddress/ProfileChan
 import { useSelector } from "react-redux";
 
 import classes from "./ProfilePage.module.css";
+import ProfileReviews from "../components/ProfileReviews/ProfileReviews";
 
 const ProfilePage = (props) => {
   const { email } = useSelector((state) => state.user);
@@ -16,8 +17,9 @@ const ProfilePage = (props) => {
         <ProfileChangePassword />
         {/* Profile change user data */}
         <ProfileChangeAddress />
-        {/* Profile user Reviews */}
       </div>
+      {/* Profile user Reviews */}
+      <ProfileReviews />
     </section>
   );
 };

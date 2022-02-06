@@ -6,8 +6,8 @@ async function getAllProducts() {
           SELECT products.*
           FROM products
           JOIN categories on products."categoryId" = categories.id
-          WHERE products."isActive"=TRUE AND categories."isActive"=TRUE;
-      `);
+          WHERE products."isActive"=TRUE AND categories."isActive"=TRUE AND products.quantity > 0;
+          `);
     return products;
   } catch (error) {
     throw error;
@@ -23,6 +23,7 @@ async function getAllProductsAdmin() {
     throw error;
   }
 }
+
 async function getProductById(id) {
   try {
     const {

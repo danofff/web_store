@@ -3,6 +3,7 @@ const checkIsUserAdmin = require("../middleware/checkIsUserAdmin");
 const productsRouter = express.Router();
 const {
   getAllProducts,
+  getAllProductsAdmin,
   createProduct,
   getProductById,
   updateProduct,
@@ -14,6 +15,17 @@ const {
 productsRouter.get("/", async (req, res, next) => {
   try {
     let activeProducts = await getAllProducts();
+    res.status(200).json({ products: activeProducts });
+  } catch (error) {
+    console.log(error);
+    error.message = "Sorry, but we cannot get the products";
+    return next(error);
+  }
+});
+
+productsRouter.get("/admin", checkIsUserAdmin, async (req, res, next) => {
+  try {
+    let activeProducts = await getAllProductsAdmin();
     res.status(200).json({ products: activeProducts });
   } catch (error) {
     console.log(error);
@@ -77,7 +89,8 @@ productsRouter.patch(
   checkIsUserAdmin,
   async (req, res, next) => {
     const { productId } = req.params;
-    const { title, description, price, quantity, imageURL } = req.body;
+    const { title, description, price, quantity, imageURL, isActive } =
+      req.body;
     try {
       const product = await getProductById(productId);
       if (!product) {
@@ -90,6 +103,7 @@ productsRouter.patch(
         price,
         quantity,
         imageURL,
+        isActive,
       });
       res.status(200).json({ product: updatedProduct });
     } catch (error) {
@@ -117,5 +131,3 @@ productsRouter.delete(
 );
 
 module.exports = productsRouter;
-
-

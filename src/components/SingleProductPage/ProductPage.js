@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { cartActions } from "../../store/cartState/cartSlice";
 import Button from "../ui/Button/Button";
-import StyledInput from "../ui/StyledInput/StyledInput";
 import StarRating from "../ui/StarRating/StarRating";
 
 import classes from "./ProductPage.module.css";
@@ -69,7 +68,9 @@ const ProductPage = (props) => {
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className={classes.unavailable}>
+          Sorry, product temporarily unavailable
+        </p>
       )}
     </React.Fragment>
   );

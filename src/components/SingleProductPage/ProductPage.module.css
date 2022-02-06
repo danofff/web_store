@@ -67,6 +67,12 @@
   grid-template-rows: repeat(3, 1fr);
 }
 
+.unavailable {
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--dark-grey);
+}
+
 @media (max-width: 650px) {
   .container {
     grid-template-columns: 100%;

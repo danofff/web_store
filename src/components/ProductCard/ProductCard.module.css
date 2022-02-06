@@ -10,6 +10,7 @@
   margin: 4px;
   color: var(--font-color);
   padding: 1rem;
+  position: relative;
 }
 .productImage {
   margin: 10px;
@@ -116,4 +117,35 @@
 .i2 {
   border-top: 4px solid #3a3a3a;
   border-left: 4px solid #3a3a3a;
+}
+
+.edit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.edit a {
+  text-decoration: none;
+  color: var(--font-color);
+  background-color: var(--accent-color);
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.1s ease-in-out;
+}
+
+.edit a:hover {
+  background-color: var(--accent-color-hover);
+}
+
+.is_active {
+  position: absolute;
+  top: 10px;
+  color: var(--dark-grey);
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
