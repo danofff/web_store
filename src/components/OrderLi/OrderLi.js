@@ -1,13 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { editOrderAct } from "../../store/dataState/dataActions";
 
 import Button from "../ui/Button/Button";
 
 import classes from "./OrderLi.module.css";
 
 const OrderLi = ({ order }) => {
-  const isAdmin = useSelector((state) => state.user.isAdmin);
+  const { isAdmin, token } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const date = new Date(order.created_at);
   const dateStr = date.toLocaleDateString("en-US", {
     weekday: "short",
@@ -17,6 +20,12 @@ const OrderLi = ({ order }) => {
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  const onEditHandler = (event) => {
+    //dispatch order edit
+    dispatch(editOrderAct(token, order.id, !order.isComplete));
+  };
+
   return (
     <tr>
       <td>
@@ -25,13 +34,20 @@ const OrderLi = ({ order }) => {
         </Link>
       </td>
       <td>{dateStr}</td>
-      <td className={classes.status}>
-        <span>{order.isComplete ? "YES" : "NO"}</span>
-        {isAdmin && (
-          <Button type="button" style="outlined" size="small">
-            {order.isComplete ? "✕" : "✔"}
-          </Button>
-        )}
+      <td>
+        <div className={classes.status}>
+          <span>{order.isComplete ? "YES" : "NO"}</span>
+          {isAdmin && (
+            <Button
+              type="button"
+              style="outlined"
+              size="small"
+              onClickHandler={onEditHandler}
+            >
+              {order.isComplete ? "✕" : "✔"}
+            </Button>
+          )}
+        </div>
       </td>
       <td>{order.deliveryAddress}</td>
       <td>{order.phone}</td>

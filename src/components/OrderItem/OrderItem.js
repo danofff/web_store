@@ -24,7 +24,9 @@ const OrderItem = ({ order }) => {
           return <OrderProduct product={product} key={product.id} />;
         })}
       </div>
-      <div className={classes.order_total}>TOTAL: ${order.orderSum}</div>
+      <div className={classes.order_total}>
+        TOTAL: ${(Math.round(order.orderSum * 100) / 100).toFixed(2)}
+      </div>
       {/* navigate back or to /admin/orders, /orders */}
       <Button
         type="button"

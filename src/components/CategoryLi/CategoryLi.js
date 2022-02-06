@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCategoryAct,
   editCategoryAct,
-} from "../../store/dataSlice/dataActions";
+} from "../../store/dataState/dataActions";
 import classes from "./CategoryLi.module.css";
 
 const CategoryLi = ({ category }) => {

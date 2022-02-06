@@ -37,6 +37,10 @@ const userSlice = createSlice({
     setUserData(state, action) {
       state.userData = action.payload;
     },
+    updateUserData(state, action) {
+      state.userData.adress = action.payload.address;
+      state.userData.zip = action.payload.zip;
+    },
   },
 });
 

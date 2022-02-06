@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OrderLi from "../components/OrderLi/OrderLi";
 
-import { getOrderByUserIdAct } from "../store/dataSlice/dataActions";
+import { getOrderByUserIdAct } from "../store/dataState/dataActions";
 import classes from "./OrdersPage.module.css";
 
 const OrdersPage = () => {
@@ -15,7 +15,7 @@ const OrdersPage = () => {
   }, [dispatch]);
 
   return (
-    <section>
+    <section className={classes.main}>
       <h1 className="title">Orders</h1>
       {orders.length > 0 ? (
         <div className={classes.container}>

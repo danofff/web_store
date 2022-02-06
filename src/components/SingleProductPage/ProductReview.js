@@ -7,9 +7,9 @@ import FormControl from "../ui/FormControl/FormControl";
 import Button from "../ui/Button/Button";
 import StarRating from "../ui/StarRating/StarRating";
 import ReviewItem from "../ReviewItem/ReviewItem";
+import { addReviewAct } from "../../store/dataState/dataActions";
 
 import classes from "./ProductReview.module.css";
-import { addReviewAct } from "../../store/dataSlice/dataActions";
 
 const ReviewPage = ({ productId }) => {
   const reviews = useSelector((state) => state.data.reviews);

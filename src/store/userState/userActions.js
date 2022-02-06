@@ -1,6 +1,11 @@
-import { getUserById, loginUser, registerUser } from "../../api/userApi";
+import {
+  changeAddress,
+  getUserById,
+  loginUser,
+  registerUser,
+} from "../../api/userApi";
 import { userActions } from "./userSlice";
-import { uiActions } from "../uiSlice/uiSlice";
+import { uiActions } from "../uiState/uiSlice";
 
 export const getUserByIdAct = (token, userId) => {
   return async (dispatch) => {
@@ -11,6 +16,13 @@ export const getUserByIdAct = (token, userId) => {
     } catch (error) {
       //handle error
       console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }
@@ -43,12 +55,39 @@ export const loginUserAct = (email, password) => {
 export const registerUserAct = (email, password, address, zip) => {
   return async (dispatch) => {
     try {
-      uiActions.setLoader(true);
+      dispatch(uiActions.setLoader(true));
       await registerUser(email, password, address, zip);
       return true;
     } catch (error) {
       console.log(error);
-      //handle error
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
+    } finally {
+      uiActions.setLoader(false);
+    }
+  };
+};
+
+export const editUserAddressAct = (token, address, zip) => {
+  return async (dispatch) => {
+    try {
+      uiActions.setLoader(true);
+      const user = await changeAddress(token, address, zip);
+      return true;
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
     } finally {
       uiActions.setLoader(false);
     }

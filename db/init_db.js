@@ -86,7 +86,7 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "productId" INTEGER REFERENCES products(id),
       "reviewText" text,
-      "userId" INTEGER REFERENCES users(id) NOT NULL,
+      "userId" INTEGER REFERENCES users(id),
       "starRating" INTEGER,
       created_at timestamp DEFAULT now(),
       updated_at timestamp DEFAULT now(),
@@ -116,27 +116,27 @@ async function populateInitialData() {
     const u1 = await createUser(
       "test@test.com",
       "testtest",
-      " 3355 Test St Testerville, TS",
-      "test",
+      "3355 Test St Testerville, TS",
+      "00000",
       true
     );
     const u2 = await createUser(
       "collin@test.com",
       "collintest",
       "33 Elm st Collin City, CF",
-      "6660"
+      "66600"
     );
     const u3 = await createUser(
       "danylo@test.com",
       "danylotest",
       "44 Marple st Danylo City, DV",
-      "9990"
+      "99900"
     );
     const u4 = await createUser(
       "thomas@test.com",
       "thomastest",
       "55 Oak st Thomas City, TK",
-      "3330"
+      "33300"
     );
     console.log("created users ------->", u1, u2, u3, u4);
     console.log("finished creating users");
@@ -291,7 +291,7 @@ async function populateInitialData() {
       2
     );
     const r4 = await createReview(
-      7,
+      4,
       2,
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, incidunt.",
       5

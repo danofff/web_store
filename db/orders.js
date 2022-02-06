@@ -1,11 +1,12 @@
 const { createOrderProductMultiple } = require("./order_products");
-const { getProductById } = require("./products");
+const { getProductById, updateProduct } = require("./products");
 const client = require("./client");
 
 async function getAllOrders() {
   try {
     const { rows: orders } = await client.query(`
-        SELECT * FROM orders;
+        SELECT * FROM orders
+        ORDER BY created_at ASC
       `);
     return orders;
   } catch (error) {
@@ -64,6 +65,14 @@ async function createOrder(cart, userId, email, phone, address, fullname) {
         "Dude, dont be greedy! We dont have that many products in stock"
       );
     }
+
+    //update quantity of product in storage
+    await updateProduct({
+      id: prod.productId,
+      quantity: product.quantity - prod.quantity,
+    });
+
+    //create mapped object
     const mappedProduct = {
       productId: product.productId,
       price: product.price,
@@ -101,9 +110,29 @@ async function createOrder(cart, userId, email, phone, address, fullname) {
   }
 }
 
+async function updateOrder(orderId, status) {
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+    UPDATE orders
+    SET "isComplete" = $1
+    WHERE id = $2
+    RETURNING*
+  `,
+      [status, orderId]
+    );
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getAllOrders,
   createOrder,
   getOrdersByUserId,
   getOrderById,
+  updateOrder,
 };

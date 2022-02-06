@@ -55,11 +55,29 @@ export const registerUser = async (email, password, address, zip) => {
 
 export const changePassword = async (token, passwordOld, passwordNew) => {
   const response = await fetch(`${baseUrl}/users/password`, {
-    method: "POST",
+    method: "PATCH",
     headers: makeHeaders(token),
     body: JSON.stringify({
       passwordOld,
       passwordNew,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    console.log(error);
+    throw new Error(error.error);
+  }
+};
+
+export const changeAddress = async (token, address, zip) => {
+  const response = await fetch(`${baseUrl}/users/address`, {
+    method: "PATCH",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      address,
+      zip,
     }),
   });
   if (response.ok) {

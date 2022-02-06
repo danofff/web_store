@@ -71,5 +71,11 @@ table tr:nth-child(odd) {
 }
 
 .active {
-  color: var(--accent-color-hover);
+  color: var(--accent-color-hover) !important;
+}
+
+@media (max-width: 600px) {
+  h1.title {
+    font-size: 2.25rem;
+  }
 }

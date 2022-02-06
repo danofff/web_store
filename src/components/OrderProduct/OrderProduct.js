@@ -15,13 +15,16 @@ const OrderProduct = ({ product }) => {
         <div className={classes.product_table}>
           <div className={`${classes.product_col}`}>
             <span>Price</span>
-            <span>${product.price}</span>
+            <span>{`\$${product.price}`}</span>
           </div>
           <div className={`${classes.product_col}`}>
             <span>Quantity </span> <span>{product.quantity}</span>
           </div>
           <div className={`${classes.product_col}`}>
-            <span>Product Total</span> <span>${product.sum}</span>
+            <span>Product Total</span>{" "}
+            <span>{`\$${(Math.round(product.sum * 100) / 100).toFixed(
+              2
+            )}`}</span>
           </div>
         </div>
       </div>

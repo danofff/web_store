@@ -5,9 +5,9 @@ import * as Yup from "yup";
 
 import FormControl from "../ui/FormControl/FormControl";
 import Button from "../ui/Button/Button";
+import ProfileFormsWrapper from "../ui/ProfileFormsWrapper/ProfileFormsWrapper";
 import { changePassword } from "../../api/userApi";
-import { uiActions } from "../../store/uiSlice/uiSlice";
-import classes from "./ProfileChangePassword.module.css";
+import { uiActions } from "../../store/uiState/uiSlice";
 
 const ProfileChangePassword = () => {
   const token = useSelector((state) => state.user.token);
@@ -59,7 +59,7 @@ const ProfileChangePassword = () => {
     enableReinitialize: true,
   });
   return (
-    <div>
+    <ProfileFormsWrapper titleText="change password">
       <form onSubmit={formik.handleSubmit}>
         <FormControl
           label="Old password"
@@ -68,6 +68,7 @@ const ProfileChangePassword = () => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           formik={formik}
+          isRequired={true}
         />
         <FormControl
           label="New password"
@@ -76,6 +77,7 @@ const ProfileChangePassword = () => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           formik={formik}
+          isRequired={true}
         />
         <FormControl
           label="Password confirmation"
@@ -84,12 +86,13 @@ const ProfileChangePassword = () => {
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           formik={formik}
+          isRequired={true}
         />
         <Button type="submit" style="plain">
           Change password
         </Button>
       </form>
-    </div>
+    </ProfileFormsWrapper>
   );
 };
 

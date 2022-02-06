@@ -27,7 +27,10 @@ const SignupForm = (props) => {
       passwordConfirmation: Yup.string()
         .oneOf([Yup.ref("password")], "Passwords must match")
         .required("Password confirmation is required field"),
-      address: Yup.string(),
+      address: Yup.string().min(
+        5,
+        "Address must be at least 5 characters long"
+      ),
       zip: Yup.string().matches(
         /^\d{5}(-\d{4})?$/,
         "Zip code could contain only digits. Use 00000 or 00000-0000 pattern"

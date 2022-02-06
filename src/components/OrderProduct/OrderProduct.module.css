@@ -50,6 +50,8 @@
   color: var(--accent-color);
   text-decoration: none;
   text-align: center;
+  display: inline-block;
+  text-align: center;
 }
 
 .product_title a:hover {

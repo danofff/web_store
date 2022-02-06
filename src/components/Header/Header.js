@@ -11,7 +11,6 @@ const Header = () => {
   const { userId, isAdmin } = useSelector((state) => state.user);
   const { quantityTotal } = useSelector((state) => state.cart);
 
-
   const [isCartBouncing, setIsCartBouncing] = useState(false);
 
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ const Header = () => {
     dispatch(userActions.logoutUser());
   };
 
-
   return (
     <header className={classes.header}>
       <div className={classes.image}>
@@ -42,13 +40,8 @@ const Header = () => {
         {/* there are things that need to be accessible to anyone and things that should
             be accessible to a specific group(aka admin, logged in user) */}
         {isAdmin && (
-          <NavLink className={classes.navbar_links} to="/admin/categories">
-            Categories
-          </NavLink>
-        )}
-        {isAdmin && (
-          <NavLink className={classes.navbar_links} to="/admin/orders">
-            All Orders
+          <NavLink className={classes.navbar_links} to="/admin">
+            Admin
           </NavLink>
         )}
         <NavLink className={classes.navbar_links} to="/products">
@@ -67,6 +60,11 @@ const Header = () => {
         {userId && (
           <NavLink className={classes.navbar_links} to="/orders">
             Orders
+          </NavLink>
+        )}
+        {userId && (
+          <NavLink className={classes.navbar_links} to="/profile">
+            Profile
           </NavLink>
         )}
         <NavLink className={classes.navbar_links} to="/cart">

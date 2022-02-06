@@ -1,0 +1,28 @@
+.container {
+  flex-basis: 400px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  border: 2px solid var(--dark-grey);
+  border-radius: 0.5rem;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-transform: uppercase;
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  padding: 0 0.5rem;
+  background-color: var(--background-color);
+  color: var(--dark-grey);
+  white-space: nowrap;
+}

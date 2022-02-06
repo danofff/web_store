@@ -5,6 +5,7 @@ const {
   getOrderProductsByOrderId,
   getOrdersByUserId,
   getOrderById,
+  updateOrder,
 } = require("../db/");
 const checkUser = require("../middleware/checkUser");
 const checkIsUserAdmin = require("../middleware/checkIsUserAdmin");
@@ -82,6 +83,18 @@ orderRouter.post("/", async (req, res, next) => {
     next(error);
   }
 });
-//need a delete and update order routes?
+
+//need  and update order route
+orderRouter.patch("/:orderId", checkIsUserAdmin, async (req, res, next) => {
+  const { orderId } = req.params;
+  const { isComplete } = req.body;
+
+  try {
+    const order = await updateOrder(orderId, isComplete);
+    return res.status(200).json({ order });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = orderRouter;

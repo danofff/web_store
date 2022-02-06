@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import {
   getCategoriesAdminAct,
   addCategoryAct,
-} from "../../store/dataSlice/dataActions";
+} from "../../store/dataState/dataActions";
 import CategoryLi from "../../components/CategoryLi/CategoryLi";
 import Button from "../../components/ui/Button/Button";
 import StyledInput from "../../components/ui/StyledInput/StyledInput";
