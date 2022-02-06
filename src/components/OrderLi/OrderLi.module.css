@@ -1,3 +1,8 @@
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .status button {
   margin-left: 0.5rem;
 }

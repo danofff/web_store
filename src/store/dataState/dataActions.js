@@ -11,9 +11,10 @@ import {
   getOrdersByUserId,
   getReviewsByProductId,
   addReview,
+  editOrder,
 } from "../../api/dataApi";
 import { dataActions } from "./dataSlice";
-import { uiActions } from "../uiSlice/uiSlice";
+import { uiActions } from "../uiState/uiSlice";
 
 /*****CATEGORIES ACTIONS****/
 export const getCategoriesAdminAct = (token) => {
@@ -157,6 +158,27 @@ export const getOrderByUserIdAct = (token, userId) => {
     } catch (error) {
       //handle error
       console.log(error);
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+
+export const editOrderAct = (token, orderId, isComplete) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const order = await editOrder(token, orderId, isComplete);
+      dispatch(dataActions.editOrder(order.order));
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
     } finally {
       dispatch(uiActions.setLoader(false));
     }

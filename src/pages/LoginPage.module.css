@@ -1,3 +1,7 @@
+.main {
+  margin: 3rem auto;
+}
+
 .form_container {
   max-width: 600px;
   width: 95%;

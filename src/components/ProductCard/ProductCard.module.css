@@ -1,123 +1,119 @@
-.productCard{
-    width: 32%;
-    height: 350px;    
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    margin: 4px;
-    color: white;
+.productCard {
+  width: 32%;
+  height: 350px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin: 4px;
+  color: var(--font-color);
+  padding: 1rem;
 }
-.productImage{
-    margin: 10px;
-    height: 100px;
-    width: 100px;
-    border-radius: 15%;
+.productImage {
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+  border-radius: 15%;
 }
-.title{
-    margin: 10px;
-    font-size: 24pt;
-    height: 2em;
-    color:blanchedalmond;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #3a3a3a;
-    display: flex;
-    align-items: center;
+.title {
+  margin: 10px;
+  font-size: 24pt;
+  height: 2em;
+  color: blanchedalmond;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #3a3a3a;
+  display: flex;
+  align-items: center;
 }
-.infoBox{
-    width: 100%;
+.infoBox {
+  width: 100%;
 }
-.priceLine{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    color: rgba(245, 245, 245, 0.897);
+.priceLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: rgba(245, 245, 245, 0.897);
 }
-.price{
-    width: 50%;
-    font-size: 18pt;
+.price {
+  text-align: center;
+  display: inline-block;
+  font-size: 18pt;
 }
-.starRating{
-    width: 50%;
+.starRating {
+  display: flex;
+  justify-content: flex-end;
+  transform: translateX(18px);
 }
-.buttonLine{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.buttonLine {
+  display: flex;
+  justify-content: space-between;
 }
-.learnMoreButtonBox{
-    width: 50%;
+
+.a {
+  border-right: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
 }
-.addToCartButtonBox{
-    width: 50%;
-    flex-grow: 1;
+.a1 {
+  border-right: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
+  border-left: 4px solid #3a3a3a;
 }
-.a{
-    border-right: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
+.a2 {
+  border-right: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
 }
-.a1{
-    border-right: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
-    border-left: 4px solid #3a3a3a;
+.b {
+  border-right: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
+  border-left: 4px solid #3a3a3a;
 }
-.a2{
-    border-right: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
+.b2 {
+  border-left: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
 }
-.b{
-    border-right: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
-    border-left: 4px solid #3a3a3a;
+.c {
+  border-bottom: 4px solid #3a3a3a;
+  border-left: 4px solid #3a3a3a;
 }
-.b2{
-    border-left: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
+.d {
+  border-top: 4px solid #3a3a3a;
+  border-right: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
 }
-.c{
-    border-bottom: 4px solid #3a3a3a;
-    border-left: 4px solid #3a3a3a;
+.e {
+  border: 4px solid #3a3a3a;
 }
-.d{
-    border-top: 4px solid #3a3a3a;
-    border-right: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
+.f {
+  border-top: 4px solid #3a3a3a;
+  border-left: 4px solid #3a3a3a;
+  border-bottom: 4px solid #3a3a3a;
 }
-.e{
-    border: 4px solid #3a3a3a;
+.g {
+  border-top: 4px solid #3a3a3a;
+  border-right: 4px solid #3a3a3a;
 }
-.f{
-    border-top: 4px solid #3a3a3a;
-    border-left: 4px solid #3a3a3a;
-    border-bottom: 4px solid #3a3a3a;
+.g2 {
+  border-top: 4px solid #3a3a3a;
+  border-right: 4px solid #3a3a3a;
 }
-.g{
-    border-top: 4px solid #3a3a3a;
-    border-right: 4px solid #3a3a3a;
+.h {
+  border-left: 4px solid #3a3a3a;
+  border-top: 4px solid #3a3a3a;
+  border-right: 4px solid #3a3a3a;
 }
-.g2{
-    border-top: 4px solid #3a3a3a;
-    border-right: 4px solid #3a3a3a;
+.h1 {
+  border-left: 4px solid #3a3a3a;
+  border-top: 4px solid #3a3a3a;
+  border-right: 4px solid #3a3a3a;
 }
-.h{
-    border-left: 4px solid #3a3a3a;
-    border-top: 4px solid #3a3a3a;
-    border-right: 4px solid #3a3a3a;
+.i {
+  border-top: 4px solid #3a3a3a;
+  border-left: 4px solid #3a3a3a;
 }
-.h1{
-    border-left: 4px solid #3a3a3a;
-    border-top: 4px solid #3a3a3a;
-    border-right: 4px solid #3a3a3a;
-}
-.i{
-    border-top: 4px solid #3a3a3a;
-    border-left: 4px solid #3a3a3a;
-}
-.i2{
-    border-top: 4px solid #3a3a3a;
-    border-left: 4px solid #3a3a3a;
+.i2 {
+  border-top: 4px solid #3a3a3a;
+  border-left: 4px solid #3a3a3a;
 }

@@ -37,6 +37,14 @@ const dataSlice = createSlice({
     setAllOrders(state, action) {
       state.orders = action.payload;
     },
+    editOrder(state, action) {
+      const order = action.payload;
+      const editedOrderIdx = state.orders.findIndex(
+        (ord) => ord.id === +order.id
+      );
+      state.orders[editedOrderIdx].isComplete = order.isComplete;
+    },
+
     //reviews
     setAllReviews(state, action) {
       state.reviews = action.payload;

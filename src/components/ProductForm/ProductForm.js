@@ -10,7 +10,7 @@ import {
   addProductAct,
   editProductAct,
   getCategoriesAdminAct,
-} from "../../store/dataSlice/dataActions";
+} from "../../store/dataState/dataActions";
 
 import classes from "./ProductForm.module.css";
 import { getProductById } from "../../api/dataApi";

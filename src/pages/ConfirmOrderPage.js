@@ -5,13 +5,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { getUserByIdAct } from "../store/userState/userActions";
-import { addOrder } from "../api/cartApi";
+import { uiActions } from "../store/uiState/uiSlice";
 import { cartActions } from "../store/cartState/cartSlice";
+import { addOrder } from "../api/cartApi";
 import Button from "../components/ui/Button/Button";
 import FormControl from "../components/ui/FormControl/FormControl";
 
 import classes from "./ConfirmOrderPage.module.css";
-import { uiActions } from "../store/uiSlice/uiSlice";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -160,7 +160,7 @@ const ConfirmOrderPage = (props) => {
             formik={formik}
           />
           <p className={classes.total_sum}>
-            TOTAL ORDER SUMM:{" "}
+            TOTAL:{" "}
             {`\$${
               Math.round(
                 cart.reduce((acc, item) => {

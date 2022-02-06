@@ -3,8 +3,10 @@ const client = require("./client");
 async function getAllProducts() {
   try {
     const { rows: products } = await client.query(`
-          SELECT * FROM products
-          WHERE "isActive"=true;
+          SELECT products.*
+          FROM products
+          JOIN categories on products."categoryId" = categories.id
+          WHERE products."isActive"=TRUE AND categories."isActive"=TRUE;
       `);
     return products;
   } catch (error) {

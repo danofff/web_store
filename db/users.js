@@ -137,10 +137,30 @@ async function changePassword(passwordOld, passwordNew, userId) {
   }
 }
 
+async function changeAddress(userId, address, zip) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      UPDATE users
+      SET address=$1, zip=$2
+      WHERE id=$3
+      RETURNING*
+    `,
+      [address, zip, userId]
+    );
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
   getUserByEmail,
   getUserById,
   verifyUser,
   changePassword,
+  changeAddress,
 };

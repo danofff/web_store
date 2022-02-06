@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { uiActions } from "../../../store/uiSlice/uiSlice";
+import { uiActions } from "../../../store/uiState/uiSlice";
 import Container from "../Container/Container";
 
 import classes from "./Snackbar.module.css";

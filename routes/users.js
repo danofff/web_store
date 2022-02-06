@@ -5,6 +5,7 @@ const {
   createUser,
   getUserById,
   changePassword,
+  changeAddress,
 } = require("../db");
 const jwt = require("jsonwebtoken");
 
@@ -81,11 +82,29 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.post("/password", checkUser, async (req, res, next) => {
+//change user password
+usersRouter.patch("/password", checkUser, async (req, res, next) => {
   const { passwordOld, passwordNew } = req.body;
   try {
     const result = await changePassword(passwordOld, passwordNew, req.user.id);
     res.status(201).json({ isSuccess: result });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+//change user address
+usersRouter.patch("/address", checkUser, async (req, res, next) => {
+  const { address, zip } = req.body;
+  try {
+    if (!address || address.length === 0) {
+      throw new Error("Address must not be empty");
+    }
+    if (!zip || zip.length === 0) {
+      throw new Error("Zip must not be empty");
+    }
+    const result = await changeAddress(req.user.id, address, zip);
+    return result;
   } catch (error) {
     return next(error);
   }

@@ -173,6 +173,22 @@ export const getOrdersByUserId = async (token, userId) => {
   }
 };
 
+export const editOrder = async (token, orderId, isComplete) => {
+  const response = await fetch(`${baseUrl}/orders/${orderId}`, {
+    method: "PATCH",
+    headers: makeHeaders(token),
+    body: JSON.stringify({
+      isComplete,
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
 //REVIEWS API
 export const getReviewsByProductId = async (productId) => {
   const response = await fetch(`${baseUrl}/reviews/${productId}`, {
