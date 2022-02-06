@@ -2,7 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-import { getProductsAct } from "../store/dataState/dataActions";
+import {
+  getProductsAct,
+  getProductsAdminAct,
+} from "../store/dataState/dataActions";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ProductPageMenuBar from "../components/ProductPageMenuBar/ProductPageMenuBar";
 import Button from "../components/ui/Button/Button";
@@ -12,6 +15,7 @@ import classes from "./ProductsPage.module.css";
 const ProductsPage = (props) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.data.products);
+  const { isAdmin, token } = useSelector((state) => state.user);
   const [sortCategories, setSortCategories] = useState({ categories: null });
   const [sortPriority, setSortPriority] = useState({
     category: null,
@@ -20,8 +24,12 @@ const ProductsPage = (props) => {
   let sortedProducts = [];
   let border = "";
   useEffect(() => {
-    dispatch(getProductsAct());
-  }, []);
+    if (isAdmin) {
+      dispatch(getProductsAdminAct(token));
+    } else {
+      dispatch(getProductsAct());
+    }
+  }, [isAdmin]);
   let handleClearAllFilters = (e) => {
     e.preventDefault();
     setSortCategories({ categories: null });

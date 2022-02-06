@@ -2,6 +2,7 @@ import {
   getCategories,
   getCategoriesAdmin,
   getProducts,
+  getProductsAdmin,
   getAllOrders,
   editCategory,
   deleteCategory,
@@ -10,6 +11,7 @@ import {
   editProduct,
   getOrdersByUserId,
   getReviewsByProductId,
+  getReviewsByUserId,
   addReview,
   editOrder,
 } from "../../api/dataApi";
@@ -164,6 +166,27 @@ export const getProductsAct = () => {
     }
   };
 };
+export const getProductsAdminAct = (token) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const response = await getProductsAdmin(token);
+      dispatch(dataActions.setProducts(response.products));
+    } catch (error) {
+      //handle error here!
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          text: error.message,
+          type: "error",
+        })
+      );
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
 
 export const addProductAct = (token, productData) => {
   return async (dispatch) => {
@@ -302,6 +325,26 @@ export const getReviewsByProductIdAct = (productId) => {
     try {
       dispatch(uiActions.setLoader(true));
       const reviews = await getReviewsByProductId(productId);
+      dispatch(dataActions.setAllReviews(reviews));
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setSnackbar({
+          isActive: true,
+          type: "error",
+          text: error.message,
+        })
+      );
+    } finally {
+      dispatch(uiActions.setLoader(false));
+    }
+  };
+};
+export const getReviewsByUserIdAct = (token) => {
+  return async (dispatch) => {
+    try {
+      dispatch(uiActions.setLoader(true));
+      const reviews = await getReviewsByUserId(token);
       dispatch(dataActions.setAllReviews(reviews));
     } catch (error) {
       console.log(error);

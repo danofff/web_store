@@ -2,3 +2,14 @@
   display: flex;
   flex-direction: column;
 }
+
+.is_active {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.is_active input {
+  margin-right: 0.75rem;
+}

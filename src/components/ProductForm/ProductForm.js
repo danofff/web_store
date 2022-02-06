@@ -14,6 +14,7 @@ import {
 
 import classes from "./ProductForm.module.css";
 import { getProductById } from "../../api/dataApi";
+import { uiActions } from "../../store/uiState/uiSlice";
 
 const ProductForm = ({ mode = "add", productId = null }) => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const ProductForm = ({ mode = "add", productId = null }) => {
     price: 0,
     quantity: 0,
     imageURL: "",
+    isActiveProduct: false,
   });
   const [categoryId, setCategoryId] = useState(1);
 
@@ -41,12 +43,20 @@ const ProductForm = ({ mode = "add", productId = null }) => {
             imageURL: product.imageURL,
             price: product.price,
             quantity: product.quantity,
+            isActiveProduct: product.isActive,
           });
           setCategoryId(parseInt(product.categoryId));
         })
         .catch((error) => {
           console.log(error);
           //handle error
+          dispatch(
+            uiActions.setSnackbar({
+              isActive: true,
+              error: error.message,
+              type: "error",
+            })
+          );
         });
     }
   }, [dispatch]);
@@ -69,6 +79,7 @@ const ProductForm = ({ mode = "add", productId = null }) => {
         price: values.price,
         quantity: values.quantity,
         categoryId,
+        isActive: product.isActiveProduct,
       };
       if (mode === "add") {
         dispatch(addProductAct(token, productData));
@@ -83,6 +94,7 @@ const ProductForm = ({ mode = "add", productId = null }) => {
     .map((cat) => {
       return { value: cat.id, name: cat.title };
     });
+
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
       <FormControl
@@ -143,6 +155,24 @@ const ProductForm = ({ mode = "add", productId = null }) => {
         handleBlur={formik.handleBlur}
         formik={formik}
       />
+      {mode === "edit" && (
+        <div className={classes.is_active}>
+          <input
+            type="checkbox"
+            checked={product.isActiveProduct}
+            onChange={(e) => {
+              setProduct((prevState) => {
+                return {
+                  ...prevState,
+                  isActiveProduct: !prevState.isActiveProduct,
+                };
+              });
+            }}
+          />
+          <label>Is Active Product</label>
+        </div>
+      )}
+
       <Button type="submit" style="plain">
         {mode === "add" ? "Add product" : "Edit product"}
       </Button>

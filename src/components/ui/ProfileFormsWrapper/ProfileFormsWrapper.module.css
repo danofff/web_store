@@ -1,12 +1,10 @@
 .container {
-  flex-basis: 400px;
-  max-width: 500px;
-  margin: 0 auto;
+  flex-basis: 600px;
+  margin: 1.75rem auto;
   padding: 1.25rem;
   border: 2px solid var(--dark-grey);
   border-radius: 0.5rem;
   position: relative;
-  margin-bottom: 1.5rem;
 }
 
 .container form {

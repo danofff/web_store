@@ -2,21 +2,35 @@
   padding: 1rem 3rem;
 }
 
-.date {
-  margin-bottom: 0.5rem;
+.date_user {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.prod_title {
+  margin-bottom: 1rem;
+}
+.prod_title a {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: var(--accent-color);
+  transition: all 0.2s ease-in-out;
+}
+.prod_title a:hover {
+  color: var(--accent-color-hover);
 }
 
 .starRating {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .text {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.username {
-  margin-bottom: 2rem;
-}
 .user {
   border-bottom: groove 0.1rem var(--darkFont-color);
   border-left-width: 1rem;

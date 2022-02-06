@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { cartActions } from "../../store/cartState/cartSlice";
 import Button from "../ui/Button/Button";
@@ -8,6 +9,7 @@ import classes from "./ProductCard.module.css";
 
 const ProductCard = (props) => {
   let { product, border } = props;
+  const { isAdmin } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleAddClick = () => {
@@ -36,6 +38,18 @@ const ProductCard = (props) => {
       className={`${classes.productCard} ${classes[border]}`}
     >
       {/* if image url is an array of images this might need to be changed */}
+      {isAdmin && (
+        <div className={classes.edit}>
+          <Link to={`/admin/products/edit/${product.id}`}>
+            <i className="fas fa-edit"></i>
+          </Link>
+        </div>
+      )}
+      {isAdmin && (
+        <div className={classes.is_active}>
+          {product.isActive ? "Active" : "Not Active"}
+        </div>
+      )}
       <img className={classes.productImage} src={product.imageURL} />
       <p className={classes.title}>{product.title}</p>
       <div className={classes.infoBox}>

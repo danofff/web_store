@@ -87,6 +87,19 @@ export const getProducts = async () => {
   }
 };
 
+export const getProductsAdmin = async (token) => {
+  const response = await fetch(`${baseUrl}/products/admin`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
 export const getProductById = async (productId) => {
   const response = await fetch(`${baseUrl}/products/${productId}`, {
     method: "GET",
@@ -194,6 +207,19 @@ export const getReviewsByProductId = async (productId) => {
   const response = await fetch(`${baseUrl}/reviews/${productId}`, {
     method: "GET",
     headers: makeHeaders(),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+};
+
+export const getReviewsByUserId = async (token) => {
+  const response = await fetch(`${baseUrl}/reviews/users`, {
+    method: "GET",
+    headers: makeHeaders(token),
   });
   if (response.ok) {
     return await response.json();

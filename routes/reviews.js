@@ -1,4 +1,5 @@
 const reviewRouter = require("express").Router();
+const { getProductById } = require("../db/products");
 const {
   getAllReviews,
   getReviewsByProductId,
@@ -19,10 +20,26 @@ reviewRouter.get("/", async (req, res, next) => {
   }
 });
 
+reviewRouter.get("/users", checkUser, async (req, res, next) => {
+  try {
+    const allReviewsByUser = await getReviewsByUserId(req.user.id);
+    const reviewsToSend = allReviewsByUser.map((review) => {
+      const username = review.userEmail.split("@")[0];
+      delete review.userEmail;
+      return {
+        ...review,
+        username,
+      };
+    });
+    res.status(200).json(reviewsToSend);
+  } catch (error) {
+    next(error);
+  }
+});
+
 reviewRouter.get("/:productId", async (req, res, next) => {
   try {
     //check if that product exists first?
-
     const allReviewsOfProduct = await getReviewsByProductId(
       req.params.productId
     );
@@ -41,16 +58,6 @@ reviewRouter.get("/:productId", async (req, res, next) => {
   }
 });
 
-reviewRouter.get("/users/:userId", async (req, res, next) => {
-  try {
-    //check if that user exists first?
-    const allReviewsByUser = await getReviewsByUserId(req.params.userId);
-    res.status(200).json(allReviewsByUser);
-  } catch (error) {
-    next(error);
-  }
-});
-
 reviewRouter.post("/", checkUser, async (req, res, next) => {
   try {
     //createReview needs productId,userId,reviewText,and starRating
@@ -62,6 +69,13 @@ reviewRouter.post("/", checkUser, async (req, res, next) => {
     //optional - verify user has purchased product before review?
     if (!productId) throw new Error("productId must be submitted!");
     if (!reviewText) throw new Error("userId must be submitted!");
+
+    const product = await getProductById(productId);
+
+    if (!product.isActive) {
+      throw new Error("You can not add review to not active product");
+    }
+
     let createdReview = await createReview(
       productId,
       userId,

@@ -38,13 +38,24 @@ async function getReviewsByUserId(userId) {
   try {
     const { rows: reviews } = await client.query(
       `
-            SELECT *
-            FROM reviews
-            WHERE "userId" = $1
-            SORT BY updated_at ASC;
+            SELECT review_user.*, products.title as "productTitle"
+            FROM 
+            (SELECT
+              reviews.id as id,
+              reviews.updated_at as updated_at,
+              reviews."reviewText" as "reviewText", 
+              reviews."starRating" as "starRating", 
+              reviews."productId" as "productId",
+              users.email as "userEmail"
+                  FROM reviews
+                  JOIN users ON users.id = reviews."userId"
+                  WHERE reviews."userId" = $1
+                  ORDER BY reviews.updated_at DESC) AS review_user
+            JOIN products ON products.id = "productId";
           `,
       [userId]
     );
+
     return reviews;
   } catch (error) {
     throw error;
