@@ -12,4 +12,27 @@
 
 .edit_form {
   display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+}
+
+.title_input {
+  flex-grow: 1;
+}
+
+.active {
+  display: flex;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.row td {
+  height: 42px;
 }

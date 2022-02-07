@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { cartActions } from "../../store/cartState/cartSlice";
+import { dataActions } from "../../store/dataState/dataSlice";
 import Button from "../ui/Button/Button";
 import StarRating from "../ui/StarRating/StarRating";
 
@@ -30,6 +31,12 @@ const ProductPage = (props) => {
         },
         newQuantity: 1,
         mode: "button",
+      })
+    );
+    dispatch(
+      dataActions.refreshProductQuantity({
+        productId: product.id,
+        subtractQuant: 1,
       })
     );
   };
