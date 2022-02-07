@@ -2,7 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5px;
+  margin: 5px 0;
+}
+
+.header a {
+  text-decoration: none;
 }
 
 .navbar {
@@ -29,11 +33,23 @@
 }
 
 .image {
-  width: 50px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.image span {
+  white-space: nowrap;
+  color: var(--accent-color);
+  font-family: "Comforter", cursive;
+  font-size: 2rem;
+  text-decoration: none;
+  margin-left: 0.25rem;
+  transform: translateY(5px);
 }
 
 .image img {
-  width: 100%;
+  width: 55px;
   height: auto;
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./StarRating.module.css";
 
 const StarRating = ({
@@ -17,6 +17,11 @@ const StarRating = ({
       handleOutler(newRate);
     }
   };
+
+  useEffect(() => {
+    setInnerRate(+rating);
+  }, [rating]);
+
   return (
     <div className={classes.rating}>
       <span

@@ -20,14 +20,12 @@ const SingleProductPage = (props) => {
   }, []);
 
   return (
-    <div>
-      <div className={classes.container}>
-        <div>
-          <ProductPage productId={productId} />
-        </div>
-        <div>
-          <ProductReviews productId={productId} />
-        </div>
+    <div className={classes.container}>
+      <div>
+        <ProductPage productId={productId} />
+      </div>
+      <div>
+        <ProductReviews productId={productId} />
       </div>
     </div>
   );

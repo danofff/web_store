@@ -50,7 +50,6 @@ const dataSlice = createSlice({
       state.reviews = action.payload;
     },
     addReview(state, action) {
-      console.log("should be", current(state).reviews[0]);
       const reviewSended = action.payload;
       const review = {
         created_at: reviewSended.review.created_at,

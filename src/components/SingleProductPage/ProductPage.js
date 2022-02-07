@@ -11,7 +11,6 @@ const ProductPage = (props) => {
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.data.products);
-  const userId = useSelector((state) => state.user.userId);
 
   useEffect(() => {
     const prod = products.find((prod) => prod.id === +props.productId);
@@ -19,6 +18,7 @@ const ProductPage = (props) => {
       setProduct(prod);
     }
   }, [products]);
+
   const handleAddClick = () => {
     dispatch(
       cartActions.changeProduct({
@@ -33,7 +33,6 @@ const ProductPage = (props) => {
       })
     );
   };
-
   return (
     <React.Fragment>
       {product ? (

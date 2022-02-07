@@ -158,7 +158,7 @@ async function populateInitialData() {
         price: 29,
         quantity: 100,
         imageUrl:
-          "https://www.gapfactory.com/webcontent/0017/282/914/cn17282914.jpg",
+          "https://cdn.shopify.com/s/files/1/0017/5007/3404/products/Men_sadidasEssentialsTrefoilHoodieGN3389_7.jpg?v=1610745135",
       },
       {
         categoryId: 1,
@@ -168,17 +168,27 @@ async function populateInitialData() {
         price: 21.99,
         quantity: 100,
         imageUrl:
-          "http://cdn.shopify.com/s/files/1/0035/1309/0115/products/Heavyweight-Recycled-Cotton-Hoodie-Saffron-Yellow-1.jpg?v=1627551660",
+          "https://ae01.alicdn.com/kf/H466f42227d87423a89d85789d43b9d22K/2020.jpg",
       },
       {
         categoryId: 2,
         title: "Super cool black t-shirt",
         description:
-          "Wanna be misterious as a shadow? You know where to click (little tip - add to cart button)",
+          "Wanna be mysterious as a shadow? You know where to click (little tip - add to cart button)",
         price: 18.99,
         quantity: 100,
         imageUrl:
-          "https://pyxis.nymag.com/v1/imgs/8f2/9c4/c95d85e1b7750cee91df7a7d5db3e355a9-13-black-tshirt-jcrew.2x.rhorizontal.w600.jpg",
+          "https://img.printez.ru/products/2/23/238/238740/MjM4NzQwLTEwOC0xLTItem9vbQ==.jpg",
+      },
+      {
+        categoryId: 2,
+        title: "Super cool green t-shirt",
+        description:
+          "If you are person of nature? So, dont't hesited byu this t-shirt",
+        price: 18.99,
+        quantity: 100,
+        imageUrl:
+          "https://a5e8126a499f8a963166-f72e9078d72b8c998606fd6e0319b679.ssl.cf5.rackcdn.com/images/product/large/gildan_47000.jpg",
       },
       {
         categoryId: 3,
@@ -188,7 +198,7 @@ async function populateInitialData() {
         price: 23.99,
         quantity: 100,
         imageUrl:
-          "https://cdn.hanes.com/catalog/product/H/N/HNS_5546/HNS_5546_DeepRoyal_Front.jpg?optimize=high&auto=webp&quality=85,65&fit=cover&width=700",
+          "https://sportkind.ru/media/image/d9/7a/3a/126614-808_fc9HaHoGu27Woy_600x600.jpg",
       },
     ];
 

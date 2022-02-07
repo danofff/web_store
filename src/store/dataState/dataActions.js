@@ -372,6 +372,7 @@ export const addReviewAct = (
       dispatch(uiActions.setLoader(true));
       const review = await addReview(token, productId, reviewText, starRating);
       dispatch(dataActions.addReview({ ...review.review, username }));
+      dispatch(getProductsAct());
       dispatch(
         uiActions.setSnackbar({
           isActive: true,
