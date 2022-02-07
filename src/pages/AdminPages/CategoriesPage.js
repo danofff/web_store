@@ -78,8 +78,8 @@ const CategoriesPage = (props) => {
               <th className={classes.th_name}>Name</th>
               <th>Created</th>
               <th>Updated</th>
-              <th>Active</th>
-              <th>Actions</th>
+              <th className={classes.active_cell}>Active</th>
+              <th className={classes.actions_cell}>Actions</th>
             </tr>
           </thead>
           <tbody>

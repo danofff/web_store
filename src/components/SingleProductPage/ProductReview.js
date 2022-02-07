@@ -28,7 +28,7 @@ const ReviewPage = ({ productId }) => {
         .min(12, "Review text must be at least 12 characters long")
         .required("Review text is required"),
     }),
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       dispatch(
         addReviewAct(
           token,

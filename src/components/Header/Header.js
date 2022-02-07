@@ -6,6 +6,7 @@ import Button from "../ui/Button/Button";
 import { userActions } from "../../store/userState/userSlice";
 
 import classes from "./Header.module.css";
+import mainLogo from "./logo.png";
 
 const Header = () => {
   const { userId, isAdmin } = useSelector((state) => state.user);
@@ -33,9 +34,8 @@ const Header = () => {
     <header className={classes.header}>
       <Link to="/products">
         <div className={classes.image}>
-          <img
-            src={`https://miro.medium.com/fit/c/160/160/1*NqIybBxOwC1uYDBgOp-7Sg.png`}
-          />
+          <img src={mainLogo} />
+          <span>Data-Ts</span>
         </div>
       </Link>
       <nav className={classes.navbar}>

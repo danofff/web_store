@@ -58,3 +58,11 @@
 .ta .th_name {
   width: 200px;
 }
+
+.active_cell {
+  width: 115px;
+}
+
+.actions_cell {
+  width: 130px;
+}

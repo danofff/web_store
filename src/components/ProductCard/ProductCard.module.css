@@ -2,7 +2,6 @@
   width: 32%;
   height: 350px;
   display: flex;
-  flex-grow: 1;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { cartActions } from "../../store/cartState/cartSlice";
+import { dataActions } from "../../store/dataState/dataSlice";
 import Button from "../ui/Button/Button";
 import StarRating from "../ui/StarRating/StarRating";
 
@@ -11,7 +12,6 @@ const ProductPage = (props) => {
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.data.products);
-  const userId = useSelector((state) => state.user.userId);
 
   useEffect(() => {
     const prod = products.find((prod) => prod.id === +props.productId);
@@ -19,6 +19,7 @@ const ProductPage = (props) => {
       setProduct(prod);
     }
   }, [products]);
+
   const handleAddClick = () => {
     dispatch(
       cartActions.changeProduct({
@@ -32,8 +33,13 @@ const ProductPage = (props) => {
         mode: "button",
       })
     );
+    dispatch(
+      dataActions.refreshProductQuantity({
+        productId: product.id,
+        subtractQuant: 1,
+      })
+    );
   };
-
   return (
     <React.Fragment>
       {product ? (

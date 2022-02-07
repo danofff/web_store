@@ -33,6 +33,13 @@ const dataSlice = createSlice({
       state.products = allProd;
     },
 
+    refreshProductQuantity(state, action) {
+      const { productId, subtractQuant } = action.payload;
+      const prodIdx = state.products.findIndex((prod) => prod.id === productId);
+      state.products[prodIdx].quantity =
+        state.products[prodIdx].quantity - subtractQuant;
+    },
+
     //orders
     setAllOrders(state, action) {
       state.orders = action.payload;
@@ -50,7 +57,6 @@ const dataSlice = createSlice({
       state.reviews = action.payload;
     },
     addReview(state, action) {
-      console.log("should be", current(state).reviews[0]);
       const reviewSended = action.payload;
       const review = {
         created_at: reviewSended.review.created_at,
