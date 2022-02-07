@@ -20,9 +20,9 @@ server.use(express.static(path.join(__dirname, "build")));
 server.use("/api", require("./routes"));
 
 //handle non-existed routes
-server.use((req, res, next) => {
-  res.status(404).json({ error: "page does not exist" });
-});
+// server.use((req, res, next) => {
+//   res.status(404).json({ error: "page does not exist" });
+// });
 
 //errors handling
 server.use((error, req, res, next) => {
