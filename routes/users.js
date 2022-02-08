@@ -104,7 +104,7 @@ usersRouter.patch("/address", checkUser, async (req, res, next) => {
       throw new Error("Zip must not be empty");
     }
     const result = await changeAddress(req.user.id, address, zip);
-    return result;
+    res.status(200).json({ user: result });
   } catch (error) {
     return next(error);
   }

@@ -150,6 +150,7 @@ async function changeAddress(userId, address, zip) {
     `,
       [address, zip, userId]
     );
+    return user;
   } catch (error) {
     console.log(error);
     throw error;
