@@ -57,6 +57,13 @@ export const registerUserAct = (email, password, address, zip) => {
     try {
       dispatch(uiActions.setLoader(true));
       await registerUser(email, password, address, zip);
+      dispatch(
+        uiActions.setSnackbar({
+          type: "success",
+          isActive: true,
+          text: "User successfully registered",
+        })
+      );
       return true;
     } catch (error) {
       console.log(error);
@@ -78,6 +85,13 @@ export const editUserAddressAct = (token, address, zip) => {
     try {
       uiActions.setLoader(true);
       const user = await changeAddress(token, address, zip);
+      dispatch(
+        uiActions.setSnackbar({
+          type: "success",
+          isActive: true,
+          text: "Address changed successfully",
+        })
+      );
       return true;
     } catch (error) {
       console.log(error);
