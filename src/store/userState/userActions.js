@@ -75,7 +75,7 @@ export const registerUserAct = (email, password, address, zip) => {
         })
       );
     } finally {
-      uiActions.setLoader(false);
+      dispatch(uiActions.setLoader(false));
     }
   };
 };
@@ -103,7 +103,7 @@ export const editUserAddressAct = (token, address, zip) => {
         })
       );
     } finally {
-      uiActions.setLoader(false);
+      dispatch(uiActions.setLoader(false));
     }
   };
 };

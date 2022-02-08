@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -11,6 +12,7 @@ import Button from "../ui/Button/Button";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const signup = useFormik({
     initialValues: {
       email: "",
@@ -36,9 +38,14 @@ const SignupForm = (props) => {
         "Zip code could contain only digits. Use 00000 or 00000-0000 pattern"
       ),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const { email, password, address, zip } = values;
-      dispatch(registerUserAct(email, password, address, zip));
+      const result = await dispatch(
+        registerUserAct(email, password, address, zip)
+      );
+      if (result) {
+        navigate("/login");
+      }
     },
   });
 

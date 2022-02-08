@@ -11,7 +11,7 @@ const ProfilePage = (props) => {
   const { email } = useSelector((state) => state.user);
   return (
     <section className={classes.profile_main}>
-      <h1 className="title">-{email.split("@")[0]}'s- Pofile</h1>
+      <h1 className="title">-{email.split("@")[0]}'s- Profile</h1>
       <div className={classes.edit_data}>
         {/* /Profile change password/ */}
         <ProfileChangePassword />
