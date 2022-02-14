@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import OrderLi from "../components/OrderLi/OrderLi";
+import OrderLi from "../../components/OrderLi/OrderLi";
 
-import { getOrderByUserIdAct } from "../store/dataState/dataActions";
+import { getOrderByUserIdAct } from "../../store/dataState/dataActions";
 import classes from "./OrdersPage.module.css";
 
 const OrdersPage = () => {

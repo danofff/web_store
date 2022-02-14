@@ -6,7 +6,7 @@ import { dataActions } from "../../store/dataState/dataSlice";
 import Button from "../ui/Button/Button";
 import StarRating from "../ui/StarRating/StarRating";
 
-import classes from "./ProductPage.module.css";
+import classes from "./ProductInfo.module.css";
 
 const ProductPage = (props) => {
   const [product, setProduct] = useState(null);

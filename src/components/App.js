@@ -2,24 +2,28 @@ import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+//state
 import { userActions } from "../store/userState/userSlice";
 import { cartActions } from "../store/cartState/cartSlice";
+
+//ui components
 import Container from "./ui/Container/Container";
-import ProductsPage from "../pages/ProductsPage";
-import NotFoundPage from "../pages/NotFoundPage";
-import LoginPage from "../pages/LoginPage";
-import SingleProductPage from "../pages/SingleProductPage";
 import Header from "./Header/Header";
 import Loader from "./ui/Loader/Loader";
-
-import SignupPage from "../pages/SignupPage";
-import OrdersPage from "../pages/OrdersPage";
-import OrderPage from "../pages/OrderPage";
-import CartPage from "../pages/CartPage";
-import ConfirmOrderPage from "../pages/ConfirmOrderPage";
-import AdminPages from "../pages/AdminPages/AdminPages";
-import ProfilePage from "../pages/ProfilePage";
 import Snackbar from "./ui/Snackbar/Snackbar";
+
+//pages
+import LoginPage from "../pages/UserPages/LoginPage";
+import SingleProductPage from "../pages/UserPages/SingleProductPage";
+import ProductsPage from "../pages/UserPages/ProductsPage";
+import NotFoundPage from "../pages/UserPages/NotFoundPage";
+import SignupPage from "../pages/UserPages/SignupPage";
+import OrdersPage from "../pages/UserPages/OrdersPage";
+import OrderPage from "../pages/UserPages/OrderPage";
+import CartPage from "../pages/UserPages/CartPage";
+import ConfirmOrderPage from "../pages/UserPages/ConfirmOrderPage";
+import ProfilePage from "../pages/UserPages/ProfilePage";
+import AdminPages from "../pages/AdminPages/AdminPages";
 
 import "./App.css";
 

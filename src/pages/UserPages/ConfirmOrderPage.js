@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { getUserByIdAct } from "../store/userState/userActions";
-import { uiActions } from "../store/uiState/uiSlice";
-import { cartActions } from "../store/cartState/cartSlice";
-import { addOrder } from "../api/cartApi";
-import Button from "../components/ui/Button/Button";
-import FormControl from "../components/ui/FormControl/FormControl";
+import { getUserByIdAct } from "../../store/userState/userActions";
+import { uiActions } from "../../store/uiState/uiSlice";
+import { cartActions } from "../../store/cartState/cartSlice";
+import { addOrder } from "../../api/cartApi";
+import Button from "../../components/ui/Button/Button";
+import FormControl from "../../components/ui/FormControl/FormControl";
 
 import classes from "./ConfirmOrderPage.module.css";
 

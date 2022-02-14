@@ -16,10 +16,10 @@ export const getCategoriesAdmin = async (token) => {
 };
 
 //categories for non admin
-export const getCategories = async (token) => {
+export const getCategories = async () => {
   const response = await fetch(`${baseUrl}/categories/`, {
     method: "GET",
-    headers: makeHeaders(token),
+    headers: makeHeaders(),
   });
   if (response.ok) {
     return await response.json();

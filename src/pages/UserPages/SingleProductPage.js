@@ -5,9 +5,9 @@ import { useParams } from "react-router";
 import {
   getProductsAct,
   getReviewsByProductIdAct,
-} from "../store/dataState/dataActions";
-import ProductPage from "../components/SingleProductPage/ProductPage";
-import ProductReviews from "../components/SingleProductPage/ProductReview";
+} from "../../store/dataState/dataActions";
+import ProductPage from "../../components/ProductInfo/ProductInfo";
+import ProductReviews from "../../components/ProductReviews/ProductReviews";
 import classes from "./SingleProductPage.module.css";
 
 const SingleProductPage = (props) => {

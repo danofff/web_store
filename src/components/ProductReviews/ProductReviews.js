@@ -9,7 +9,7 @@ import StarRating from "../ui/StarRating/StarRating";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import { addReviewAct } from "../../store/dataState/dataActions";
 
-import classes from "./ProductReview.module.css";
+import classes from "./ProductReviews.module.css";
 
 const ReviewPage = ({ productId }) => {
   const reviews = useSelector((state) => state.data.reviews);

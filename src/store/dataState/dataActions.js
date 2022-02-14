@@ -41,10 +41,10 @@ export const getCategoriesAdminAct = (token) => {
 };
 
 // made this to get list of all categories for products page
-export const getCategoriesAct = (token) => {
+export const getCategoriesAct = () => {
   return async (dispatch) => {
     try {
-      const response = await getCategories(token);
+      const response = await getCategories();
       dispatch(dataActions.setCategories(response.categories));
     } catch (error) {
       console.log(error);

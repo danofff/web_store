@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getOrderById } from "../api/dataApi";
-import OrderItem from "../components/OrderItem/OrderItem";
+import { getOrderById } from "../../api/dataApi";
+import OrderItem from "../../components/OrderItem/OrderItem";
+
 import classes from "./OrderPage.module.css";
 
 const OrderPage = (props) => {

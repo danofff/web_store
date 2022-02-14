@@ -2,10 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { cartActions } from "../store/cartState/cartSlice";
-import { addOrder } from "../api/cartApi";
-import CartItem from "../components/CartItem/CartItem";
-import Button from "../components/ui/Button/Button";
+import { cartActions } from "../../store/cartState/cartSlice";
+import { addOrder } from "../../api/cartApi";
+import CartItem from "../../components/CartItem/CartItem";
+import Button from "../../components/ui/Button/Button";
 
 import classes from "./CartPage.module.css";
 

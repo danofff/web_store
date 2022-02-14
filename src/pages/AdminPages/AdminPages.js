@@ -7,7 +7,7 @@ import OrdersPage from "./OrdersPageA";
 import OrderPageA from "./OrderPageA";
 import AddProductPage from "./AddProductPage";
 import EditProductPage from "./EditProductPage";
-import NotFoundPage from "../NotFoundPage";
+import NotFoundPage from "../UserPages/NotFoundPage";
 
 import classes from "./AdminPages.module.css";
 

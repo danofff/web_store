@@ -1,11 +1,11 @@
 import React from "react";
-
-import ProfileChangePassword from "../components/ProfileChangePassword/ProfileChangePassword";
-import ProfileChangeAddress from "../components/ProfileChangeAddress/ProfileChangeAddress";
 import { useSelector } from "react-redux";
 
+import ProfileChangePassword from "../../components/ProfileChangePassword/ProfileChangePassword";
+import ProfileChangeAddress from "../../components/ProfileChangeAddress/ProfileChangeAddress";
+import ProfileReviews from "../../components/ProfileReviews/ProfileReviews";
+
 import classes from "./ProfilePage.module.css";
-import ProfileReviews from "../components/ProfileReviews/ProfileReviews";
 
 const ProfilePage = (props) => {
   const { email } = useSelector((state) => state.user);

@@ -6,9 +6,9 @@ import * as Yup from "yup";
 
 import { registerUserAct } from "../../store/userState/userActions";
 import FormControl from "../ui/FormControl/FormControl";
+import Button from "../ui/Button/Button";
 
 import classes from "./SignupForm.module.css";
-import Button from "../ui/Button/Button";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +22,9 @@ const SignupForm = (props) => {
       zip: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email().required("Email is required field"),
+      email: Yup.string()
+        .email("Email must be a valid email address")
+        .required("Email is required field"),
       password: Yup.string()
         .min(8, "Password must be at least 8 characters long")
         .required("Password is requried field"),
