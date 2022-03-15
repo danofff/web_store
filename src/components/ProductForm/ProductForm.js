@@ -139,13 +139,15 @@ const ProductForm = ({ mode = "add", productId = null }) => {
         handleBlur={formik.handleBlur}
         formik={formik}
       />
-      <StyledSelect
-        options={categoriesOptions}
-        label="Category"
-        name="category"
-        value={categoryId}
-        onChange={(e) => setCategoryId(e.target.value)}
-      />
+      <div className={classes.select__cont}>
+        <StyledSelect
+          options={categoriesOptions}
+          label="Category"
+          name="category"
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+        />
+      </div>
       <FormControl
         type="textarea"
         name="description"

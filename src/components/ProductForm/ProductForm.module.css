@@ -13,3 +13,7 @@
 .is_active input {
   margin-right: 0.75rem;
 }
+
+.select__cont {
+  margin-bottom: 1.5rem;
+}
