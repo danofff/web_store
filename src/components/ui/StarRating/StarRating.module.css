@@ -1,6 +1,5 @@
 .rating {
   display: flex;
-  transform: translateX(-18px);
 }
 
 .rate {
@@ -9,6 +8,7 @@
 
 .rate_zero {
   opacity: 0;
+  z-index: 100;
 }
 
 .rating_digit {
