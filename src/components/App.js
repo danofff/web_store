@@ -11,6 +11,7 @@ import Container from "./ui/Container/Container";
 import Header from "./Header/Header";
 import Loader from "./ui/Loader/Loader";
 import Snackbar from "./ui/Snackbar/Snackbar";
+import MobileNav from "./ui/MobileNav/MobileNav";
 
 //pages
 import LoginPage from "../pages/UserPages/LoginPage";
@@ -38,8 +39,9 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <Container>
-      <div className="App">
+    <div className="App">
+      <MobileNav />
+      <Container>
         <Loader />
         <Header />
         <Routes>
@@ -56,9 +58,9 @@ const App = () => {
           {isAdmin && <Route path="/admin/*" element={<AdminPages />} />}
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
-      </div>
-      <Snackbar />
-    </Container>
+        <Snackbar />
+      </Container>
+    </div>
   );
 };
 

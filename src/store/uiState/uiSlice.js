@@ -4,6 +4,7 @@ const uiSlice = createSlice({
   name: "ui",
   initialState: {
     loaderIsActive: false,
+    mobileMenuIsActive: false,
     snackbar: {
       type: "default",
       text: "default",
@@ -16,6 +17,9 @@ const uiSlice = createSlice({
     },
     setSnackbar(state, action) {
       state.snackbar = action.payload;
+    },
+    setMobile(state, action) {
+      state.mobileMenuIsActive = action.payload;
     },
   },
 });

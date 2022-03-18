@@ -1,9 +1,11 @@
 .main {
-  width: 750px;
+  max-width: 750px;
+  max-width: 90%;
   margin: 3rem auto;
 }
 
 .nothing_yet {
+  margin: 1rem 0;
   text-align: center;
   text-transform: uppercase;
   font-size: 2rem;
@@ -12,6 +14,12 @@
 
 .cart_container {
   margin: 2rem 0;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.cart_content {
+  min-width: 500px;
 }
 
 .total {

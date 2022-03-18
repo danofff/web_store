@@ -12,12 +12,18 @@
 .img {
   width: 100%;
 }
-
+.img {
+  box-shadow: 0px 0px 5px 1px var(--accent-color);
+  border-radius: 3rem;
+}
 .productImage {
   width: 100%;
   height: auto;
-  box-shadow: 0px 0px 15px 5px var(--accent-color);
-  border-radius: 15%;
+  transition: all 0.3s ease-in-out;
+}
+
+.img:hover .productImage {
+  transform: scale(1.05);
 }
 
 .description {

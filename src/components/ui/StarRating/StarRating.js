@@ -4,7 +4,7 @@ import classes from "./StarRating.module.css";
 const StarRating = ({
   rating = 0,
   disabled = true,
-  handleOutler = () => {},
+  handleOutRate = () => {},
 }) => {
   const [innerRate, setInnerRate] = useState(Math.round(rating * 10) / 10);
   const ratingArr = [0, 0, 0, 0, 0];
@@ -13,8 +13,21 @@ const StarRating = ({
     if (!disabled) {
       const parsedRate = parseInt(event.target.parentNode.dataset.value);
       const newRate = isNaN(parsedRate) ? innerRate : parsedRate;
-      rating = setInnerRate(newRate);
-      handleOutler(newRate);
+      handleOutRate(newRate);
+    }
+  };
+
+  const handleMouseOver = (event) => {
+    if (!disabled) {
+      const parsedRate = parseInt(event.target.parentNode.dataset.value);
+      const newRate = isNaN(parsedRate) ? innerRate : parsedRate;
+      setInnerRate(newRate);
+    }
+  };
+
+  const handleMouseLeave = (event) => {
+    if (!disabled) {
+      setInnerRate(rating);
     }
   };
 
@@ -38,6 +51,8 @@ const StarRating = ({
             className={classes.rate}
             data-value={idx + 1}
             onClick={handleStarClick}
+            onMouseOver={handleMouseOver}
+            onMouseLeave={handleMouseLeave}
           >
             <i
               className={`${idx + 1 <= innerRate ? "fas" : "far"} fa-star`}

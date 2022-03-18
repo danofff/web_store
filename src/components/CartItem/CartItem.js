@@ -47,7 +47,7 @@ const CartItem = ({ product }) => {
         <span>Title</span>
         <span>Price</span>
         <span>Quantity</span>
-        <span>Summ</span>
+        <span>Subtotal</span>
         <span className={classes.item_title}>
           <Link to={`/products/${product.productId}`}>{product.title}</Link>
         </span>

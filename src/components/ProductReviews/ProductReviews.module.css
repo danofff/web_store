@@ -2,6 +2,17 @@
   padding: 1rem 3rem;
 }
 
+.container form {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+  margin-top: 1rem;
+}
+
+.container form.active {
+  max-height: 30rem;
+}
+
 .starRating {
   padding: 0 0 2rem 0;
 }

@@ -9,6 +9,10 @@
   transition: all 0.15s ease-in-out;
 }
 
+.large {
+  font-size: 1rem;
+}
+
 .medium {
   font-size: 0.75rem;
 }

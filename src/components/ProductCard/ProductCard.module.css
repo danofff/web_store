@@ -12,11 +12,20 @@
   border-radius: 0.5rem;
   position: relative;
 }
+.image__container {
+  background-color: var(--background-elem);
+  border-radius: 1rem;
+}
+
 .productImage {
   margin-bottom: 0.75rem;
   height: 150px;
   width: auto;
-  border-radius: 15%;
+  transition: all 0.3s ease-in-out;
+}
+
+.image__container:hover .productImage {
+  transform: scale(1.1);
 }
 .title {
   text-align: center;

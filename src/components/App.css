@@ -13,7 +13,6 @@ html {
   --background-elem: #393939;
   --font-color: #fff;
 
-  --accent-color: #4af6cd;
   --error-color: 255, 0, 0;
   --accent-color: #1aacf4;
   --accent-color-hover: #0099e6;
@@ -31,6 +30,7 @@ body {
   background-color: var(--background-color);
   color: var(--font-color);
   font-family: sans-serif;
+  width: 100vw;
 }
 
 h1.title {

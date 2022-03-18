@@ -158,7 +158,7 @@ async function populateInitialData() {
         price: 29,
         quantity: 100,
         imageUrl:
-          "https://cdn.shopify.com/s/files/1/0017/5007/3404/products/Men_sadidasEssentialsTrefoilHoodieGN3389_7.jpg?v=1610745135",
+          "https://res.cloudinary.com/drwgcj7gc/image/upload/v1647461000/data-ts/red_hbhivr.webp",
       },
       {
         categoryId: 1,
@@ -168,7 +168,7 @@ async function populateInitialData() {
         price: 21.99,
         quantity: 100,
         imageUrl:
-          "https://ae01.alicdn.com/kf/H466f42227d87423a89d85789d43b9d22K/2020.jpg",
+          "https://res.cloudinary.com/drwgcj7gc/image/upload/v1647461140/data-ts/yellow_vhuuzc.webp",
       },
       {
         categoryId: 2,
@@ -178,7 +178,7 @@ async function populateInitialData() {
         price: 18.99,
         quantity: 100,
         imageUrl:
-          "https://img.printez.ru/products/2/23/238/238740/MjM4NzQwLTEwOC0xLTItem9vbQ==.jpg",
+          "https://res.cloudinary.com/drwgcj7gc/image/upload/v1647461000/data-ts/black_j1evpz.webp",
       },
       {
         categoryId: 2,
@@ -188,7 +188,7 @@ async function populateInitialData() {
         price: 18.99,
         quantity: 100,
         imageUrl:
-          "https://a5e8126a499f8a963166-f72e9078d72b8c998606fd6e0319b679.ssl.cf5.rackcdn.com/images/product/large/gildan_47000.jpg",
+          "https://res.cloudinary.com/drwgcj7gc/image/upload/v1647461000/data-ts/green_aah0u0.webp",
       },
       {
         categoryId: 3,
@@ -198,7 +198,7 @@ async function populateInitialData() {
         price: 23.99,
         quantity: 100,
         imageUrl:
-          "https://sportkind.ru/media/image/d9/7a/3a/126614-808_fc9HaHoGu27Woy_600x600.jpg",
+          "https://res.cloudinary.com/drwgcj7gc/image/upload/v1647461000/data-ts/blue_wbpafh.webp",
       },
     ];
 

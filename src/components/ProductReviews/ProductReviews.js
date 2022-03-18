@@ -14,14 +14,15 @@ import classes from "./ProductReviews.module.css";
 const ReviewPage = ({ productId }) => {
   const reviews = useSelector((state) => state.data.reviews);
   const { userId, token, email } = useSelector((state) => state.user);
+
   const [rating, setRating] = useState(0);
+  const [isAddReviewFormActive, setIsAddReviewFormActive] = useState(false);
 
   const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
       reviewText: "",
-      rating: 0,
     },
     validationSchema: Yup.object({
       reviewText: Yup.string()
@@ -39,14 +40,32 @@ const ReviewPage = ({ productId }) => {
         )
       );
       resetForm();
+      setIsAddReviewFormActive(false);
+      setRating(0);
     },
   });
+
+  const onAddReviewClickHandler = (event) => {
+    setIsAddReviewFormActive((prevState) => !prevState);
+  };
 
   return (
     <React.Fragment>
       {userId && (
         <div className={classes.container}>
-          <form onSubmit={formik.handleSubmit}>
+          <Button
+            style="plain"
+            type="button"
+            size="medium"
+            onClickHandler={onAddReviewClickHandler}
+            width="110px"
+          >
+            {isAddReviewFormActive ? "Close Form" : "Add Review"}
+          </Button>
+          <form
+            onSubmit={formik.handleSubmit}
+            className={isAddReviewFormActive ? classes.active : ""}
+          >
             <FormControl
               type="textarea"
               label="Review Text"
@@ -58,9 +77,11 @@ const ReviewPage = ({ productId }) => {
             />
             <div className={classes.starRating}>
               <StarRating
-                rating={formik.rating}
+                rating={rating}
                 disabled={false}
-                handleOutler={setRating}
+                handleOutRate={(rating) => {
+                  setRating(rating);
+                }}
               />
             </div>
             <Button type="submit" style="plain">

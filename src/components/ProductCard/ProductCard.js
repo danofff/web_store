@@ -30,8 +30,9 @@ const ProductCard = (props) => {
   const handleMoreClick = () => {
     navigate(`/products/${product.id}`);
   };
-  let priceToFix = parseFloat(product.price);
-  let fixedPrice = priceToFix.toFixed(2);
+
+  let fixedPrice = parseFloat(product.price).toFixed(2) || 2;
+
   return (
     <div
       id={product.id}
@@ -50,12 +51,14 @@ const ProductCard = (props) => {
           {product.isActive ? "Active" : "Not Active"}
         </div>
       )}
-      <img className={classes.productImage} src={product.imageURL} />
+      <div className={classes.image__container}>
+        <img className={classes.productImage} src={product.imageURL} />
+      </div>
       <p className={classes.title}>{product.title}</p>
       <div className={classes.infoBox}>
         <div className={classes.priceLine}>
           {/* add to fixed to this line */}
-          <p className={classes.price}>${fixedPrice}</p>
+          <p className={classes.price}>{`\$${fixedPrice}`}</p>
           <div className={classes.starRating}>
             <StarRating
               rating={product.rating}

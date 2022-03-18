@@ -26,8 +26,6 @@ const CartPage = (props) => {
   const onOrderHandler = async (event) => {
     if (cartData.quantityTotal > 0) {
       navigate("/cart/confirm");
-    } else {
-      //show error like "you can't order an empty cart"
     }
   };
   return (
@@ -38,9 +36,11 @@ const CartPage = (props) => {
       </Button>
       {cartData.cart.length > 0 ? (
         <div className={classes.cart_container}>
-          {cartData.cart.map((prod) => {
-            return <CartItem key={prod.productId} product={prod} />;
-          })}
+          <div className={classes.cart_content}>
+            {cartData.cart.map((prod) => {
+              return <CartItem key={prod.productId} product={prod} />;
+            })}
+          </div>
         </div>
       ) : (
         <h2 className={classes.nothing_yet}>Cart is empty</h2>
