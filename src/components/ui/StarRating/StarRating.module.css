@@ -1,5 +1,6 @@
 .rating {
   display: flex;
+  transform: translateX(-18px);
 }
 
 .rate {
