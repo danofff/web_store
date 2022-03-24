@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./FormControl.module.css";
 
 const FormControl = ({
@@ -15,7 +15,16 @@ const FormControl = ({
   autocomplete = "off",
 }) => {
   const isError = formik.touched[name] && formik.errors[name];
+  const [isFocused, setIsFocused] = useState(false);
 
+  const onInputFocus = (event) => {
+    setIsFocused(true);
+  };
+
+  const onInputBlur = (event) => {
+    setIsFocused(false);
+    handleBlur(event);
+  };
   let input;
   if (type === "number") {
     input = (
@@ -25,11 +34,12 @@ const FormControl = ({
         name={name}
         id={name}
         onChange={handleChange}
-        onBlur={handleBlur}
+        onBlur={onInputBlur}
         value={formik.values[name]}
         min={min}
         max={max}
         step={step}
+        onFocus={onInputFocus}
       />
     );
   } else if (type === "textarea") {
@@ -40,9 +50,10 @@ const FormControl = ({
         name={name}
         id={name}
         onChange={handleChange}
-        onBlur={handleBlur}
+        onBlur={onInputBlur}
         value={formik.values[name]}
         rows={4}
+        onFocus={onInputFocus}
       />
     );
   } else {
@@ -53,10 +64,10 @@ const FormControl = ({
         name={name}
         id={name}
         onChange={handleChange}
-        onBlur={handleBlur}
+        onBlur={onInputBlur}
         value={formik.values[name]}
-        placeholder={label}
         autoComplete={autocomplete}
+        onFocus={onInputFocus}
       />
     );
   }
@@ -64,7 +75,7 @@ const FormControl = ({
     <div
       className={`${classes.form_control} ${
         type === "textarea" ? classes.textarea : ""
-      }`}
+      } ${formik.values[name] || isFocused ? classes.focused : ""}`}
     >
       <label
         htmlFor={name}
