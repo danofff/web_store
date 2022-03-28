@@ -24,8 +24,8 @@ const ProductForm = ({ mode = "add", productId = null }) => {
   const [product, setProduct] = useState({
     title: "",
     description: "",
-    price: 0,
-    quantity: 0,
+    price: 0.01,
+    quantity: 1,
     imageURL: "",
     isActiveProduct: false,
   });
