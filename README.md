@@ -2,11 +2,15 @@
 
 - An Express web server
 - A PostgreSQL database
-- A React front-end with Redux central state manager
+- A React client part with Redux central state manager
 
 And you want it to work locally as well as be easy to deploy?
 
 We've got your back:
+
+## Deployment
+
+Web application was deployed to https://damp-garden-20186.herokuapp.com/
 
 ## Local Development
 
@@ -27,19 +31,30 @@ Once both dev commands are running, you can start developing... the server resta
 ```bash
 ├── db
 │   ├── index.js
-│   └── init_db.js
+│   ├── init_db.js
+│   └── ...different db calls
+├── middleware
+│   ├── ...different middleware services
 ├── index.js
 ├── package.json
 ├── public
-│   └── index.html
+│   ├── index.html
+│   └── fav.ico
 ├── routes
-│   └── index.js
+│   ├── index.js
+│   └── ...different routes
 └── src
     ├── api
-    │   └── index.js
+    │   └── ...different api calls
+    ├── index.js
     ├── components
     │   ├── App.js
-    │   └── index.js
+    │   ├── App.css
+    │   └── ...other components
+    ├── pages
+    │   └── ...app pages
+    ├── store
+    │   └── ...redux store slices
     └── index.js
 ```
 
@@ -49,8 +64,4 @@ Inside `/db` you could see `index.js` which is responsible for creating all of y
 
 Inside `/routes` you could see `index.js` which is responsible for building the `apiRouter`, which is attached in the express server. This was built all routes that React application uses to send/receive data via JSON.
 
-Lastly `/public` and `/src` are the two puzzle pieces for React front-end. `/public` contains any static files necessary for your front-end. This can include images, a favicon, and most importantly the `index.html` that is the root of your React application.
-
-## Deployment
-
-Web application was deployed to https://damp-garden-20186.herokuapp.com/
+Lastly `/public` and `/src` are the two puzzle pieces for React front-end part of application. `/public` contains any static files necessary for your front-end. This can include images, a favicon, and most importantly the `index.html` that is the root of your React application.
