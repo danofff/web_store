@@ -4,10 +4,6 @@
 - A PostgreSQL database
 - A React client part with Redux central state manager
 
-And you want it to work locally as well as be easy to deploy?
-
-We've got your back:
-
 ## Deployment
 
 Web application was deployed to https://damp-garden-20186.herokuapp.com/
@@ -64,4 +60,4 @@ Inside `/db` you could see `index.js` which is responsible for creating all of y
 
 Inside `/routes` you could see `index.js` which is responsible for building the `apiRouter`, which is attached in the express server. This was built all routes that React application uses to send/receive data via JSON.
 
-Lastly `/public` and `/src` are the two puzzle pieces for React front-end part of application. `/public` contains any static files necessary for your front-end. This can include images, a favicon, and most importantly the `index.html` that is the root of your React application.
+Lastly `/public` and `/src` are the two puzzle pieces for React front-end part of application. `/public` contains any static files necessary for front-end. This can include images, a favicon, and most importantly the `index.html` that is the root of your React application. `/src` contains React components, pages and application state.
